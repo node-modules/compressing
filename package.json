@@ -1,0 +1,38 @@
+{
+  "name": "compressible",
+  "version": "1.0.0",
+  "description": "Everything you need for compressing and uncompressing",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec -t 15000 test/*.test.js",
+    "cov": "node node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -t 15000 test/*.test.js",
+    "lint": "eslint --fix .",
+    "ci": "tnpm run lint && tnpm run cov"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/node-modules/compressible.git"
+  },
+  "keywords": [
+    "compress",
+    "uncompress",
+    "util"
+  ],
+  "files": [
+    "index.js"
+  ],
+  "author": "shaoshuai0102 <shaoshuai0102@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/node-modules/compressible/issues"
+  },
+  "homepage": "https://github.com/node-modules/compressible#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^3.10.2",
+    "eslint-config-egg": "^3.2.0",
+    "istanbul": "^0.4.5",
+    "mocha": "^3.1.2",
+    "power-assert": "^1.4.2"
+  }
+}
