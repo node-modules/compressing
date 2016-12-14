@@ -4,10 +4,10 @@
   "description": "Everything you need for compressing and uncompressing",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -R spec -t 15000 test/*.test.js",
-    "cov": "node node_modules/.bin/istanbul cover node_modules/.bin/_mocha -- -t 15000 test/*.test.js",
+    "test": "egg-bin test",
+    "cov": "egg-bin cov",
     "lint": "eslint --fix .",
-    "ci": "tnpm run lint && tnpm run cov"
+    "ci": "npm run lint && npm run cov"
   },
   "repository": {
     "type": "git",
@@ -16,10 +16,16 @@
   "keywords": [
     "compress",
     "uncompress",
-    "util"
+    "util",
+    "tgz",
+    "gzip",
+    "tar",
+    "zip",
+    "stream"
   ],
   "files": [
-    "index.js"
+    "index.js",
+    "lib"
   ],
   "author": "shaoshuai0102 <shaoshuai0102@gmail.com>",
   "license": "MIT",
@@ -27,12 +33,20 @@
     "url": "https://github.com/node-modules/compressible/issues"
   },
   "homepage": "https://github.com/node-modules/compressible#readme",
-  "dependencies": {},
+  "dependencies": {
+    "get-ready": "^1.0.0",
+    "multipipe": "^1.0.2",
+    "streamifier": "^0.1.1",
+    "tar-stream": "^1.5.2",
+    "yauzl": "^2.7.0",
+    "yazl": "^2.4.2"
+  },
   "devDependencies": {
+    "egg-bin": "^1.9.1",
     "eslint": "^3.10.2",
     "eslint-config-egg": "^3.2.0",
-    "istanbul": "^0.4.5",
-    "mocha": "^3.1.2",
-    "power-assert": "^1.4.2"
+    "mm": "^2.0.0",
+    "power-assert": "^1.4.2",
+    "uuid": "^3.0.1"
   }
 }
