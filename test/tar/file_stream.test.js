@@ -6,7 +6,7 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const pipe = require('multipipe');
-const compressible = require('../..');
+const compressing = require('../..');
 const assert = require('power-assert');
 
 describe('test/tar/file_stream.test.js', () => {
@@ -22,7 +22,7 @@ describe('test/tar/file_stream.test.js', () => {
     });
 
     const fileStream = fs.createWriteStream(destFile);
-    const tarStream = new compressible.tar.FileStream({ relativePath: 'xx.log' });
+    const tarStream = new compressing.tar.FileStream({ relativePath: 'xx.log' });
     pipe(sourceStream, tarStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -41,7 +41,7 @@ describe('test/tar/file_stream.test.js', () => {
     });
 
     const fileStream = fs.createWriteStream(destFile);
-    const tarStream = new compressible.tar.FileStream({ relativePath: 'xx.log', size: fs.statSync(sourceFile).size });
+    const tarStream = new compressing.tar.FileStream({ relativePath: 'xx.log', size: fs.statSync(sourceFile).size });
     pipe(sourceStream, tarStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));

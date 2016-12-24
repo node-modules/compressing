@@ -1,4 +1,4 @@
-# compressible
+# compressing
 
 [![NPM version][npm-image]][npm-url]
 [![build status][travis-image]][travis-url]
@@ -7,18 +7,18 @@
 [![Known Vulnerabilities][snyk-image]][snyk-url]
 [![npm download][download-image]][download-url]
 
-[npm-image]: https://img.shields.io/npm/v/compressible.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/compressible
-[travis-image]: https://img.shields.io/travis/node-modules/compressible.svg?style=flat-square
-[travis-url]: https://travis-ci.org/node-modules/compressible
-[codecov-image]: https://codecov.io/gh/node-modules/compressible/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/node-modules/compressible
-[david-image]: https://img.shields.io/david/node-modules/compressible.svg?style=flat-square
-[david-url]: https://david-dm.org/node-modules/compressible
-[snyk-image]: https://snyk.io/test/npm/compressible/badge.svg?style=flat-square
-[snyk-url]: https://snyk.io/test/npm/compressible
-[download-image]: https://img.shields.io/npm/dm/compressible.svg?style=flat-square
-[download-url]: https://npmjs.org/package/compressible
+[npm-image]: https://img.shields.io/npm/v/compressing.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/compressing
+[travis-image]: https://img.shields.io/travis/node-modules/compressing.svg?style=flat-square
+[travis-url]: https://travis-ci.org/node-modules/compressing
+[codecov-image]: https://codecov.io/gh/node-modules/compressing/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/node-modules/compressing
+[david-image]: https://img.shields.io/david/node-modules/compressing.svg?style=flat-square
+[david-url]: https://david-dm.org/node-modules/compressing
+[snyk-image]: https://snyk.io/test/npm/compressing/badge.svg?style=flat-square
+[snyk-url]: https://snyk.io/test/npm/compressing
+[download-image]: https://img.shields.io/npm/dm/compressing.svg?style=flat-square
+[download-url]: https://npmjs.org/package/compressing
 
 The missing compress and uncompress lib for node.
 
@@ -34,7 +34,7 @@ Currently supported:
 ## Install
 
 ```bash
-npm install compressible
+npm install compressing
 ```
 
 ## Usage
@@ -46,20 +46,20 @@ Use gzip as an example, tar, tgz and zip is same as gzip.
 __promise style__
 
 ```js
-const compressible = require('compressible');
+const compressing = require('compressing');
 
 // compress a file
-compressible.gzip.compressFile('file/path/to/compress', 'path/to/destination.gz')
+compressing.gzip.compressFile('file/path/to/compress', 'path/to/destination.gz')
 .then(compressDone)
 .catch(handleError);
 
 // compress a file buffer
-compressible.gzip.compressFile(buffer, 'path/to/destination.gz')
+compressing.gzip.compressFile(buffer, 'path/to/destination.gz')
 .then(compressDone)
 .catch(handleError);
 
 // compress a stream
-compressible.gzip.compressFile(stream, 'path/to/destination.gz')
+compressing.gzip.compressFile(stream, 'path/to/destination.gz')
 .then(compressDone)
 .catch(handleError);
 ```
@@ -67,9 +67,9 @@ compressible.gzip.compressFile(stream, 'path/to/destination.gz')
 __stream style__
 
 ```js
-const compressible = require('compressible');
+const compressing = require('compressing');
 
-new compressible.gzip.FileStream({ source: 'file/path/to/compress' })
+new compressing.gzip.FileStream({ source: 'file/path/to/compress' })
 .on('error', handleError)
 .pipe(fs.createWriteStream('path/to/destination.gz'))
 .on('error', handleError);
@@ -77,7 +77,7 @@ new compressible.gzip.FileStream({ source: 'file/path/to/compress' })
 // It's a transform stream, so you can pipe to it
 fs.createReadStream('file/path/to/compress')
 .on('error', handleError)
-.pipe(new compressible.gzip.FileStream())
+.pipe(new compressing.gzip.FileStream())
 .on('error', handleError)
 .pipe(fs.createWriteStream('path/to/destination.gz'))
 .on('error', handleError);
@@ -85,7 +85,7 @@ fs.createReadStream('file/path/to/compress')
 // You should take care of stream errors in caution, use multipipe to handle error in one place
 const pipe = require('multipipe';)
 const sourceStream = fs.createReadStream('file/path/to/compress')
-const gzipStream = new compressible.gzip.FileStream();
+const gzipStream = new compressing.gzip.FileStream();
 const destStream = fs.createWriteStream('path/to/destination.gz');
 pipe(sourceStream, gzipStream, destStream, err => handleError);
 ```
@@ -100,8 +100,8 @@ __Gzip only support compressing a single file. if you want to compress a dir wit
 __promise style__
 
 ```js
-const compressible = require('compressible');
-compressible.tar.compressDir('dir/path/to/compress', 'path/to/destination.tar')
+const compressing = require('compressing');
+compressing.tar.compressDir('dir/path/to/compress', 'path/to/destination.tar')
 .then(compressDone)
 .catch(handleError);
 ```
@@ -109,9 +109,9 @@ compressible.tar.compressDir('dir/path/to/compress', 'path/to/destination.tar')
 __stream style__
 
 ```js
-const compressible = require('compressible');
+const compressing = require('compressing');
 
-const tarStream = new compressible.tar.Stream();
+const tarStream = new compressing.tar.Stream();
 tarStream.addEntry('dir/path/to/compress');
 
 tarStream
@@ -120,7 +120,7 @@ tarStream
 .on('error', handleError);
 
 // You should take care of stream errors in caution, use multipipe to handle error in one place
-const tarStream = new compressible.tar.Stream();
+const tarStream = new compressing.tar.Stream();
 tarStream.addEntry('dir/path/to/compress');
 const destStream = fs.createWriteStream('path/to/destination.tar');
 pipe(tarStream, destStream, handleError);
@@ -129,7 +129,7 @@ pipe(tarStream, destStream, handleError);
 Stream is very powerful, you can compress multiple entries in it;
 
 ```js
-const tarStream = new compressible.tar.Stream();
+const tarStream = new compressing.tar.Stream();
 // dir
 tarStream.addEntry('dir/path/to/compress');
 

@@ -4,7 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
-const compressible = require('../..');
+const compressing = require('../..');
 const assert = require('power-assert');
 
 describe('test/tgz/index.test.js', () => {
@@ -14,7 +14,7 @@ describe('test/tgz/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressible.tgz.compressFile(sourceFile, fileStream);
+      yield compressing.tgz.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
     });
 
@@ -23,7 +23,7 @@ describe('test/tgz/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressible.tgz.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
+      yield compressing.tgz.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
       assert(fs.existsSync(destFile));
       // TODO 检查 uncompress 之后 relativePath
     });
@@ -34,7 +34,7 @@ describe('test/tgz/index.test.js', () => {
       const fileStream = fs.createWriteStream(destFile);
       let err;
       try {
-        yield compressible.tgz.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
+        yield compressing.tgz.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
       } catch (e) {
         err = e;
       }
@@ -49,7 +49,7 @@ describe('test/tgz/index.test.js', () => {
       setImmediate(() => fileStream.emit('error', new Error('xx')));
       let err;
       try {
-        yield compressible.tgz.compressFile(sourceFile, fileStream);
+        yield compressing.tgz.compressFile(sourceFile, fileStream);
       } catch (e) {
         err = e;
       }
@@ -63,7 +63,7 @@ describe('test/tgz/index.test.js', () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
       console.log('dest', destFile);
-      yield compressible.tgz.compressDir(sourceDir, destFile);
+      yield compressing.tgz.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
 
@@ -72,7 +72,7 @@ describe('test/tgz/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
       const destStream = fs.createWriteStream(destFile);
       console.log('dest', destFile);
-      yield compressible.tgz.compressDir(sourceDir, destStream);
+      yield compressing.tgz.compressDir(sourceDir, destStream);
       assert(fs.existsSync(destFile));
     });
 
@@ -81,7 +81,7 @@ describe('test/tgz/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
       const destStream = fs.createWriteStream(destFile);
       console.log('dest', destFile);
-      yield compressible.tgz.compressDir(sourceDir, destStream, { ignoreBase: true });
+      yield compressing.tgz.compressDir(sourceDir, destStream, { ignoreBase: true });
       assert(fs.existsSync(destFile));
     });
 
@@ -89,7 +89,7 @@ describe('test/tgz/index.test.js', () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
       console.log('dest', destFile);
-      yield compressible.tgz.compressDir(sourceDir, destFile);
+      yield compressing.tgz.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
 
@@ -102,7 +102,7 @@ describe('test/tgz/index.test.js', () => {
       });
       let err;
       try {
-        yield compressible.tgz.compressDir(sourceDir, destStream);
+        yield compressing.tgz.compressDir(sourceDir, destStream);
       } catch (e) {
         err = e;
       }
@@ -115,7 +115,7 @@ describe('test/tgz/index.test.js', () => {
       const destFile = path.join('/permision-deny');
       let err;
       try {
-        yield compressible.tgz.compressDir(sourceDir, destFile);
+        yield compressing.tgz.compressDir(sourceDir, destFile);
       } catch (e) {
         err = e;
       }

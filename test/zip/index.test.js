@@ -4,7 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
-const compressible = require('../..');
+const compressing = require('../..');
 const assert = require('power-assert');
 
 describe('test/zip/index.test.js', () => {
@@ -14,7 +14,7 @@ describe('test/zip/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressible.zip.compressFile(sourceFile, fileStream);
+      yield compressing.zip.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
     });
 
@@ -25,7 +25,7 @@ describe('test/zip/index.test.js', () => {
       setImmediate(() => fileStream.emit('error', new Error('xx')));
       let err;
       try {
-        yield compressible.zip.compressFile(sourceFile, fileStream);
+        yield compressing.zip.compressFile(sourceFile, fileStream);
       } catch (e) {
         err = e;
       }
@@ -38,7 +38,7 @@ describe('test/zip/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressible.zip.compressFile(sourceBuffer, fileStream, { relativePath: 'dd/dd.log' });
+      yield compressing.zip.compressFile(sourceBuffer, fileStream, { relativePath: 'dd/dd.log' });
       assert(fs.existsSync(destFile));
     });
 
@@ -48,7 +48,7 @@ describe('test/zip/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressible.zip.compressFile(sourceStream, fileStream, { relativePath: 'dd/dd.log' });
+      yield compressing.zip.compressFile(sourceStream, fileStream, { relativePath: 'dd/dd.log' });
       assert(fs.existsSync(destFile));
     });
   });
@@ -58,7 +58,7 @@ describe('test/zip/index.test.js', () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
       console.log('dest', destFile);
-      yield compressible.zip.compressDir(sourceDir, destFile);
+      yield compressing.zip.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
 
@@ -67,7 +67,7 @@ describe('test/zip/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
       const destStream = fs.createWriteStream(destFile);
       console.log('dest', destFile);
-      yield compressible.zip.compressDir(sourceDir, destStream);
+      yield compressing.zip.compressDir(sourceDir, destStream);
       assert(fs.existsSync(destFile));
     });
 
@@ -76,7 +76,7 @@ describe('test/zip/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
       const destStream = fs.createWriteStream(destFile);
       console.log('dest', destFile);
-      yield compressible.zip.compressDir(sourceDir, destStream, { ignoreBase: true });
+      yield compressing.zip.compressDir(sourceDir, destStream, { ignoreBase: true });
       assert(fs.existsSync(destFile));
     });
 
@@ -84,7 +84,7 @@ describe('test/zip/index.test.js', () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
       console.log('dest', destFile);
-      yield compressible.zip.compressDir(sourceDir, destFile);
+      yield compressing.zip.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
 
@@ -96,7 +96,7 @@ describe('test/zip/index.test.js', () => {
         destStream.emit('error', new Error('xxx'));
       });
       try {
-        yield compressible.zip.compressDir(sourceDir, destStream);
+        yield compressing.zip.compressDir(sourceDir, destStream);
       } catch (e) {
         assert(e);
         assert(e.message === 'xxx');
@@ -108,7 +108,7 @@ describe('test/zip/index.test.js', () => {
       const destFile = path.join('/permision-deny');
       let err;
       try {
-        yield compressible.zip.compressDir(sourceDir, destFile);
+        yield compressing.zip.compressDir(sourceDir, destFile);
       } catch (e) {
         err = e;
       }

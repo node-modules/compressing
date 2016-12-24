@@ -1,5 +1,5 @@
 {
-  "name": "compressible",
+  "name": "compressing",
   "version": "1.0.0",
   "description": "Everything you need for compressing and uncompressing",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/node-modules/compressible.git"
+    "url": "git+https://github.com/node-modules/compressing.git"
   },
   "keywords": [
     "compress",
@@ -30,9 +30,9 @@
   "author": "shaoshuai0102 <shaoshuai0102@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/node-modules/compressible/issues"
+    "url": "https://github.com/node-modules/compressing/issues"
   },
-  "homepage": "https://github.com/node-modules/compressible#readme",
+  "homepage": "https://github.com/node-modules/compressing#readme",
   "dependencies": {
     "get-ready": "^1.0.0",
     "multipipe": "^1.0.2",

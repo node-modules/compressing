@@ -5,7 +5,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
-const compressible = require('../..');
+const compressing = require('../..');
 const assert = require('power-assert');
 
 describe('test/tar/index.test.js', () => {
@@ -17,7 +17,7 @@ describe('test/tar/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressible.tar.compressFile(sourceFile, fileStream);
+      yield compressing.tar.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
     });
 
@@ -26,7 +26,7 @@ describe('test/tar/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressible.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
+      yield compressing.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
       assert(fs.existsSync(destFile));
       // TODO 检查 uncompress 之后 relativePath
     });
@@ -38,7 +38,7 @@ describe('test/tar/index.test.js', () => {
       const fileStream = fs.createWriteStream(destFile);
       let err;
       try {
-        yield compressible.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
+        yield compressing.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
       } catch (e) {
         err = e;
       }
@@ -53,7 +53,7 @@ describe('test/tar/index.test.js', () => {
       setImmediate(() => fileStream.emit('error', new Error('xx')));
       let err;
       try {
-        yield compressible.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
+        yield compressing.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
       } catch (e) {
         err = e;
       }
@@ -69,7 +69,7 @@ describe('test/tar/index.test.js', () => {
       mm(console, 'warn', msg => {
         assert(msg === 'You should specify the size of streamming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.supressSizeWarning: true to suppress this warning');
       });
-      yield compressible.tar.compressFile(sourceStream, fileStream, { relativePath: 'xx.log' });
+      yield compressing.tar.compressFile(sourceStream, fileStream, { relativePath: 'xx.log' });
       assert(fs.existsSync(destFile));
     });
 
@@ -82,7 +82,7 @@ describe('test/tar/index.test.js', () => {
       mm(console, 'warn', msg => {
         assert(!msg);
       });
-      yield compressible.tar.compressFile(sourceStream, fileStream, { relativePath: 'xx.log', size: fs.statSync(sourceFile).size });
+      yield compressing.tar.compressFile(sourceStream, fileStream, { relativePath: 'xx.log', size: fs.statSync(sourceFile).size });
       assert(fs.existsSync(destFile));
     });
 
@@ -92,7 +92,7 @@ describe('test/tar/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressible.tar.compressFile(sourceBuffer, fileStream, { relativePath: 'xx.log' });
+      yield compressing.tar.compressFile(sourceBuffer, fileStream, { relativePath: 'xx.log' });
       assert(fs.existsSync(destFile));
     });
   });
@@ -102,7 +102,7 @@ describe('test/tar/index.test.js', () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
-      yield compressible.tar.compressDir(sourceDir, destFile);
+      yield compressing.tar.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
 
@@ -111,7 +111,7 @@ describe('test/tar/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       const destStream = fs.createWriteStream(destFile);
       console.log('dest', destFile);
-      compressible.tar.compressDir(sourceDir, destStream);
+      compressing.tar.compressDir(sourceDir, destStream);
       assert(fs.existsSync(destFile));
     });
 
@@ -120,7 +120,7 @@ describe('test/tar/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       const destStream = fs.createWriteStream(destFile);
       console.log('dest', destFile);
-      yield compressible.tar.compressDir(sourceDir, destStream, { ignoreBase: true });
+      yield compressing.tar.compressDir(sourceDir, destStream, { ignoreBase: true });
       assert(fs.existsSync(destFile));
     });
 
@@ -128,7 +128,7 @@ describe('test/tar/index.test.js', () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
-      yield compressible.tar.compressDir(sourceDir, destFile);
+      yield compressing.tar.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
 
@@ -142,7 +142,7 @@ describe('test/tar/index.test.js', () => {
       });
       let err;
       try {
-        yield compressible.tar.compressDir(sourceDir, destStream);
+        yield compressing.tar.compressDir(sourceDir, destStream);
       } catch (e) {
         err = e;
       }
@@ -154,7 +154,7 @@ describe('test/tar/index.test.js', () => {
       const destFile = path.join('/permision-deny');
       let err;
       try {
-        yield compressible.tar.compressDir(sourceDir, destFile);
+        yield compressing.tar.compressDir(sourceDir, destFile);
       } catch (e) {
         err = e;
       }

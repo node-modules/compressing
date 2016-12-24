@@ -6,9 +6,9 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const pipe = require('multipipe');
-const compressible = require('../..');
+const compressing = require('../..');
 const assert = require('power-assert');
-const TarStream = compressible.tar.Stream;
+const TarStream = compressing.tar.Stream;
 
 
 describe('test/tar/stream.test.js', () => {

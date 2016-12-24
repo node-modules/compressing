@@ -5,7 +5,7 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const pipe = require('multipipe');
-const compressible = require('../..');
+const compressing = require('../..');
 const assert = require('power-assert');
 
 describe('test/zip/file_stream.test.js', () => {
@@ -15,7 +15,7 @@ describe('test/zip/file_stream.test.js', () => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
     console.log('dest', destFile);
     const fileStream = fs.createWriteStream(destFile);
-    const zipStream = new compressible.zip.FileStream({ relativePath: 'dd/dd.log' });
+    const zipStream = new compressing.zip.FileStream({ relativePath: 'dd/dd.log' });
     pipe(sourceStream, zipStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));

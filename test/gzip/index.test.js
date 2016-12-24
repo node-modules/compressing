@@ -4,7 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
-const compressible = require('../..');
+const compressing = require('../..');
 const assert = require('power-assert');
 
 describe('test/gzip/index.test.js', () => {
@@ -14,7 +14,7 @@ describe('test/gzip/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
       console.log('destFile', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressible.gzip.compressFile(sourceFile, fileStream);
+      yield compressing.gzip.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
     });
 
@@ -26,7 +26,7 @@ describe('test/gzip/index.test.js', () => {
 
       let err;
       try {
-        yield compressible.gzip.compressFile(sourceFile, fileStream);
+        yield compressing.gzip.compressFile(sourceFile, fileStream);
       } catch (e) {
         err = e;
       }
@@ -39,7 +39,7 @@ describe('test/gzip/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
       console.log('destFile', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressible.gzip.compressFile(sourceBuffer, fileStream);
+      yield compressing.gzip.compressFile(sourceBuffer, fileStream);
       assert(fs.existsSync(destFile));
     });
 
@@ -49,7 +49,7 @@ describe('test/gzip/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
       console.log('destFile', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressible.gzip.compressFile(sourceStream, fileStream);
+      yield compressing.gzip.compressFile(sourceStream, fileStream);
       assert(fs.existsSync(destFile));
     });
   });

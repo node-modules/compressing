@@ -6,9 +6,9 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const pipe = require('multipipe');
-const compressible = require('../..');
+const compressing = require('../..');
 const assert = require('power-assert');
-const TgzStream = compressible.tgz.Stream;
+const TgzStream = compressing.tgz.Stream;
 
 
 describe('test/tgz/stream.test.js', () => {

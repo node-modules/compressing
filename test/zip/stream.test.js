@@ -6,9 +6,9 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const pipe = require('multipipe');
-const compressible = require('../..');
+const compressing = require('../..');
 const assert = require('power-assert');
-const ZipStream = compressible.zip.Stream;
+const ZipStream = compressing.zip.Stream;
 
 describe('test/zip/stream.test.js', () => {
   afterEach(mm.restore);

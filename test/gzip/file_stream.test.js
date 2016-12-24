@@ -5,7 +5,7 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const pipe = require('multipipe');
-const compressible = require('../..');
+const compressing = require('../..');
 const assert = require('power-assert');
 
 describe('test/gzip/file_stream.test.js', () => {
@@ -14,7 +14,7 @@ describe('test/gzip/file_stream.test.js', () => {
     const sourceStream = fs.createReadStream(sourceFile);
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
     console.log('destFile', destFile);
-    const gzipStream = new compressible.gzip.FileStream();
+    const gzipStream = new compressing.gzip.FileStream();
     const destStream = fs.createWriteStream(destFile);
     pipe(sourceStream, gzipStream, destStream, err => {
       assert(!err);
@@ -27,7 +27,7 @@ describe('test/gzip/file_stream.test.js', () => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
     console.log('destFile', destFile);
-    const gzipStream = new compressible.gzip.FileStream({ source: sourceFile });
+    const gzipStream = new compressing.gzip.FileStream({ source: sourceFile });
     const destStream = fs.createWriteStream(destFile);
     pipe(gzipStream, destStream, err => {
       assert(!err);
@@ -42,7 +42,7 @@ describe('test/gzip/file_stream.test.js', () => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
     console.log('destFile', destFile);
     const destStream = fs.createWriteStream(destFile);
-    const gzipStream = new compressible.gzip.FileStream({ source: sourceBuffer });
+    const gzipStream = new compressing.gzip.FileStream({ source: sourceBuffer });
     pipe(gzipStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -57,7 +57,7 @@ describe('test/gzip/file_stream.test.js', () => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
     console.log('destFile', destFile);
     const destStream = fs.createWriteStream(destFile);
-    const gzipStream = new compressible.gzip.FileStream({ source: sourceStream });
+    const gzipStream = new compressing.gzip.FileStream({ source: sourceStream });
     pipe(gzipStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -67,7 +67,7 @@ describe('test/gzip/file_stream.test.js', () => {
 
   it('should emit error if sourceFile does not exit', done => {
     const sourceFile = 'file-not-exist';
-    const gzipStream = new compressible.gzip.FileStream({ source: sourceFile });
+    const gzipStream = new compressing.gzip.FileStream({ source: sourceFile });
     gzipStream.on('error', err => {
       assert(err);
       done();
@@ -77,7 +77,7 @@ describe('test/gzip/file_stream.test.js', () => {
   it('should emit error if sourceStream emit error', done => {
     const sourceFile = 'file-not-exist';
     const sourceStream = fs.createReadStream(sourceFile);
-    const gzipStream = new compressible.gzip.FileStream({ source: sourceStream });
+    const gzipStream = new compressing.gzip.FileStream({ source: sourceStream });
     gzipStream.on('error', err => {
       assert(err && err.code === 'ENOENT');
       done();
