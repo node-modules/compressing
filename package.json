@@ -34,6 +34,7 @@
   },
   "homepage": "https://github.com/node-modules/compressing#readme",
   "dependencies": {
+    "flushwritable": "^1.0.0",
     "get-ready": "^1.0.0",
     "multipipe": "^1.0.2",
     "streamifier": "^0.1.1",
