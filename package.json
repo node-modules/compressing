@@ -36,6 +36,7 @@
   "dependencies": {
     "flushwritable": "^1.0.0",
     "get-ready": "^1.0.0",
+    "mkdirp": "^0.5.1",
     "multipipe": "^1.0.2",
     "streamifier": "^0.1.1",
     "tar-stream": "^1.5.2",
@@ -47,7 +48,6 @@
     "egg-bin": "^1.9.1",
     "eslint": "^3.10.2",
     "eslint-config-egg": "^3.2.0",
-    "mkdirp": "^0.5.1",
     "mm": "^2.0.0",
     "power-assert": "^1.4.2",
     "uuid": "^3.0.1"

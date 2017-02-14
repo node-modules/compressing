@@ -6,6 +6,7 @@ const path = require('path');
 const uuid = require('uuid');
 const compressing = require('../..');
 const assert = require('power-assert');
+const dircompare = require('dir-compare');
 
 describe('test/zip/index.test.js', () => {
   describe('zip.compressFile()', () => {
@@ -114,6 +115,44 @@ describe('test/zip/index.test.js', () => {
       }
       assert(err);
       assert(err.message.indexOf('EACCES: permission denied') > -1);
+    });
+  });
+
+  describe('zip.uncompress()', () => {
+    it('zip.uncompress(sourceFile, destDir)', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
+      yield compressing.zip.uncompress(sourceFile, destDir);
+      const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
+      assert(res.distinct === 0);
+      assert(res.equal === 5);
+      assert(res.totalFiles === 4);
+      assert(res.totalDirs === 1);
+    });
+
+    it('zip.uncompress(sourceStream, destDir)', function* () {
+      const sourceStream = fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xxx.zip'));
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
+      yield compressing.zip.uncompress(sourceStream, destDir);
+      const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
+      assert(res.distinct === 0);
+      assert(res.equal === 5);
+      assert(res.totalFiles === 4);
+      assert(res.totalDirs === 1);
+    });
+
+    it('zip.uncompress(sourceBuffer, destDir)', function* () {
+      const sourceBuffer = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xxx.zip'));
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
+      yield compressing.zip.uncompress(sourceBuffer, destDir);
+      const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
+      assert(res.distinct === 0);
+      assert(res.equal === 5);
+      assert(res.totalFiles === 4);
+      assert(res.totalDirs === 1);
     });
   });
 });
