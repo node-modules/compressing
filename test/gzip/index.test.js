@@ -53,4 +53,53 @@ describe('test/gzip/index.test.js', () => {
       assert(fs.existsSync(destFile));
     });
   });
+
+  describe('gzip.uncompress()', () => {
+    it('gzip.uncompress(sourceFile, destStream)', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log.gz');
+      const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
+      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+      const fileStream = fs.createWriteStream(destFile);
+      yield compressing.gzip.uncompress(sourceFile, fileStream);
+      assert(fs.existsSync(destFile));
+      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+    });
+
+    it('gzip.uncompress(sourceStream, destStream)', function* () {
+      const sourceStream = fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xx.log.gz'));
+      const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
+      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+      const fileStream = fs.createWriteStream(destFile);
+      yield compressing.gzip.uncompress(sourceStream, fileStream);
+      assert(fs.existsSync(destFile));
+      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+    });
+
+    it('gzip.uncompress(sourceStream, destFile)', function* () {
+      const sourceStream = fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xx.log.gz'));
+      const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
+      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+      yield compressing.gzip.uncompress(sourceStream, destFile);
+      assert(fs.existsSync(destFile));
+      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+    });
+
+    it('gzip.uncompress(sourceFile, destFile)', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log.gz');
+      const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
+      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+      yield compressing.gzip.uncompress(sourceFile, destFile);
+      assert(fs.existsSync(destFile));
+      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+    });
+
+    it('gzip.uncompress(buffer, destFile)', function* () {
+      const sourceBuffer = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xx.log.gz'));
+      const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
+      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+      yield compressing.gzip.uncompress(sourceBuffer, destFile);
+      assert(fs.existsSync(destFile));
+      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+    });
+  });
 });

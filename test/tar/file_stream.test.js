@@ -5,9 +5,9 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
+const assert = require('assert');
 const pipe = require('multipipe');
 const compressing = require('../..');
-const assert = require('power-assert');
 
 describe('test/tar/file_stream.test.js', () => {
   afterEach(mm.restore);

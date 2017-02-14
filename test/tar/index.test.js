@@ -7,6 +7,7 @@ const path = require('path');
 const uuid = require('uuid');
 const compressing = require('../..');
 const assert = require('power-assert');
+const dircompare = require('dir-compare');
 
 describe('test/tar/index.test.js', () => {
   afterEach(mm.restore);
@@ -160,6 +161,45 @@ describe('test/tar/index.test.js', () => {
       }
       assert(err);
       assert(err.message.indexOf('EACCES: permission denied') > -1);
+    });
+  });
+
+  describe('tar.uncompress()', () => {
+    it('tar.uncompress(sourceFile, destDir)', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tar');
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
+      yield compressing.tar.uncompress(sourceFile, destDir);
+      const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
+      assert(res.distinct === 0);
+      assert(res.equal === 5);
+      assert(res.totalFiles === 4);
+      assert(res.totalDirs === 1);
+    });
+
+    it('tar.uncompress(sourceStream, destDir)', function* () {
+      const sourceStream = fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xxx.tar'));
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
+      yield compressing.tar.uncompress(sourceStream, destDir);
+      const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
+      assert(res.distinct === 0);
+      assert(res.equal === 5);
+      assert(res.totalFiles === 4);
+      assert(res.totalDirs === 1);
+    });
+
+    it('tar.uncompress(sourceBuffer, destDir)', function* () {
+      const sourceBuffer = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xxx.tar'));
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
+      // console.log('sourceBuffer', destDir, originalDir);
+      yield compressing.tar.uncompress(sourceBuffer, destDir);
+      const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
+      assert(res.distinct === 0);
+      assert(res.equal === 5);
+      assert(res.totalFiles === 4);
+      assert(res.totalDirs === 1);
     });
   });
 });

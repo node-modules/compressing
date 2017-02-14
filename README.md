@@ -20,9 +20,7 @@
 [download-image]: https://img.shields.io/npm/dm/compressing.svg?style=flat-square
 [download-url]: https://npmjs.org/package/compressing
 
-The missing compress and uncompress lib for node.
-
-__Currently uncompressing has not been supported yet.__
+The missing compressing and uncompressing lib for node.
 
 Currently supported:
 
@@ -70,24 +68,24 @@ __stream style__
 const compressing = require('compressing');
 
 new compressing.gzip.FileStream({ source: 'file/path/to/compress' })
-.on('error', handleError)
-.pipe(fs.createWriteStream('path/to/destination.gz'))
-.on('error', handleError);
+  .on('error', handleError)
+  .pipe(fs.createWriteStream('path/to/destination.gz'))
+  .on('error', handleError);
 
 // It's a transform stream, so you can pipe to it
 fs.createReadStream('file/path/to/compress')
-.on('error', handleError)
-.pipe(new compressing.gzip.FileStream())
-.on('error', handleError)
-.pipe(fs.createWriteStream('path/to/destination.gz'))
-.on('error', handleError);
+  .on('error', handleError)
+  .pipe(new compressing.gzip.FileStream())
+  .on('error', handleError)
+  .pipe(fs.createWriteStream('path/to/destination.gz'))
+  .on('error', handleError);
 
 // You should take care of stream errors in caution, use multipipe to handle error in one place
 const pipe = require('multipipe';)
 const sourceStream = fs.createReadStream('file/path/to/compress')
 const gzipStream = new compressing.gzip.FileStream();
 const destStream = fs.createWriteStream('path/to/destination.gz');
-pipe(sourceStream, gzipStream, destStream, err => handleError);
+pipe(sourceStream, gzipStream, destStream, handleError);
 ```
 
 
@@ -115,9 +113,9 @@ const tarStream = new compressing.tar.Stream();
 tarStream.addEntry('dir/path/to/compress');
 
 tarStream
-.on('error', handleError)
-.pipe(fs.createWriteStream('path/to/destination.tar'))
-.on('error', handleError);
+  .on('error', handleError)
+  .pipe(fs.createWriteStream('path/to/destination.tar'))
+  .on('error', handleError);
 
 // You should take care of stream errors in caution, use multipipe to handle error in one place
 const tarStream = new compressing.tar.Stream();
@@ -146,6 +144,95 @@ const destStream = fs.createWriteStream('path/to/destination.tar');
 pipe(tarStream, destStream, handleError);
 ```
 
+### Uncompress a file
+
+__promise style__
+
+```js
+const compressing = require('compressing');
+
+// uncompress a file
+compressing.tgz.uncompress('file/path/to/uncompress.tgz', 'path/to/destination/dir')
+.then(uncompressDone)
+.catch(handleError);
+
+// uncompress a file buffer
+compressing.tgz.uncompress(buffer, 'path/to/destination/dir')
+.then(uncompressDone)
+.catch(handleError);
+
+// uncompress a stream
+compressing.tgz.uncompress(stream, 'path/to/destination/dir')
+.then(uncompressDone)
+.catch(handleError);
+```
+
+**Note: tar, tgz and zip have the same uncompressing API as above: destination should be a path of a directory, while that of gzip is slightly different: destination must be a file or filestream.**
+
+
+And working with urllib is super easy. Let's download a tgz file and uncompress to a directory:
+
+```js
+const urllib = require('urllib');
+const targetDir = require('os').tmpdir();
+const compressing = require('compressing');
+
+urllib.request('http://registry.npmjs.org/pedding/-/pedding-1.1.0.tgz', {
+  streaming: true,
+  followRedirect: true,
+})
+.then(result => compressing.tgz.uncompress(result.res, targetDir))
+.then(() => console.log('uncompress done'))
+.catch(console.error);
+```
+
+__stream style__
+
+```js
+const compressing = require('compressing');
+const mkdirp = require('mkdirp');
+
+function onEntry(header, stream, next) => {
+  stream.on('end', next);
+
+  // header.type => file | directory
+  // header.name => path name
+
+  if (header.type === 'file') {
+    stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+  } else { // directory
+    mkdirp(path.join(destDir, header.name), err => {
+      if (err) return handleError(err);
+      stream.resume();
+    });
+  }
+}
+
+new compressing.tgz.UncompressStream({ source: 'file/path/to/uncompress.tgz' })
+  .on('error', handleError)
+  .on('finish', handleFinish) // uncompressing is done
+  .on('entry', onEntry);
+
+// It's a writable stream, so you can pipe to it
+fs.createReadStream('file/path/to/uncompress')
+  .on('error', handleError)
+  .pipe(new compressing.tgz.UncompressStream())
+  .on('error', handleError)
+  .on('finish', handleFinish) // uncompressing is done
+  .on('entry', onEntry);
+```
+
+**Note: tar, tgz and zip have the same uncompressing streaming API as above: it's a writable stream, and entries will be emitted while uncompressing one after one another, while that of gzip is slightly different: gzip.UncompressStream is a transform stream, so no `entry` event will be emitted and you can just pipe to another stream**
+
+This constrants is brought by Gzip algorithm itself, it only support compressing one file and uncompress one file.
+
+```js
+new compressing.gzip.UncompressStream({ source: 'file/path/to/uncompress.gz' })
+  .on('error', handleError)
+  .pipe(fs.createWriteStream('path/to/dest/file'))
+  .on('error', handleError);
+```
+
 ## API
 
 ### compressFile
@@ -171,14 +258,29 @@ Use this API to compress a dir. This is a convenient method, which wraps Stream 
 
 __Note: gzip do not have a compressDir method, you may need tgz instead.__
 
-- tar.compressDir(dir, dest, opts)
-- tgz.compressDir(dir, dest, opts)
-- zip.compressDir(dir, dest, opts)
+- tar.compressDir(source, dest, opts)
+- tgz.compressDir(source, dest, opts)
+- zip.compressDir(source, dest, opts)
 
 Params
 
-- dir {String|Buffer|Stream} - dir path to be compressed
+- source {String|Buffer|Stream} - source to be compressed
 - dest {String|Stream} - compressing destination, could be a file path(eg. `/path/to/xx.tgz`), or a writable stream.
+- opts {Object} - usually you don't need it
+
+### uncompress
+
+Use this API to uncompress a file. This is a convenient method, which wraps UncompressStream API below, but you can handle error in one place. RECOMMANDED.
+
+- tar.uncompress(source, dest, opts)
+- tgz.uncompress(source, dest, opts)
+- zip.uncompress(source, dest, opts)
+- gzip.uncompress(source, dest, opts)
+
+Params
+
+- source {String|Buffer|Stream} - source to be uncompressed
+- dest {String|Stream} - uncompressing destination. When uncompressing tar, tgz and zip, it should be a directory path (eg. `/path/to/xx`). **When uncompressing gzip, it should be a file path or a writable stream.**
 - opts {Object} - usually you don't need it
 
 ### FileStream
@@ -241,6 +343,32 @@ Params
 - opts.relativePath {String} - uncompression programs would extract the file from the compressed file as opts.relativePath. If entry is a file path or a dir path, opts.relativePath is optional, otherwise it's required.
 - opts.ignoreBase {Boolean} - when entry is a dir path, and opts.ignoreBase is set to true, the compression will contain files relative to the path passed, and not with the path included.
 
+### UncompressStream
+
+The writable stream to uncompress anything as you need.
+
+__Note: If you are not very familiar with streams, just use `uncompress()` API, error can be handled in one place.__
+
+__Gzip only support compressing and uncompressing one single file. So gzip.UncompressStream is a transform stream which is different from others.__
+
+__Constructor__
+
+- new gzip.UncompressStream(opts)
+- new tar.UncompressStream(opts)
+- new tgz.UncompressStream(opts)
+- new zip.UncompressStream(opts)
+
+Common params:
+
+- opts.source {String|Buffer|Stream} - source to be uncompressed, could be a file path, buffer, or a readable stream.
+
+__CAUTION for zip.UncompressStream__
+
+Due to the design of the .zip file format, it's impossible to interpret a .zip file without loading all data into memory.
+
+Although the API is streaming style(try to keep it handy), it still loads all data into memory.
+
+https://github.com/thejoshwolfe/yauzl#no-streaming-unzip-api
 
 
 
