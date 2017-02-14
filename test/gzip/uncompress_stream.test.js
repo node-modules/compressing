@@ -1,17 +1,22 @@
 'use strict';
 
-const os = require('os');
 const fs = require('fs');
+const mm = require('mm');
+const os = require('os');
 const uuid = require('uuid');
 const path = require('path');
 const assert = require('assert');
 const pipe = require('multipipe');
 const compressing = require('../..');
+const streamifier = require('streamifier');
 
 const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
 const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log.gz');
 
 describe('test/gzip/uncompress_stream.test.js', () => {
+
+  afterEach(mm.restore);
+
   it('should be transform stream', done => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
 
@@ -82,6 +87,21 @@ describe('test/gzip/uncompress_stream.test.js', () => {
     const uncompressStream = new compressing.gzip.UncompressStream({ source: sourceStream });
     uncompressStream.on('error', err => {
       assert(err && err.code === 'ENOENT');
+      done();
+    });
+  });
+
+  it('should emit error if stream created by streamifier.createReadStream emit error', done => {
+    const original = streamifier.createReadStream;
+    mm(streamifier, 'createReadStream', function() {
+      const result = original.apply(streamifier, arguments);
+      setImmediate(() => result.emit('error', 'mockError'));
+      return result;
+    });
+    const sourceBuffer = fs.readFileSync(sourceFile);
+    const uncompressStream = new compressing.gzip.UncompressStream({ source: sourceBuffer });
+    uncompressStream.on('error', err => {
+      assert(err === 'mockError');
       done();
     });
   });

@@ -10,6 +10,7 @@ const mkdirp = require('mkdirp');
 const pipe = require('multipipe');
 const compressing = require('../..');
 const dircompare = require('dir-compare');
+const streamifier = require('streamifier');
 
 const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
 const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tar');
@@ -151,6 +152,21 @@ describe('test/tar/uncompress_stream.test.js', () => {
     const uncompressStream = new compressing.tar.UncompressStream({ source: sourceStream });
     uncompressStream.on('error', err => {
       assert(err && err.code === 'ENOENT');
+      done();
+    });
+  });
+
+  it('should emit error if stream created by streamifier.createReadStream emit error', done => {
+    const original = streamifier.createReadStream;
+    mm(streamifier, 'createReadStream', function() {
+      const result = original.apply(streamifier, arguments);
+      setImmediate(() => result.emit('error', 'mockError'));
+      return result;
+    });
+    const sourceBuffer = fs.readFileSync(sourceFile);
+    const uncompressStream = new compressing.tar.UncompressStream({ source: sourceBuffer });
+    uncompressStream.on('error', err => {
+      assert(err === 'mockError');
       done();
     });
   });

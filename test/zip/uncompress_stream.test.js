@@ -154,4 +154,16 @@ describe('test/zip/uncompress_stream.test.js', () => {
       done();
     });
   });
+
+  it('should emit error if utils.streamToBuffer throw error', done => {
+    const sourceStream = fs.createReadStream(sourceFile);
+
+    const uncompressStream = new compressing.zip.UncompressStream();
+    pipe(sourceStream, uncompressStream, err => {
+      assert(err === 'mockError');
+      done();
+    });
+
+    sourceStream.emit('error', 'mockError');
+  });
 });
