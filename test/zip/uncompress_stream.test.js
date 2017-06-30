@@ -166,4 +166,35 @@ describe('test/zip/uncompress_stream.test.js', () => {
 
     sourceStream.emit('error', 'mockError');
   });
+
+  it('should uncompress with strip', done => {
+    const sourceStream = fs.createReadStream(sourceFile);
+    const destDir = path.join(os.tmpdir(), uuid.v4());
+
+    const uncompressStream = new compressing.zip.UncompressStream({ strip: 1 });
+    mkdirp.sync(destDir);
+    pipe(sourceStream, uncompressStream, err => {
+      assert(!err);
+      const res = dircompare.compareSync(originalDir, destDir);
+      assert(res.distinct === 0);
+      assert(res.equal === 5);
+      assert(res.totalFiles === 4);
+      assert(res.totalDirs === 1);
+      done();
+    });
+
+    uncompressStream.on('entry', (header, stream, next) => {
+      stream.on('end', next);
+
+      if (header.type === 'file') {
+        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+      } else { // directory
+        mkdirp(path.join(destDir, header.name), err => {
+          if (err) return done(err);
+          stream.resume();
+        });
+      }
+    });
+  });
+
 });
