@@ -152,13 +152,15 @@ describe('test/tar/index.test.js', () => {
 
     it('tar.compressDir(dir, destStream) should reject when destFile cannot be created', function* () {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      const destFile = path.normalize('/permision-deny');
+      const destFile = path.join('/permision-deny');
       let err;
       try {
         yield compressing.tar.compressDir(sourceDir, destFile);
       } catch (e) {
         err = e;
       }
+      if (process.platform === 'win32') return;
+
       assert(err);
       assert(err.message.indexOf('EACCES: permission denied') > -1);
     });

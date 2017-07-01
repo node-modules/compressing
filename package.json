@@ -6,7 +6,7 @@
   "scripts": {
     "test": "egg-bin test",
     "cov": "egg-bin cov",
-    "lint": "eslint --fix .",
+    "lint": "eslint .",
     "ci": "npm run lint && npm run cov"
   },
   "repository": {
