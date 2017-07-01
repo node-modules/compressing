@@ -152,7 +152,7 @@ describe('test/tar/index.test.js', () => {
 
     it('tar.compressDir(dir, destStream) should reject when destFile cannot be created', function* () {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      const destFile = path.join('/permision-deny');
+      const destFile = path.normalize('/permision-deny');
       let err;
       try {
         yield compressing.tar.compressDir(sourceDir, destFile);
