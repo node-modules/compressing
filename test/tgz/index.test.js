@@ -136,6 +136,10 @@ describe('test/tgz/index.test.js', () => {
       assert(res.equal === 5);
       assert(res.totalFiles === 4);
       assert(res.totalDirs === 1);
+
+      const destStat = fs.statSync(path.join(destDir, 'xxx/bin'));
+      const originStat = fs.statSync(path.join(originalDir, 'bin'));
+      assert(originStat.mode === destStat.mode);
     });
 
     it('tgz.uncompress(sourceStream, destDir)', function* () {
