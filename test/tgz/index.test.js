@@ -132,6 +132,12 @@ describe('test/tgz/index.test.js', () => {
       const destDir = path.join(os.tmpdir(), uuid.v4());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       yield compressing.tgz.uncompress(sourceFile, destDir);
+
+      assert(fs.statSync(path.join(destDir, 'xxx/bar.txt')).size === 7);
+      assert(fs.statSync(path.join(destDir, 'xxx/foo')).size === 3);
+      assert(fs.statSync(path.join(destDir, 'xxx/test/test.js')).size === 14);
+      assert(fs.statSync(path.join(destDir, 'xxx/bin')).size === 2117);
+
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
       assert(res.distinct === 0);
       assert(res.equal === 5);
