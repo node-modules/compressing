@@ -7,7 +7,7 @@ const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
 const mkdirp = require('mkdirp');
-const pipe = require('multipipe');
+const pump = require('pump');
 const compressing = require('../..');
 const dircompare = require('dir-compare');
 
@@ -23,7 +23,7 @@ describe('test/tgz/uncompress_stream.test.js', () => {
 
     const uncompressStream = new compressing.tgz.UncompressStream();
     mkdirp.sync(destDir);
-    pipe(sourceStream, uncompressStream, err => {
+    pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
       assert(res.distinct === 0);

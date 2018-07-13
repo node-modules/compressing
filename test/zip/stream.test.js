@@ -5,7 +5,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
-const pipe = require('multipipe');
+const pump = require('pump');
 const compressing = require('../..');
 const assert = require('power-assert');
 const ZipStream = compressing.zip.Stream;
@@ -21,7 +21,7 @@ describe('test/zip/stream.test.js', () => {
     const zipStream = new ZipStream();
     zipStream.addEntry(path.join(__dirname, '..', 'fixtures', 'xx.log'));
 
-    pipe(zipStream, fileStream, err => {
+    pump(zipStream, fileStream, err => {
       console.log('error', err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -37,7 +37,7 @@ describe('test/zip/stream.test.js', () => {
     const zipStream = new ZipStream();
     zipStream.addEntry(path.join(__dirname, '..', 'fixtures', 'xx.log'), { relativePath: 'dd/dd.log' });
 
-    pipe(zipStream, fileStream, err => {
+    pump(zipStream, fileStream, err => {
       console.log('error', err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -53,7 +53,7 @@ describe('test/zip/stream.test.js', () => {
     const zipStream = new ZipStream();
     zipStream.addEntry(path.join(__dirname, '..', 'fixtures'));
 
-    pipe(zipStream, fileStream, err => {
+    pump(zipStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -69,7 +69,7 @@ describe('test/zip/stream.test.js', () => {
     const zipStream = new ZipStream();
     zipStream.addEntry(path.join(__dirname, '..', 'fixtures'), { ignoreBase: true });
 
-    pipe(zipStream, fileStream, err => {
+    pump(zipStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -85,7 +85,7 @@ describe('test/zip/stream.test.js', () => {
     const zipStream = new ZipStream();
     zipStream.addEntry(path.join(__dirname, '..', 'fixtures'), { relativePath: 'xxx' });
 
-    pipe(zipStream, fileStream, err => {
+    pump(zipStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -101,7 +101,7 @@ describe('test/zip/stream.test.js', () => {
     const zipStream = new ZipStream();
     zipStream.addEntry(path.join(__dirname, '..', 'fixtures'), { relativePath: 'xxx', ignoreBase: true });
 
-    pipe(zipStream, fileStream, err => {
+    pump(zipStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -116,7 +116,7 @@ describe('test/zip/stream.test.js', () => {
 
     const zipStream = new ZipStream();
     zipStream.addEntry(fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xx.log')), { relativePath: 'xx.log' });
-    pipe(zipStream, fileStream, err => {
+    pump(zipStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -134,7 +134,7 @@ describe('test/zip/stream.test.js', () => {
 
     const zipStream = new ZipStream();
     zipStream.addEntry(fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xx.log')), { relativePath: 'xx.log' });
-    pipe(zipStream, fileStream, err => {
+    pump(zipStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -153,7 +153,7 @@ describe('test/zip/stream.test.js', () => {
     const zipStream = new ZipStream();
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     zipStream.addEntry(fs.createReadStream(sourceFile), { relativePath: 'dd/xx.log', size: fs.statSync(sourceFile).size });
-    pipe(zipStream, fileStream, err => {
+    pump(zipStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -181,7 +181,7 @@ describe('test/zip/stream.test.js', () => {
     // add dir
     zipStream.addEntry(sourceDir);
 
-    pipe(zipStream, fileStream, err => {
+    pump(zipStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();

@@ -80,12 +80,12 @@ fs.createReadStream('file/path/to/compress')
   .pipe(fs.createWriteStream('path/to/destination.gz'))
   .on('error', handleError);
 
-// You should take care of stream errors in caution, use multipipe to handle error in one place
-const pipe = require('multipipe';)
+// You should take care of stream errors in caution, use pump to handle error in one place
+const pump = require('pump';)
 const sourceStream = fs.createReadStream('file/path/to/compress')
 const gzipStream = new compressing.gzip.FileStream();
 const destStream = fs.createWriteStream('path/to/destination.gz');
-pipe(sourceStream, gzipStream, destStream, handleError);
+pump(sourceStream, gzipStream, destStream, handleError);
 ```
 
 
@@ -117,11 +117,11 @@ tarStream
   .pipe(fs.createWriteStream('path/to/destination.tar'))
   .on('error', handleError);
 
-// You should take care of stream errors in caution, use multipipe to handle error in one place
+// You should take care of stream errors in caution, use pump to handle error in one place
 const tarStream = new compressing.tar.Stream();
 tarStream.addEntry('dir/path/to/compress');
 const destStream = fs.createWriteStream('path/to/destination.tar');
-pipe(tarStream, destStream, handleError);
+pump(tarStream, destStream, handleError);
 ```
 
 Stream is very powerful, you can compress multiple entries in it;
