@@ -4,7 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
-const pipe = require('multipipe');
+const pump = require('pump');
 const compressing = require('../..');
 const assert = require('power-assert');
 
@@ -16,7 +16,7 @@ describe('test/gzip/file_stream.test.js', () => {
     console.log('destFile', destFile);
     const gzipStream = new compressing.gzip.FileStream();
     const destStream = fs.createWriteStream(destFile);
-    pipe(sourceStream, gzipStream, destStream, err => {
+    pump(sourceStream, gzipStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -29,7 +29,7 @@ describe('test/gzip/file_stream.test.js', () => {
     console.log('destFile', destFile);
     const gzipStream = new compressing.gzip.FileStream({ source: sourceFile });
     const destStream = fs.createWriteStream(destFile);
-    pipe(gzipStream, destStream, err => {
+    pump(gzipStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -43,7 +43,7 @@ describe('test/gzip/file_stream.test.js', () => {
     console.log('destFile', destFile);
     const destStream = fs.createWriteStream(destFile);
     const gzipStream = new compressing.gzip.FileStream({ source: sourceBuffer });
-    pipe(gzipStream, destStream, err => {
+    pump(gzipStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -58,7 +58,7 @@ describe('test/gzip/file_stream.test.js', () => {
     console.log('destFile', destFile);
     const destStream = fs.createWriteStream(destFile);
     const gzipStream = new compressing.gzip.FileStream({ source: sourceStream });
-    pipe(gzipStream, destStream, err => {
+    pump(gzipStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();

@@ -6,7 +6,7 @@ const os = require('os');
 const uuid = require('uuid');
 const path = require('path');
 const assert = require('assert');
-const pipe = require('multipipe');
+const pump = require('pump');
 const compressing = require('../..');
 const streamifier = require('streamifier');
 
@@ -23,7 +23,7 @@ describe('test/gzip/uncompress_stream.test.js', () => {
     const sourceStream = fs.createReadStream(sourceFile);
     const uncompressStream = new compressing.gzip.UncompressStream();
     const destStream = fs.createWriteStream(destFile);
-    pipe(sourceStream, uncompressStream, destStream, err => {
+    pump(sourceStream, uncompressStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
@@ -36,7 +36,7 @@ describe('test/gzip/uncompress_stream.test.js', () => {
 
     const uncompressStream = new compressing.gzip.UncompressStream({ source: sourceFile });
     const destStream = fs.createWriteStream(destFile);
-    pipe(uncompressStream, destStream, err => {
+    pump(uncompressStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
@@ -50,7 +50,7 @@ describe('test/gzip/uncompress_stream.test.js', () => {
 
     const destStream = fs.createWriteStream(destFile);
     const uncompressStream = new compressing.gzip.UncompressStream({ source: sourceBuffer });
-    pipe(uncompressStream, destStream, err => {
+    pump(uncompressStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
@@ -64,7 +64,7 @@ describe('test/gzip/uncompress_stream.test.js', () => {
 
     const destStream = fs.createWriteStream(destFile);
     const uncompressStream = new compressing.gzip.UncompressStream({ source: sourceStream });
-    pipe(uncompressStream, destStream, err => {
+    pump(uncompressStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));

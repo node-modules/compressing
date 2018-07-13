@@ -5,7 +5,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
-const pipe = require('multipipe');
+const pump = require('pump');
 const compressing = require('../..');
 const assert = require('power-assert');
 const TarStream = compressing.tar.Stream;
@@ -22,7 +22,7 @@ describe('test/tar/stream.test.js', () => {
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures', 'xx.log'));
 
-    pipe(tarStream, fileStream, err => {
+    pump(tarStream, fileStream, err => {
       console.log('error', err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -38,7 +38,7 @@ describe('test/tar/stream.test.js', () => {
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures', 'xx.log'), { relativePath: 'dd/dd.log' });
 
-    pipe(tarStream, fileStream, err => {
+    pump(tarStream, fileStream, err => {
       console.log('error', err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -54,7 +54,7 @@ describe('test/tar/stream.test.js', () => {
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures'));
 
-    pipe(tarStream, fileStream, err => {
+    pump(tarStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -70,7 +70,7 @@ describe('test/tar/stream.test.js', () => {
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures'), { ignoreBase: true });
 
-    pipe(tarStream, fileStream, err => {
+    pump(tarStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -86,7 +86,7 @@ describe('test/tar/stream.test.js', () => {
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures'), { relativePath: 'xxx' });
 
-    pipe(tarStream, fileStream, err => {
+    pump(tarStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -102,7 +102,7 @@ describe('test/tar/stream.test.js', () => {
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures'), { relativePath: 'xxx', ignoreBase: true });
 
-    pipe(tarStream, fileStream, err => {
+    pump(tarStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -117,7 +117,7 @@ describe('test/tar/stream.test.js', () => {
 
     const tarStream = new TarStream();
     tarStream.addEntry(fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xx.log')), { relativePath: 'xx.log' });
-    pipe(tarStream, fileStream, err => {
+    pump(tarStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -135,7 +135,7 @@ describe('test/tar/stream.test.js', () => {
 
     const tarStream = new TarStream();
     tarStream.addEntry(fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xx.log')), { relativePath: 'xx.log' });
-    pipe(tarStream, fileStream, err => {
+    pump(tarStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -154,7 +154,7 @@ describe('test/tar/stream.test.js', () => {
     const tarStream = new TarStream();
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     tarStream.addEntry(fs.createReadStream(sourceFile), { relativePath: 'dd/xx.log', size: fs.statSync(sourceFile).size });
-    pipe(tarStream, fileStream, err => {
+    pump(tarStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -182,7 +182,7 @@ describe('test/tar/stream.test.js', () => {
     // add dir
     tarStream.addEntry(sourceDir);
 
-    pipe(tarStream, fileStream, err => {
+    pump(tarStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();

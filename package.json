@@ -37,7 +37,7 @@
     "flushwritable": "^1.0.0",
     "get-ready": "^1.0.0",
     "mkdirp": "^0.5.1",
-    "multipipe": "^1.0.2",
+    "pump": "^3.0.0",
     "streamifier": "^0.1.1",
     "tar-stream": "^1.5.2",
     "yauzl": "^2.7.0",

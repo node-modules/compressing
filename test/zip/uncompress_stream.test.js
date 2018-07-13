@@ -7,7 +7,7 @@ const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
 const mkdirp = require('mkdirp');
-const pipe = require('multipipe');
+const pump = require('pump');
 const compressing = require('../..');
 const dircompare = require('dir-compare');
 
@@ -23,7 +23,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
 
     const uncompressStream = new compressing.zip.UncompressStream();
     mkdirp.sync(destDir);
-    pipe(sourceStream, uncompressStream, err => {
+    pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
       assert(res.distinct === 0);
@@ -159,7 +159,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
     const sourceStream = fs.createReadStream(sourceFile);
 
     const uncompressStream = new compressing.zip.UncompressStream();
-    pipe(sourceStream, uncompressStream, err => {
+    pump(sourceStream, uncompressStream, err => {
       assert(err === 'mockError');
       done();
     });
@@ -173,7 +173,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
 
     const uncompressStream = new compressing.zip.UncompressStream({ strip: 1 });
     mkdirp.sync(destDir);
-    pipe(sourceStream, uncompressStream, err => {
+    pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, destDir);
       assert(res.distinct === 0);
@@ -203,7 +203,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
 
     const uncompressStream = new compressing.zip.UncompressStream({ strip: 2 });
     mkdirp.sync(destDir);
-    pipe(sourceStream, uncompressStream, err => {
+    pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(path.join(__dirname, '../fixtures/xxx-strip2'), destDir);
       assert(res.distinct === 0);
