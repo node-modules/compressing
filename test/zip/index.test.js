@@ -162,6 +162,7 @@ describe('test/zip/index.test.js', () => {
       destDir = path.join(os.tmpdir(), uuid.v4());
       yield compressing.zip.uncompress(sourceFile, destDir, { strip: 1 });
       const names = fs.readdirSync(destDir);
+      names.sort();
       assert.deepEqual(names, [
         '262149.html',
         '6y6r_65538.html',
