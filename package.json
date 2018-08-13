@@ -51,9 +51,17 @@
     "eslint-config-egg": "^3.2.0",
     "mm": "^2.0.0",
     "power-assert": "^1.4.2",
+    "rimraf": "^2.6.2",
     "uuid": "^3.0.1"
   },
+  "engines": {
+    "node": ">= 4.0.0"
+  },
   "ci": {
-    "version": "4, 6, 8"
+    "version": "4, 6, 8, 10",
+    "license": {
+      "year": "2017",
+      "fullname": "node-modules and other contributors"
+    }
   }
 }
