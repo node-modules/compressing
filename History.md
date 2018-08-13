@@ -1,4 +1,10 @@
 
+1.3.0 / 2018-08-13
+==================
+
+**features**
+  * [[`04feafa`](http://github.com/node-modules/compressing/commit/04feafa6a290d877044ed162ca4c7dcdc5e54e87)] - feat: support absolute path zip file (#10) (fengmk2 <<fengmk2@gmail.com>>)
+
 1.2.4 / 2018-07-13
 ==================
 
