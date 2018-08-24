@@ -7,6 +7,7 @@ const uuid = require('uuid');
 const compressing = require('../..');
 const assert = require('power-assert');
 const dircompare = require('dir-compare');
+const mkdirp = require('mz-modules/mkdirp');
 
 describe('test/tgz/index.test.js', () => {
   describe('tgz.compressFile()', () => {
