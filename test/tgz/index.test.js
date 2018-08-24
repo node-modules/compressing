@@ -7,6 +7,7 @@ const uuid = require('uuid');
 const compressing = require('../..');
 const assert = require('power-assert');
 const dircompare = require('dir-compare');
+const mkdirp = require('mz-modules/mkdirp');
 
 describe('test/tgz/index.test.js', () => {
   describe('tgz.compressFile()', () => {
@@ -55,6 +56,23 @@ describe('test/tgz/index.test.js', () => {
         err = e;
       }
       assert(err && err.message === 'xx');
+    });
+
+    it('should keep stat mode', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures/xxx/bin');
+      const originStat = fs.statSync(sourceFile);
+      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
+      console.log('dest', destFile);
+      const fileStream = fs.createWriteStream(destFile);
+      yield compressing.tgz.compressFile(sourceFile, fileStream);
+      assert(fs.existsSync(destFile));
+
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      yield mkdirp(destDir);
+      yield compressing.tgz.uncompress(destFile, destDir);
+      const stat = fs.statSync(path.join(destDir, 'bin'));
+      assert(stat.mode === originStat.mode);
+      console.log(destDir);
     });
 
   });
