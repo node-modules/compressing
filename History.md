@@ -1,4 +1,10 @@
 
+1.3.1 / 2018-08-24
+==================
+
+**fixes**
+  * [[`b802819`](http://github.com/node-modules/compressing/commit/b8028195dd6e7200ff47c8f43f695d24838e986b)] - fix: keep stat mode when compress tar or tgz (#11) (Haoliang Gao <<sakura9515@gmail.com>>)
+
 1.3.0 / 2018-08-13
 ==================
 
