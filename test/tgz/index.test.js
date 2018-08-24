@@ -57,6 +57,23 @@ describe('test/tgz/index.test.js', () => {
       assert(err && err.message === 'xx');
     });
 
+    it('should keep stat mode', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures/xxx/bin');
+      const originStat = fs.statSync(sourceFile);
+      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
+      console.log('dest', destFile);
+      const fileStream = fs.createWriteStream(destFile);
+      yield compressing.tgz.compressFile(sourceFile, fileStream);
+      assert(fs.existsSync(destFile));
+
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      yield mkdirp(destDir);
+      yield compressing.tgz.uncompress(destFile, destDir);
+      const stat = fs.statSync(path.join(destDir, 'bin'));
+      assert(stat.mode === originStat.mode);
+      console.log(destDir);
+    });
+
   });
 
   describe('tgz.compressDir()', () => {
