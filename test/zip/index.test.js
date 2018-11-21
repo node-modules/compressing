@@ -28,6 +28,22 @@ describe('test/zip/index.test.js', () => {
       assert(fs.existsSync(destFile));
     });
 
+    it('zip.compressFile(file, stream) should handle error if file not exist', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log', 'not_exist');
+      destDir = path.join(os.tmpdir(), uuid.v4());
+      mkdirp.sync(destDir);
+      const destFile = path.join(destDir, uuid.v4() + '.zip');
+      console.log('dest', destFile);
+      const fileStream = fs.createWriteStream(destFile);
+      let err;
+      try {
+        yield compressing.zip.compressFile(sourceFile, fileStream);
+      } catch (e) {
+        err = e;
+      }
+      assert(err);
+    });
+
     it('zip.compressFile(file, destStream) should error if destStream emit error', function* () {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       destDir = path.join(os.tmpdir(), uuid.v4());
