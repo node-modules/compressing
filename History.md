@@ -1,4 +1,10 @@
 
+1.3.2 / 2018-11-21
+==================
+
+**fixes**
+  * [[`3713a0b`](http://github.com/node-modules/compressing/commit/3713a0b8d5b03d61c111afbbd4b6226169afeb14)] - fix: handle error from yazl when file not exists (#19) (DiamondYuan <<541832074@qq.com>>)
+
 1.3.1 / 2018-08-24
 ==================
 
