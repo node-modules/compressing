@@ -2,3 +2,5 @@ node_modules
 npm-debug.log*
 coverage
 .vscode
+test/fixtures/types/*.js
+yarn.lock
