@@ -2,7 +2,7 @@ import * as compressing from "../../../index";
 import * as fs from "fs";
 
 const stringValue = "source";
-const streamValue = fs.createWriteStream(stringValue);
+const writestreamValue = fs.createWriteStream(stringValue);
 const readStreamValue = fs.createReadStream(stringValue);
 const numberValue = 1994;
 const bufferValue = fs.readFileSync(stringValue);
@@ -11,11 +11,11 @@ const bufferValue = fs.readFileSync(stringValue);
  * tar.compressFile()
  */
 compressing.tar.compressFile(stringValue, stringValue);
-compressing.tar.compressFile(stringValue, streamValue);
-compressing.tar.compressFile(bufferValue, streamValue, {
+compressing.tar.compressFile(stringValue, writestreamValue);
+compressing.tar.compressFile(bufferValue, writestreamValue, {
   relativePath: stringValue
 });
-compressing.tar.compressFile(streamValue, streamValue, {
+compressing.tar.compressFile(readStreamValue, writestreamValue, {
   relativePath: stringValue
 });
 compressing.tar.compressFile(stringValue, stringValue).then(re => {
@@ -25,8 +25,10 @@ compressing.tar.compressFile(stringValue, stringValue).then(re => {
  * tar.compressDir()
  */
 compressing.tar.compressDir(stringValue, stringValue);
-compressing.tar.compressDir(stringValue, streamValue);
-compressing.tar.compressDir(stringValue, streamValue, {ignoreBase: true});
+compressing.tar.compressDir(stringValue, writestreamValue);
+compressing.tar.compressDir(readStreamValue, stringValue);
+compressing.tar.compressDir(stringValue, writestreamValue);
+compressing.tar.compressDir(stringValue, writestreamValue, {ignoreBase: true});
 compressing.tar.compressDir(stringValue, stringValue).then(re => {
 });
 
@@ -35,7 +37,7 @@ compressing.tar.compressDir(stringValue, stringValue).then(re => {
  */
 compressing.tar.uncompress(stringValue, stringValue);
 compressing.tar.uncompress(stringValue, stringValue, {strip: numberValue});
-compressing.tar.uncompress(streamValue, stringValue);
+compressing.tar.uncompress(readStreamValue, stringValue);
 compressing.tar.uncompress(bufferValue, stringValue);
 compressing.tar.uncompress(stringValue, stringValue).then(re => {
 });
@@ -63,7 +65,7 @@ zipStream.addEntry(readStreamValue, {relativePath: stringValue, size: numberValu
 let uncompressStream = new compressing.tar.UncompressStream();
 uncompressStream = new compressing.tar.UncompressStream({source: stringValue});
 uncompressStream = new compressing.tar.UncompressStream({source: bufferValue});
-uncompressStream = new compressing.tar.UncompressStream({source: streamValue});
+uncompressStream = new compressing.tar.UncompressStream({source: readStreamValue});
 uncompressStream.on('error', (error) => {
 });
 

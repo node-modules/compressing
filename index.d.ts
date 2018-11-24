@@ -1,14 +1,13 @@
-import {Stream,Readable} from 'stream';
-import {ReadStream}from 'fs'
+import {ReadStream, WriteStream} from 'fs'
 
-type sourceType = string | Buffer | Stream;
+type sourceType = string | Buffer | ReadStream;
 
-type destType = string | Stream;
+type destType = string | WriteStream;
 
 type streamEntryOpts = {
   relativePath?: string;
   ignoreBase?: boolean;
-  size?:number;
+  size?: number;
 }
 
 
@@ -33,8 +32,8 @@ export namespace gzip {
       zlib?: object,
       source: sourceType
     });
-    
-    on(event:'error',cb:Function)
+
+    on(event: 'error', cb: Function)
 
   }
 
@@ -73,9 +72,9 @@ export namespace tar {
     constructor(opts?: {
       source: sourceType
     });
-    
 
-    on(event:'error',cb:Function)
+
+    on(event: 'error', cb: Function)
 
   }
 
@@ -114,10 +113,10 @@ export namespace tgz {
 
     constructor(opts?: {
       source?: sourceType,
-      strip?:number
+      strip?: number
     });
 
-    on(event:'entry'|'finish'|'error',cb:Function)
+    on(event: 'entry' | 'finish' | 'error', cb: Function)
 
   }
 
@@ -144,17 +143,17 @@ export namespace zip {
 
     /**
      *  If opts.source is a file path, opts.relativePath is optional, otherwise it's required.
-     * 
+     *
      *  @param opts
      */
     constructor(opts?: {
       relativePath?: string,
       yazl?: Object,
       source: string
-    }|{
+    } | {
       relativePath: string,
       yazl?: Object,
-      source?: Buffer|Stream
+      source?: Buffer | ReadStream
     });
 
   }
@@ -163,10 +162,10 @@ export namespace zip {
 
     constructor(opts?: {
       source?: sourceType,
-      strip?:number
+      strip?: number
     });
 
-    on(event:'entry'|'finish'|'error',cb:Function)
+    on(event: 'entry' | 'finish' | 'error', cb: Function)
 
   }
 

@@ -2,7 +2,7 @@ import * as compressing from "../../../index";
 import * as fs from "fs";
 
 const stringValue = "source";
-const streamValue = fs.createWriteStream(stringValue);
+const writestreamValue = fs.createWriteStream(stringValue);
 const readStreamValue = fs.createReadStream(stringValue);
 const numberValue = 1994;
 const bufferValue = fs.readFileSync(stringValue);
@@ -11,11 +11,11 @@ const bufferValue = fs.readFileSync(stringValue);
  * zip.compressFile()
  */
 compressing.zip.compressFile(stringValue, stringValue);
-compressing.zip.compressFile(stringValue, streamValue);
-compressing.zip.compressFile(bufferValue, streamValue, {
+compressing.zip.compressFile(stringValue, writestreamValue);
+compressing.zip.compressFile(bufferValue, writestreamValue, {
   relativePath: stringValue
 });
-compressing.zip.compressFile(streamValue, streamValue, {
+compressing.zip.compressFile(readStreamValue, writestreamValue, {
   relativePath: stringValue
 });
 compressing.zip.compressFile(stringValue, stringValue).then(re => {
@@ -25,8 +25,10 @@ compressing.zip.compressFile(stringValue, stringValue).then(re => {
  * zip.compressDir()
  */
 compressing.zip.compressDir(stringValue, stringValue);
-compressing.zip.compressDir(stringValue, streamValue);
-compressing.zip.compressDir(stringValue, streamValue, {ignoreBase: true});
+compressing.zip.compressDir(bufferValue, stringValue);
+compressing.zip.compressDir(readStreamValue, stringValue);
+compressing.zip.compressDir(stringValue, writestreamValue);
+compressing.zip.compressDir(stringValue, writestreamValue, {ignoreBase: true});
 compressing.zip.compressDir(stringValue, stringValue).then(re => {
 });
 
@@ -35,7 +37,7 @@ compressing.zip.compressDir(stringValue, stringValue).then(re => {
  */
 compressing.zip.uncompress(stringValue, stringValue);
 compressing.zip.uncompress(stringValue, stringValue, {strip: numberValue});
-compressing.zip.uncompress(streamValue, stringValue);
+compressing.zip.uncompress(readStreamValue, stringValue);
 compressing.zip.uncompress(bufferValue, stringValue);
 compressing.zip.uncompress(stringValue, stringValue).then(re => {
 });
@@ -63,7 +65,7 @@ zipStream.addEntry(readStreamValue, {relativePath: stringValue, size: numberValu
 let uncompressStream = new compressing.zip.UncompressStream();
 uncompressStream = new compressing.zip.UncompressStream({source: stringValue});
 uncompressStream = new compressing.zip.UncompressStream({source: bufferValue});
-uncompressStream = new compressing.zip.UncompressStream({source: streamValue});
+uncompressStream = new compressing.zip.UncompressStream({source: readStreamValue});
 uncompressStream = new compressing.zip.UncompressStream({strip: numberValue});
 uncompressStream.on('entry', (header, stream, next) => {
 });
