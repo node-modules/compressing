@@ -1,4 +1,10 @@
 
+1.4.0 / 2018-11-30
+==================
+
+**others**
+  * [[`1f352c8`](http://github.com/node-modules/compressing/commit/1f352c88028acf27c1881fd45d555094cb279c44)] - docs: add index.d.ts and test case (#17) (DiamondYuan <<541832074@qq.com>>)
+
 1.3.2 / 2018-11-21
 ==================
 
