@@ -4,10 +4,11 @@
   "description": "Everything you need for compressing and uncompressing",
   "main": "index.js",
   "scripts": {
-    "test": "egg-bin test && tsc -p ./test/fixtures/types/tsconfig.json",
+    "ts-test": "tsc -p ./test/fixtures/types/tsconfig.json",
+    "test": "egg-bin test && npm run ts-test",
     "cov": "egg-bin cov",
     "lint": "eslint .",
-    "ci": "npm run lint && npm run cov"
+    "ci": "npm run lint && npm run ts-test && npm run cov"
   },
   "repository": {
     "type": "git",
@@ -64,7 +65,7 @@
     "node": ">= 4.0.0"
   },
   "ci": {
-    "version": "4, 6, 8, 10",
+    "version": "4, 6, 8, 10, 11",
     "license": {
       "year": "2017",
       "fullname": "node-modules and other contributors"
