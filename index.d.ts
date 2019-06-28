@@ -1,21 +1,25 @@
-import {ReadStream, WriteStream} from 'fs'
+import { ReadStream, WriteStream } from 'fs'
 
-type sourceType = string | Buffer | ReadStream;
+type sourceType = string | Buffer | ReadStream
 
-type destType = string | WriteStream;
+type destType = string | WriteStream
 
-type streamEntryOpts = {
-  relativePath?: string;
-  ignoreBase?: boolean;
-  size?: number;
+interface streamEntryOpts {
+  relativePath?: string
+  ignoreBase?: boolean
+  size?: number
 }
 
+interface streamHeader {
+  type: 'file' | 'directory',
+  name: 'string'
+}
 
 export namespace gzip {
 
-  function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>;
+  function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>
 
-  function uncompress(source: sourceType, dest: destType, opts?: any): Promise<void>;
+  function uncompress(source: sourceType, dest: destType, opts?: any): Promise<void>
 
   export class FileStream extends ReadStream {
 
@@ -33,7 +37,8 @@ export namespace gzip {
       source: sourceType
     });
 
-    on(event: 'error' | string, listener: (...args: any[]) => void): this
+    on(event: string, listener: (...args: any[]) => void): this
+    on(event: 'error', listener: (err: Error) => void): this
 
   }
 
@@ -41,19 +46,19 @@ export namespace gzip {
 
 export namespace tar {
 
-  function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>;
+  function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>
 
-  function compressDir(source: sourceType, dest: destType, opts?: any): Promise<void>;
+  function compressDir(source: sourceType, dest: destType, opts?: any): Promise<void>
 
-  function uncompress(source: sourceType, dest: string, opts?: any): Promise<void>;
+  function uncompress(source: sourceType, dest: string, opts?: any): Promise<void>
 
   export class Stream extends ReadStream {
 
     constructor();
 
-    addEntry(entry: string, opts?: streamEntryOpts): void;
+    addEntry(entry: string, opts?: streamEntryOpts): void
 
-    addEntry(entry: Buffer | ReadStream, opts: streamEntryOpts): void;
+    addEntry(entry: Buffer | ReadStream, opts: streamEntryOpts): void
   }
 
   export class FileStream extends ReadStream {
@@ -73,7 +78,10 @@ export namespace tar {
       source: sourceType
     });
 
-    on(event: 'entry' | 'finish' | 'error' | string, listener: (...args: any[]) => void): this
+    on(event: string, listener: (...args: any[]) => void): this
+    on(event: 'entry', listener: (header: streamHeader, stream: WriteStream, next: () => void) => void): this
+    on(event: 'finish', listener: () => void): this
+    on(event: 'error', listener: (err: Error) => void): this
 
   }
 
@@ -81,19 +89,19 @@ export namespace tar {
 
 export namespace tgz {
 
-  function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>;
+  function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>
 
-  function compressDir(source: sourceType, dest: destType, opts?: any): Promise<void>;
+  function compressDir(source: sourceType, dest: destType, opts?: any): Promise<void>
 
-  function uncompress(source: sourceType, dest: string, opts?: any): Promise<void>;
+  function uncompress(source: sourceType, dest: string, opts?: any): Promise<void>
 
   export class Stream extends ReadStream {
 
     constructor();
 
-    addEntry(entry: string, opts?: streamEntryOpts): void;
+    addEntry(entry: string, opts?: streamEntryOpts): void
 
-    addEntry(entry: Buffer | ReadStream, opts: streamEntryOpts): void;
+    addEntry(entry: Buffer | ReadStream, opts: streamEntryOpts): void
   }
 
   export class FileStream extends ReadStream {
@@ -115,7 +123,10 @@ export namespace tgz {
       strip?: number
     });
 
-    on(event: 'entry' | 'finish' | 'error' | string, listener: (...args: any[]) => void): this
+    on(event: string, listener: (...args: any[]) => void): this
+    on(event: 'entry', listener: (header: streamHeader, stream: WriteStream, next: () => void) => void): this
+    on(event: 'finish', listener: () => void): this
+    on(event: 'error', listener: (err: Error) => void): this
 
   }
 
@@ -123,19 +134,19 @@ export namespace tgz {
 
 export namespace zip {
 
-  function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>;
+  function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>
 
-  function compressDir(source: sourceType, dest: destType, opts?: any): Promise<void>;
+  function compressDir(source: sourceType, dest: destType, opts?: any): Promise<void>
 
-  function uncompress(source: sourceType, dest: string, opts?: any): Promise<void>;
+  function uncompress(source: sourceType, dest: string, opts?: any): Promise<void>
 
   export class Stream extends ReadStream {
 
     constructor();
 
-    addEntry(entry: string, opts?: streamEntryOpts): void;
+    addEntry(entry: string, opts?: streamEntryOpts): void
 
-    addEntry(entry: Buffer | ReadStream, opts: streamEntryOpts): void;
+    addEntry(entry: Buffer | ReadStream, opts: streamEntryOpts): void
   }
 
   export class FileStream extends ReadStream {
@@ -147,11 +158,11 @@ export namespace zip {
      */
     constructor(opts?: {
       relativePath?: string,
-      yazl?: Object,
+      yazl?: object,
       source: string
     } | {
       relativePath: string,
-      yazl?: Object,
+      yazl?: object,
       source?: Buffer | ReadStream
     });
 
@@ -164,9 +175,11 @@ export namespace zip {
       strip?: number
     });
 
-    on(event: 'entry' | 'finish' | 'error' | string, listener: (...args: any[]) => void): this
+    on(event: string, listener: (...args: any[]) => void): this
+    on(event: 'entry', listener: (header: streamHeader, stream: WriteStream, next: () => void) => void): this
+    on(event: 'finish', listener: () => void): this
+    on(event: 'error', listener: (err: Error) => void): this
 
   }
 
 }
-
