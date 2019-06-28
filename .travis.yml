@@ -7,6 +7,6 @@ node_js:
 install:
   - npm i npminstall && npminstall
 script:
-  - npm run ci
+  - sudo npm run ci
 after_script:
   - npminstall codecov && codecov
