@@ -1,4 +1,4 @@
-sudo: false
+sudo: true
 language: node_js
 node_js:
   - '8'
@@ -7,6 +7,6 @@ node_js:
 install:
   - npm i npminstall && npminstall
 script:
-  - sudo npm run ci
+  - npm run ci
 after_script:
   - npminstall codecov && codecov
