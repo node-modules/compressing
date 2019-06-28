@@ -68,4 +68,3 @@ uncompressStream = new compressing.tar.UncompressStream({source: bufferValue});
 uncompressStream = new compressing.tar.UncompressStream({source: readStreamValue});
 uncompressStream.on('error', (error) => {
 });
-
