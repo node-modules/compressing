@@ -168,6 +168,29 @@ describe('test/tgz/index.test.js', () => {
       // assert(originStat.mode === destStat.mode);
       assert(destStat.mode);
       assert(originStat.mode);
+      const format = stats => '0' + (stats.mode & parseInt('777', 8)).toString(8);
+      assert(format(originStat) === format(destStat));
+    });
+
+    it('tgz.uncompress(sourceFile, destDir) with symlink', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'symlink.tgz');
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const originalDir = path.join(__dirname, '..', 'fixtures', 'symlink');
+      yield compressing.tgz.uncompress(sourceFile, destDir);
+      console.log(destDir);
+
+      assert(fs.lstatSync(path.join(destDir, 'README.md')).isSymbolicLink());
+      assert(fs.lstatSync(path.join(destDir, 'cli')).isSymbolicLink());
+      assert(fs.lstatSync(path.join(destDir, 'node_modules/enums')).isSymbolicLink());
+      assert(fs.readFileSync(path.join(destDir, 'README.md'), 'utf-8').includes('Usage'));
+
+      const res = dircompare.compareSync(originalDir, destDir);
+      assert(res.distinct === 0);
+
+      const destStat = fs.lstatSync(path.join(destDir, 'cli'));
+      const originStat = fs.lstatSync(path.join(originalDir, 'cli'));
+      const format = stats => '0' + (stats.mode & parseInt('777', 8)).toString(8);
+      assert(format(originStat) === format(destStat));
     });
 
     it('tgz.uncompress(sourceStream, destDir)', function* () {
