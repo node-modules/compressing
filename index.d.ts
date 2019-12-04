@@ -172,7 +172,8 @@ export namespace zip {
 
     constructor(opts?: {
       source?: sourceType,
-      strip?: number
+      strip?: number,
+      zipFileNameEncoding?: string
     });
 
     on(event: string, listener: (...args: any[]) => void): this

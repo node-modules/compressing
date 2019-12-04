@@ -282,6 +282,12 @@ Params
 - source {String|Buffer|Stream} - source to be uncompressed
 - dest {String|Stream} - uncompressing destination. When uncompressing tar, tgz and zip, it should be a directory path (eg. `/path/to/xx`). **When uncompressing gzip, it should be a file path or a writable stream.**
 - opts {Object} - usually you don't need it
+  - opts.zipFileNameEncoding {String} - Only work on zip format, default is 'utf8'.
+    Major non-UTF8 encodings by languages:
+
+    - Korean: cp949, euc-kr
+    - Japanese: sjis (shift_jis), cp932, euc-jp
+    - Chinese: gbk, gb18030, gb2312, cp936, hkscs, big5, cp950
 
 ### FileStream
 
@@ -369,6 +375,3 @@ Due to the design of the .zip file format, it's impossible to interpret a .zip f
 Although the API is streaming style(try to keep it handy), it still loads all data into memory.
 
 https://github.com/thejoshwolfe/yauzl#no-streaming-unzip-api
-
-
-

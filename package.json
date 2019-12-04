@@ -39,6 +39,7 @@
   "dependencies": {
     "flushwritable": "^1.0.0",
     "get-ready": "^1.0.0",
+    "iconv-lite": "^0.5.0",
     "mkdirp": "^0.5.1",
     "pump": "^3.0.0",
     "streamifier": "^0.1.1",
@@ -65,7 +66,7 @@
     "node": ">= 4.0.0"
   },
   "ci": {
-    "version": "4, 6, 8, 10, 11",
+    "version": "4, 6, 8, 10, 12",
     "license": {
       "year": "2017",
       "fullname": "node-modules and other contributors"
