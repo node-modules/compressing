@@ -173,6 +173,46 @@ describe('test/zip/index.test.js', () => {
       assert(res.totalDirs === 1);
     });
 
+    // only test on local
+    it.skip('zip.uncompress(sourceFile, destDir) support chinese gbk path', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'chinese-path-test.zip');
+      destDir = path.join(os.tmpdir(), uuid.v4());
+      yield compressing.zip.uncompress(sourceFile, destDir, {
+        zipFileNameEncoding: 'gbk',
+      });
+      assert(fs.readdirSync(destDir).includes('发布周期.md'));
+    });
+
+    it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = gbk', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
+      destDir = path.join(os.tmpdir(), uuid.v4());
+      yield compressing.zip.uncompress(sourceFile, destDir, {
+        zipFileNameEncoding: 'gbk',
+        strip: 1,
+      });
+      assert(fs.readdirSync(destDir).includes('foo'));
+    });
+
+    it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = utf8', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
+      destDir = path.join(os.tmpdir(), uuid.v4());
+      yield compressing.zip.uncompress(sourceFile, destDir, {
+        zipFileNameEncoding: 'utf8',
+        strip: 1,
+      });
+      assert(fs.readdirSync(destDir).includes('foo'));
+    });
+
+    it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = utf-8', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
+      destDir = path.join(os.tmpdir(), uuid.v4());
+      yield compressing.zip.uncompress(sourceFile, destDir, {
+        zipFileNameEncoding: 'utf-8',
+        strip: 1,
+      });
+      assert(fs.readdirSync(destDir).includes('foo'));
+    });
+
     it('zip.uncompress(sourceFile, destDir) support absolute path', function* () {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'contain-absolute-path.zip');
       destDir = path.join(os.tmpdir(), uuid.v4());
