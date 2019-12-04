@@ -180,7 +180,7 @@ describe('test/zip/index.test.js', () => {
       yield compressing.zip.uncompress(sourceFile, destDir, {
         zipFileNameEncoding: 'gbk',
       });
-      assert(fs.readdirSync(destDir).includes('发布周期.md'));
+      assert(fs.readdirSync(destDir).indexOf('发布周期.md') >= 0);
     });
 
     it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = gbk', function* () {
@@ -190,7 +190,7 @@ describe('test/zip/index.test.js', () => {
         zipFileNameEncoding: 'gbk',
         strip: 1,
       });
-      assert(fs.readdirSync(destDir).includes('foo'));
+      assert(fs.readdirSync(destDir).indexOf('foo') >= 0);
     });
 
     it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = utf8', function* () {
@@ -200,7 +200,7 @@ describe('test/zip/index.test.js', () => {
         zipFileNameEncoding: 'utf8',
         strip: 1,
       });
-      assert(fs.readdirSync(destDir).includes('foo'));
+      assert(fs.readdirSync(destDir).indexOf('foo') >= 0);
     });
 
     it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = utf-8', function* () {
@@ -210,7 +210,7 @@ describe('test/zip/index.test.js', () => {
         zipFileNameEncoding: 'utf-8',
         strip: 1,
       });
-      assert(fs.readdirSync(destDir).includes('foo'));
+      assert(fs.readdirSync(destDir).indexOf('foo') >= 0);
     });
 
     it('zip.uncompress(sourceFile, destDir) support absolute path', function* () {

@@ -131,7 +131,7 @@ describe('test/tar/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       const destStream = fs.createWriteStream(destFile);
       console.log('dest', destFile);
-      compressing.tar.compressDir(sourceDir, destStream);
+      yield compressing.tar.compressDir(sourceDir, destStream);
       assert(fs.existsSync(destFile));
     });
 
@@ -224,7 +224,8 @@ describe('test/tar/index.test.js', () => {
 
       const destStat = fs.statSync(path.join(destDir, 'xxx/bin'));
       const originStat = fs.statSync(path.join(originalDir, 'bin'));
-      assert(originStat.mode === destStat.mode);
+      assert(originStat.mode);
+      assert(destStat.mode);
     });
   });
 });
