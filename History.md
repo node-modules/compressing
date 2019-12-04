@@ -1,4 +1,16 @@
 
+1.5.0 / 2019-12-04
+==================
+
+**features**
+  * [[`15c29e9`](http://github.com/node-modules/compressing/commit/15c29e9893880d2c19c343d133edb50f0c55c713)] - feat: zip format support custom fileName encoding (#36) (fengmk2 <<fengmk2@gmail.com>>)
+
+**fixes**
+  * [[`7d605fe`](http://github.com/node-modules/compressing/commit/7d605fe01a88bc6aab9a2b06a8725545f591bab9)] - fix: typescript error(#29) (Ruanyq <<yiqiang0930@163.com>>)
+
+**others**
+  * [[`4808fb8`](http://github.com/node-modules/compressing/commit/4808fb8e1d6cbbb31c0e82c359ec04eccb0c1eaf)] - test: add node 11 (#20) (fengmk2 <<fengmk2@gmail.com>>)
+
 1.4.0 / 2018-11-30
 ==================
 
