@@ -28,7 +28,7 @@ compressing.tgz.compressDir(stringValue, stringValue);
 compressing.tgz.compressDir(stringValue, writestreamValue);
 compressing.tgz.compressDir(readStreamValue, stringValue);
 compressing.tgz.compressDir(stringValue, writestreamValue);
-compressing.tgz.compressDir(stringValue, writestreamValue, {ignoreBase: true});
+compressing.tgz.compressDir(stringValue, writestreamValue, { ignoreBase: true });
 compressing.tgz.compressDir(stringValue, stringValue).then(re => {
 });
 
@@ -36,7 +36,7 @@ compressing.tgz.compressDir(stringValue, stringValue).then(re => {
  * tgz.uncompress()
  */
 compressing.tgz.uncompress(stringValue, stringValue);
-compressing.tgz.uncompress(stringValue, stringValue, {strip: 1});
+compressing.tgz.uncompress(stringValue, stringValue, { strip: 1 });
 compressing.tgz.uncompress(readStreamValue, stringValue);
 compressing.tgz.uncompress(bufferValue, stringValue);
 compressing.tgz.uncompress(stringValue, stringValue).then(re => {
@@ -44,7 +44,7 @@ compressing.tgz.uncompress(stringValue, stringValue).then(re => {
 /*
  * tgz.FileStream
  */
-new compressing.tgz.FileStream({relativePath: stringValue});
+new compressing.tgz.FileStream({ relativePath: stringValue });
 
 /**
  * tgz.Stream
@@ -52,23 +52,24 @@ new compressing.tgz.FileStream({relativePath: stringValue});
 const ZipStream = compressing.tgz.Stream;
 let zipStream = new ZipStream();
 zipStream.addEntry(stringValue);
-zipStream.addEntry(stringValue, {relativePath: stringValue});
-zipStream.addEntry(stringValue, {ignoreBase: true});
-zipStream.addEntry(stringValue, {relativePath: stringValue, ignoreBase: true});
-zipStream.addEntry(bufferValue, {relativePath: stringValue});
-zipStream.addEntry(readStreamValue, {relativePath: stringValue, size: numberValue});
+zipStream.addEntry(stringValue, { relativePath: stringValue });
+zipStream.addEntry(stringValue, { ignoreBase: true });
+zipStream.addEntry(stringValue, { relativePath: stringValue, ignoreBase: true });
+zipStream.addEntry(bufferValue, { relativePath: stringValue });
+zipStream.addEntry(readStreamValue, { relativePath: stringValue, size: numberValue });
 
 /**
  * tgz.uncompress_stream
  */
 let uncompressStream = new compressing.tgz.UncompressStream();
-uncompressStream = new compressing.tgz.UncompressStream({source: stringValue});
-uncompressStream = new compressing.tgz.UncompressStream({source: bufferValue});
-uncompressStream = new compressing.tgz.UncompressStream({source: readStreamValue});
-uncompressStream = new compressing.tgz.UncompressStream({strip: numberValue});
+uncompressStream = new compressing.tgz.UncompressStream({ source: stringValue });
+uncompressStream = new compressing.tgz.UncompressStream({ source: bufferValue });
+uncompressStream = new compressing.tgz.UncompressStream({ source: readStreamValue });
+uncompressStream = new compressing.tgz.UncompressStream({ strip: numberValue });
 uncompressStream.on('finish', () => {
 });
-uncompressStream.on('entry', (header, stream, next) => {
+uncompressStream.on('entry', (header, stream: fs.ReadStream, next) => {
+  stream.resume()
 });
 uncompressStream.on('error', (error) => {
 });

@@ -28,7 +28,7 @@ compressing.zip.compressDir(stringValue, stringValue);
 compressing.zip.compressDir(bufferValue, stringValue);
 compressing.zip.compressDir(readStreamValue, stringValue);
 compressing.zip.compressDir(stringValue, writestreamValue);
-compressing.zip.compressDir(stringValue, writestreamValue, {ignoreBase: true});
+compressing.zip.compressDir(stringValue, writestreamValue, { ignoreBase: true });
 compressing.zip.compressDir(stringValue, stringValue).then(re => {
 });
 
@@ -36,7 +36,7 @@ compressing.zip.compressDir(stringValue, stringValue).then(re => {
  * zip.uncompress()
  */
 compressing.zip.uncompress(stringValue, stringValue);
-compressing.zip.uncompress(stringValue, stringValue, {strip: numberValue});
+compressing.zip.uncompress(stringValue, stringValue, { strip: numberValue });
 compressing.zip.uncompress(readStreamValue, stringValue);
 compressing.zip.uncompress(bufferValue, stringValue);
 compressing.zip.uncompress(stringValue, stringValue).then(re => {
@@ -44,7 +44,7 @@ compressing.zip.uncompress(stringValue, stringValue).then(re => {
 /*
  * zip.FileStream
  */
-new compressing.zip.FileStream({relativePath: stringValue});
+new compressing.zip.FileStream({ relativePath: stringValue });
 
 
 /**
@@ -53,21 +53,22 @@ new compressing.zip.FileStream({relativePath: stringValue});
 const ZipStream = compressing.zip.Stream;
 let zipStream = new ZipStream();
 zipStream.addEntry(stringValue);
-zipStream.addEntry(stringValue, {relativePath: stringValue});
-zipStream.addEntry(stringValue, {ignoreBase: true});
-zipStream.addEntry(stringValue, {relativePath: stringValue, ignoreBase: true});
-zipStream.addEntry(bufferValue, {relativePath: stringValue});
-zipStream.addEntry(readStreamValue, {relativePath: stringValue, size: numberValue});
+zipStream.addEntry(stringValue, { relativePath: stringValue });
+zipStream.addEntry(stringValue, { ignoreBase: true });
+zipStream.addEntry(stringValue, { relativePath: stringValue, ignoreBase: true });
+zipStream.addEntry(bufferValue, { relativePath: stringValue });
+zipStream.addEntry(readStreamValue, { relativePath: stringValue, size: numberValue });
 
 /**
  * zip.uncompress_stream
  */
 let uncompressStream = new compressing.zip.UncompressStream();
-uncompressStream = new compressing.zip.UncompressStream({source: stringValue});
-uncompressStream = new compressing.zip.UncompressStream({source: bufferValue});
-uncompressStream = new compressing.zip.UncompressStream({source: readStreamValue});
-uncompressStream = new compressing.zip.UncompressStream({strip: numberValue});
-uncompressStream.on('entry', (header, stream, next) => {
+uncompressStream = new compressing.zip.UncompressStream({ source: stringValue });
+uncompressStream = new compressing.zip.UncompressStream({ source: bufferValue });
+uncompressStream = new compressing.zip.UncompressStream({ source: readStreamValue });
+uncompressStream = new compressing.zip.UncompressStream({ strip: numberValue });
+uncompressStream.on('entry', (header, stream: fs.ReadStream, next) => {
+  stream.resume()
 });
 uncompressStream.on('error', (error) => {
 });

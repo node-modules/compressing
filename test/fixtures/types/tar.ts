@@ -28,7 +28,7 @@ compressing.tar.compressDir(stringValue, stringValue);
 compressing.tar.compressDir(stringValue, writestreamValue);
 compressing.tar.compressDir(readStreamValue, stringValue);
 compressing.tar.compressDir(stringValue, writestreamValue);
-compressing.tar.compressDir(stringValue, writestreamValue, {ignoreBase: true});
+compressing.tar.compressDir(stringValue, writestreamValue, { ignoreBase: true });
 compressing.tar.compressDir(stringValue, stringValue).then(re => {
 });
 
@@ -36,7 +36,7 @@ compressing.tar.compressDir(stringValue, stringValue).then(re => {
  * tar.uncompress()
  */
 compressing.tar.uncompress(stringValue, stringValue);
-compressing.tar.uncompress(stringValue, stringValue, {strip: numberValue});
+compressing.tar.uncompress(stringValue, stringValue, { strip: numberValue });
 compressing.tar.uncompress(readStreamValue, stringValue);
 compressing.tar.uncompress(bufferValue, stringValue);
 compressing.tar.uncompress(stringValue, stringValue).then(re => {
@@ -44,7 +44,7 @@ compressing.tar.uncompress(stringValue, stringValue).then(re => {
 /*
  * tar.FileStream
  */
-new compressing.tar.FileStream({relativePath: stringValue});
+new compressing.tar.FileStream({ relativePath: stringValue });
 
 
 /**
@@ -53,19 +53,21 @@ new compressing.tar.FileStream({relativePath: stringValue});
 const ZipStream = compressing.tar.Stream;
 let zipStream = new ZipStream();
 zipStream.addEntry(stringValue);
-zipStream.addEntry(stringValue, {relativePath: stringValue});
-zipStream.addEntry(stringValue, {ignoreBase: true});
-zipStream.addEntry(stringValue, {relativePath: stringValue, ignoreBase: true});
-zipStream.addEntry(bufferValue, {relativePath: stringValue});
-zipStream.addEntry(readStreamValue, {relativePath: stringValue, size: numberValue});
+zipStream.addEntry(stringValue, { relativePath: stringValue });
+zipStream.addEntry(stringValue, { ignoreBase: true });
+zipStream.addEntry(stringValue, { relativePath: stringValue, ignoreBase: true });
+zipStream.addEntry(bufferValue, { relativePath: stringValue });
+zipStream.addEntry(readStreamValue, { relativePath: stringValue, size: numberValue });
 
 /**
  * tar.uncompress_stream
  */
 let uncompressStream = new compressing.tar.UncompressStream();
-uncompressStream = new compressing.tar.UncompressStream({source: stringValue});
-uncompressStream = new compressing.tar.UncompressStream({source: bufferValue});
-uncompressStream = new compressing.tar.UncompressStream({source: readStreamValue});
+uncompressStream = new compressing.tar.UncompressStream({ source: stringValue });
+uncompressStream = new compressing.tar.UncompressStream({ source: bufferValue });
+uncompressStream = new compressing.tar.UncompressStream({ source: readStreamValue });
 uncompressStream.on('error', (error) => {
 });
-
+uncompressStream.on('entry', (header, stream: fs.ReadStream, next) => {
+  stream.resume()
+});
