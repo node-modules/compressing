@@ -1,4 +1,10 @@
 
+1.5.1 / 2020-05-11
+==================
+
+**fixes**
+  * [[`f516814`](http://github.com/node-modules/compressing/commit/f51681490aeea44a7b27ec0c09d3fb3d0385c5c0)] - fix: index.d.ts streamHeader.name wrong declearing (#46) (shadyzoz <<ShadyZOZ@users.noreply.github.com>>)
+
 1.5.0 / 2019-12-04
 ==================
 
