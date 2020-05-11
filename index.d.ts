@@ -12,7 +12,7 @@ interface streamEntryOpts {
 
 interface streamHeader {
   type: 'file' | 'directory',
-  name: 'string'
+  name: string
 }
 
 export namespace gzip {
