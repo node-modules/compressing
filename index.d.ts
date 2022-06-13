@@ -15,6 +15,12 @@ interface streamHeader {
   name: string
 }
 
+interface streamHeaderWithMode {
+  type: 'file' | 'directory',
+  name: string
+  mode: number
+}
+
 export namespace gzip {
 
   function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>
@@ -79,7 +85,7 @@ export namespace tar {
     });
 
     on(event: string, listener: (...args: any[]) => void): this
-    on(event: 'entry', listener: (header: streamHeader, stream: WriteStream, next: () => void) => void): this
+    on(event: 'entry', listener: (header: streamHeaderWithMode, stream: WriteStream, next: () => void) => void): this
     on(event: 'finish', listener: () => void): this
     on(event: 'error', listener: (err: Error) => void): this
 
@@ -124,7 +130,7 @@ export namespace tgz {
     });
 
     on(event: string, listener: (...args: any[]) => void): this
-    on(event: 'entry', listener: (header: streamHeader, stream: WriteStream, next: () => void) => void): this
+    on(event: 'entry', listener: (header: streamHeaderWithMode, stream: WriteStream, next: () => void) => void): this
     on(event: 'finish', listener: () => void): this
     on(event: 'error', listener: (err: Error) => void): this
 
@@ -177,7 +183,7 @@ export namespace zip {
     });
 
     on(event: string, listener: (...args: any[]) => void): this
-    on(event: 'entry', listener: (header: streamHeader, stream: WriteStream, next: () => void) => void): this
+    on(event: 'entry', listener: (header: streamHeaderWithMode, stream: WriteStream, next: () => void) => void): this
     on(event: 'finish', listener: () => void): this
     on(event: 'error', listener: (err: Error) => void): this
 

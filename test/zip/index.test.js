@@ -13,7 +13,7 @@ const dircompare = require('dir-compare');
 describe('test/zip/index.test.js', () => {
   let destDir;
   afterEach(() => {
-    rimraf.sync(destDir);
+    destDir && rimraf.sync(destDir);
   });
 
   describe('zip.compressFile()', () => {
@@ -255,5 +255,21 @@ describe('test/zip/index.test.js', () => {
       assert(res.totalFiles === 4);
       assert(res.totalDirs === 1);
     });
+  });
+  it('uncompress should keep stat mode', function* () {
+    const sourceFile = path.join(__dirname, '..', 'fixtures/xxx/bin');
+    const originStat = fs.statSync(sourceFile);
+    const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
+    console.log('dest', destFile);
+    const fileStream = fs.createWriteStream(destFile);
+    yield compressing.zip.compressFile(sourceFile, fileStream);
+    assert(fs.existsSync(destFile));
+
+    const destDir = path.join(os.tmpdir(), uuid.v4());
+    yield mkdirp(destDir);
+    yield compressing.zip.uncompress(destFile, destDir);
+    const stat = fs.statSync(path.join(destDir, 'bin'));
+    assert(stat.mode === originStat.mode);
+    console.log(destDir);
   });
 });
