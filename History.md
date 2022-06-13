@@ -1,4 +1,13 @@
 
+1.6.0 / 2022-06-13
+==================
+
+**features**
+  * [[`bd8ef44`](http://github.com/node-modules/compressing/commit/bd8ef44ade2f4b93d41ff2f78d6f17902d965798)] - feat: unzip should keep file mode (#68) (Artin <<lengthmin@gmail.com>>)
+
+**others**
+  * [[`592e518`](http://github.com/node-modules/compressing/commit/592e5180dfbdbc6cb1becd1baf6a007ce7b7cd39)] - Create codeql-analysis.yml (fengmk2 <<fengmk2@gmail.com>>)
+
 1.5.1 / 2020-05-11
 ==================
 

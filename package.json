@@ -1,9 +1,10 @@
 {
   "name": "compressing",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "description": "Everything you need for compressing and uncompressing",
   "main": "index.js",
   "scripts": {
+    "contributor": "git-contributor",
     "ts-test": "tsc -p ./test/fixtures/types/tsconfig.json",
     "test": "egg-bin test && npm run ts-test",
     "cov": "egg-bin cov",
@@ -55,6 +56,7 @@
     "egg-ci": "^1.8.0",
     "eslint": "^3.10.2",
     "eslint-config-egg": "^3.2.0",
+    "git-contributor": "^1.1.0",
     "mm": "^2.0.0",
     "mz-modules": "^2.1.0",
     "power-assert": "^1.4.2",
