@@ -13,7 +13,7 @@ const dircompare = require('dir-compare');
 describe('test/zip/index.test.js', () => {
   let destDir;
   afterEach(() => {
-    destDir && rimraf.sync(destDir);
+    rimraf.sync(destDir);
   });
 
   describe('zip.compressFile()', () => {
@@ -265,7 +265,7 @@ describe('test/zip/index.test.js', () => {
     yield compressing.zip.compressFile(sourceFile, fileStream);
     assert(fs.existsSync(destFile));
 
-    const destDir = path.join(os.tmpdir(), uuid.v4());
+    destDir = path.join(os.tmpdir(), uuid.v4());
     yield mkdirp(destDir);
     yield compressing.zip.uncompress(destFile, destDir);
     const stat = fs.statSync(path.join(destDir, 'bin'));
