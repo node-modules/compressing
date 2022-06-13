@@ -8,7 +8,7 @@
     "ts-test": "tsc -p ./test/fixtures/types/tsconfig.json",
     "test": "egg-bin test && npm run ts-test",
     "cov": "egg-bin cov",
-    "lint": "eslint .",
+    "lint": "eslint . --fix",
     "ci": "npm run lint && npm run ts-test && npm run cov"
   },
   "repository": {
@@ -68,7 +68,7 @@
     "node": ">= 4.0.0"
   },
   "ci": {
-    "version": "8, 10, 12, 14, 16, 18",
+    "version": "10, 12, 14, 16, 18",
     "license": {
       "year": "2017",
       "fullname": "node-modules and other contributors"
