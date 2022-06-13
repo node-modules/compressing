@@ -5,3 +5,4 @@ coverage
 test/fixtures/types/*.js
 test/fixtures/chinese-path-test.zip
 yarn.lock
+.DS_Store

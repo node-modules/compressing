@@ -156,7 +156,7 @@ describe('test/zip/index.test.js', () => {
       }
       if (process.platform === 'win32') return;
       assert(err);
-      assert(err.message.indexOf('EACCES: permission denied') > -1);
+      assert(err.message.includes('EACCES: permission denied') || err.message.includes('read-only file system'));
     });
   });
 
