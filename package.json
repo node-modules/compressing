@@ -69,6 +69,7 @@
   },
   "ci": {
     "version": "10, 12, 14, 16, 18",
+    "os": "linux, macos",
     "license": {
       "year": "2017",
       "fullname": "node-modules and other contributors"
