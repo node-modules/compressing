@@ -1,83 +1,581 @@
-2016-09-12 11:14:58,613 INFO 10186 [money02@alitest.com/2088102117755972/127.0.0.1/1e1eb84814736500973271001/1286ms GET /wealth/index.html] 1280ms model.context: 4 reqs
-2016-09-22 14:48:41,103 INFO 44459 [-/-/127.0.0.1/c0a802e114745269209611004dadab/142ms GET /tile/service/portal:recent.tile] [chair:tile] 131ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 14:48:41,110 INFO 44459 [-/-/127.0.0.1/c0a802e114745269209611004dadab/149ms GET /tile/service/portal:recent.tile] status 200 (rt: 149ms)
-2016-09-22 14:49:07,222 INFO 44459 [-/-/127.0.0.1/c0a802e114745269465361005dadab/686ms GET /tile/service/portal:recent.tile] [chair:tile] 104ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 14:49:07,225 INFO 44459 [-/-/127.0.0.1/c0a802e114745269465361005dadab/689ms GET /tile/service/portal:recent.tile] status 200 (rt: 689ms)
-2016-09-22 14:50:05,131 INFO 44459 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745270045421006dadab/589ms GET /tile/service/portal:recent.tile] [chair:tile] 517ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 14:50:05,135 INFO 44459 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745270045421006dadab/593ms GET /tile/service/portal:recent.tile] status 200 (rt: 593ms)
-2016-09-22 14:53:26,625 INFO 45445 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745272054531004db185/1172ms GET /tile/service/portal:recent.tile] [chair:tile] 770ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 14:53:26,631 INFO 45445 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745272054531004db185/1178ms GET /tile/service/portal:recent.tile] status 200 (rt: 1178ms)
-2016-09-22 14:53:32,000 INFO 45445 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745272115481005db185/452ms GET /tile/service/portal:recent.tile] [chair:tile] 374ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 14:53:32,001 INFO 45445 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745272115481005db185/453ms GET /tile/service/portal:recent.tile] status 200 (rt: 453ms)
-2016-09-22 14:53:39,091 INFO 45445 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745272185501006db185/540ms GET /tile/service/portal:recent.tile] [chair:tile] 440ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 14:53:39,091 INFO 45445 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745272185501006db185/541ms GET /tile/service/portal:recent.tile] status 200 (rt: 541ms)
-2016-09-22 14:54:09,519 INFO 45445 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745272489891007db185/531ms GET /tile/service/portal:recent.tile] [chair:tile] 430ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 14:54:09,521 INFO 45445 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745272489891007db185/533ms GET /tile/service/portal:recent.tile] status 200 (rt: 533ms)
-2016-09-22 14:58:11,856 INFO 46182 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745274906561004db466/1199ms GET /tile/service/portal:recent.tile] [chair:tile] 483ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 14:58:11,868 INFO 46182 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745274906561004db466/1212ms GET /tile/service/portal:recent.tile] status 200 (rt: 1211ms)
-2016-09-22 14:59:29,709 INFO 46182 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745275692761005db466/433ms GET /tile/service/portal:recent.tile] [chair:tile] 382ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 14:59:29,712 INFO 46182 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745275692761005db466/436ms GET /tile/service/portal:recent.tile] status 200 (rt: 436ms)
-2016-09-22 14:59:33,813 INFO 46182 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745275733251006db466/488ms GET /tile/service/portal:recent.tile] [chair:tile] 437ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 14:59:33,814 INFO 46182 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745275733251006db466/489ms GET /tile/service/portal:recent.tile] status 200 (rt: 489ms)
-2016-09-22 15:01:20,979 INFO 46182 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745276805371007db466/442ms GET /tile/service/portal:recent.tile] [chair:tile] 393ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:01:20,981 INFO 46182 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745276805371007db466/444ms GET /tile/service/portal:recent.tile] status 200 (rt: 444ms)
-2016-09-22 15:04:24,093 INFO 46873 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745278634571004db719/636ms GET /tile/service/portal:recent.tile] [chair:tile] 390ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:04:24,099 INFO 46873 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745278634571004db719/642ms GET /tile/service/portal:recent.tile] status 200 (rt: 642ms)
-2016-09-22 15:04:31,848 INFO 46873 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745278714991005db719/349ms GET /tile/service/portal:recent.tile] [chair:tile] 289ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:04:31,850 INFO 46873 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745278714991005db719/351ms GET /tile/service/portal:recent.tile] status 200 (rt: 351ms)
-2016-09-22 15:06:02,677 INFO 47015 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745279597661004db7a7/2910ms GET /tile/service/portal:recent.tile] [chair:tile] 585ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:06:02,682 INFO 47015 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745279597661004db7a7/2916ms GET /tile/service/portal:recent.tile] status 200 (rt: 2916ms)
-2016-09-22 15:07:08,497 INFO 47587 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745280274551004db9e3/1043ms GET /tile/service/portal:recent.tile] [chair:tile] 644ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:07:08,502 INFO 47587 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745280274551004db9e3/1048ms GET /tile/service/portal:recent.tile] status 200 (rt: 1048ms)
-2016-09-22 15:07:12,433 INFO 47587 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745280312951005db9e3/1137ms GET /tile/service/portal:recent.tile] [chair:tile] 340ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:07:12,434 INFO 47587 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745280312951005db9e3/1139ms GET /tile/service/portal:recent.tile] status 200 (rt: 1139ms)
-2016-09-22 15:07:22,782 INFO 47587 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745280405711006db9e3/2211ms GET /tile/service/portal:recent.tile] [chair:tile] 2115ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:07:22,783 INFO 47587 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745280405711006db9e3/2212ms GET /tile/service/portal:recent.tile] status 200 (rt: 2212ms)
-2016-09-22 15:10:02,772 INFO 48641 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745282015271003dbe01/1246ms GET /tile/service/portal:recent.tile] [chair:tile] 694ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:10:02,777 INFO 48641 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745282015271003dbe01/1251ms GET /tile/service/portal:recent.tile] status 200 (rt: 1251ms)
-2016-09-22 15:10:36,862 INFO 48641 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745282363831005dbe01/480ms GET /tile/service/portal:recent.tile] [chair:tile] 412ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:10:36,867 INFO 48641 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745282363831005dbe01/486ms GET /tile/service/portal:recent.tile] status 200 (rt: 486ms)
-2016-09-22 15:23:03,589 INFO 49758 [-/-/127.0.0.1/c0a802e114745289832391004dc25e/351ms GET /tile/service/portal:recent.tile] [chair:tile] 154ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:23:03,600 INFO 49758 [-/-/127.0.0.1/c0a802e114745289832391004dc25e/362ms GET /tile/service/portal:recent.tile] status 200 (rt: 361ms)
-2016-09-22 15:23:21,019 INFO 49758 [-/-/127.0.0.1/c0a802e114745290008861005dc25e/133ms GET /tile/service/portal:recent.tile] [chair:tile] 93ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:23:21,020 INFO 49758 [-/-/127.0.0.1/c0a802e114745290008861005dc25e/134ms GET /tile/service/portal:recent.tile] status 200 (rt: 134ms)
-2016-09-22 15:23:27,827 INFO 49758 [-/-/127.0.0.1/c0a802e114745290076941006dc25e/134ms GET /tile/service/portal:recent.tile] [chair:tile] 93ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:23:27,828 INFO 49758 [-/-/127.0.0.1/c0a802e114745290076941006dc25e/135ms GET /tile/service/portal:recent.tile] status 200 (rt: 135ms)
-2016-09-22 15:23:31,981 INFO 49758 [-/-/127.0.0.1/c0a802e114745290118201007dc25e/161ms GET /tile/service/portal:recent.tile] [chair:tile] 114ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:23:31,983 INFO 49758 [-/-/127.0.0.1/c0a802e114745290118201007dc25e/163ms GET /tile/service/portal:recent.tile] status 200 (rt: 163ms)
-2016-09-22 15:23:59,532 INFO 50391 [-/-/127.0.0.1/c0a802e114745290392021003dc4d7/330ms GET /tile/service/portal:recent.tile] [chair:tile] 131ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:23:59,536 INFO 50391 [-/-/127.0.0.1/c0a802e114745290392021003dc4d7/334ms GET /tile/service/portal:recent.tile] status 200 (rt: 334ms)
-2016-09-22 15:24:09,280 INFO 50391 [-/-/127.0.0.1/c0a802e114745290491211005dc4d7/158ms GET /tile/service/portal:recent.tile] [chair:tile] 102ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:24:09,281 INFO 50391 [-/-/127.0.0.1/c0a802e114745290491211005dc4d7/160ms GET /tile/service/portal:recent.tile] status 200 (rt: 160ms)
-2016-09-22 15:24:13,668 INFO 50391 [-/-/127.0.0.1/c0a802e114745290535271006dc4d7/141ms GET /tile/service/portal:recent.tile] [chair:tile] 100ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:24:13,669 INFO 50391 [-/-/127.0.0.1/c0a802e114745290535271006dc4d7/142ms GET /tile/service/portal:recent.tile] status 200 (rt: 142ms)
-2016-09-22 15:24:37,262 INFO 50391 [-/-/127.0.0.1/c0a802e114745290771001007dc4d7/162ms GET /tile/service/portal:recent.tile] [chair:tile] 124ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:24:37,264 INFO 50391 [-/-/127.0.0.1/c0a802e114745290771001007dc4d7/164ms GET /tile/service/portal:recent.tile] status 200 (rt: 164ms)
-2016-09-22 15:24:51,931 INFO 50391 [-/-/127.0.0.1/c0a802e114745290917621008dc4d7/169ms GET /tile/service/portal:recent.tile] [chair:tile] 126ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:24:51,933 INFO 50391 [-/-/127.0.0.1/c0a802e114745290917621008dc4d7/171ms GET /tile/service/portal:recent.tile] status 200 (rt: 171ms)
-2016-09-22 15:25:58,572 INFO 50668 [-/-/127.0.0.1/c0a802e114745291582031004dc5ec/370ms GET /tile/service/portal:recent.tile] [chair:tile] 111ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:25:58,578 INFO 50668 [-/-/127.0.0.1/c0a802e114745291582031004dc5ec/376ms GET /tile/service/portal:recent.tile] status 200 (rt: 376ms)
-2016-09-22 15:27:09,061 INFO 50841 [-/-/127.0.0.1/c0a802e114745292287031003dc699/359ms GET /tile/service/portal:recent.tile] [chair:tile] 111ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:27:09,066 INFO 50841 [-/-/127.0.0.1/c0a802e114745292287031003dc699/364ms GET /tile/service/portal:recent.tile] status 200 (rt: 364ms)
-2016-09-22 15:27:59,927 INFO 50841 [-/-/127.0.0.1/c0a802e114745292797271005dc699/200ms GET /tile/service/portal:recent.tile] [chair:tile] 156ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:27:59,929 INFO 50841 [-/-/127.0.0.1/c0a802e114745292797271005dc699/202ms GET /tile/service/portal:recent.tile] status 200 (rt: 202ms)
-2016-09-22 15:28:24,700 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745293037721006dc699/928ms GET /tile/service/portal:recent.tile] [chair:tile] 876ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:28:24,703 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745293037721006dc699/931ms GET /tile/service/portal:recent.tile] status 200 (rt: 931ms)
-2016-09-22 15:29:00,212 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745293398331008dc699/379ms GET /tile/service/portal:recent.tile] [chair:tile] 336ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:29:00,213 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745293398331008dc699/380ms GET /tile/service/portal:recent.tile] status 200 (rt: 380ms)
-2016-09-22 15:29:09,155 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/undefined/c0a802e114745293481961010dc699/958ms GET /tile/service/portal:recent.tile] [chair:tile] 830ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:29:09,155 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/undefined/c0a802e114745293481961010dc699/959ms GET /tile/service/portal:recent.tile] status 200 (rt: 959ms)
-2016-09-22 15:29:09,242 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/undefined/c0a802e114745293483441011dc699/898ms GET /tile/service/portal:recent.tile] [chair:tile] 849ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:29:09,243 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/undefined/c0a802e114745293483441011dc699/899ms GET /tile/service/portal:recent.tile] status 200 (rt: 899ms)
-2016-09-22 15:29:09,399 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745293480121009dc699/1387ms GET /tile/service/portal:recent.tile] [chair:tile] 1109ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:29:09,399 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745293480121009dc699/1387ms GET /tile/service/portal:recent.tile] status 200 (rt: 1387ms)
-2016-09-22 15:29:09,616 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745293484941012dc699/1122ms GET /tile/service/portal:recent.tile] [chair:tile] 1060ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:29:09,617 INFO 50841 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745293484941012dc699/1123ms GET /tile/service/portal:recent.tile] status 200 (rt: 1123ms)
-2016-09-22 15:30:30,039 INFO 51283 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745294292131003dc853/826ms GET /tile/service/portal:recent.tile] [chair:tile] 377ms 200 45479 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:30:30,044 INFO 51283 [lmb_qinxi_003@alitest.com/2088202902862395/127.0.0.1/c0a802e114745294292131003dc853/832ms GET /tile/service/portal:recent.tile] status 200 (rt: 832ms)
-2016-09-22 15:41:09,448 INFO 51283 [-/-/127.0.0.1/c0a802e114745300692181005dc853/231ms GET /tile/service/portal:recent.tile] [chair:tile] 139ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:41:09,456 INFO 51283 [-/-/127.0.0.1/c0a802e114745300692181005dc853/239ms GET /tile/service/portal:recent.tile] status 200 (rt: 239ms)
-2016-09-22 15:42:42,691 INFO 51283 [-/-/127.0.0.1/c0a802e114745301622551006dc853/436ms GET /tile/service/portal:recent.tile] [chair:tile] 393ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:42:42,692 INFO 51283 [-/-/127.0.0.1/c0a802e114745301622551006dc853/437ms GET /tile/service/portal:recent.tile] status 200 (rt: 437ms)
-2016-09-22 15:42:45,933 INFO 51283 [-/-/127.0.0.1/c0a802e114745301644161007dc853/1517ms GET /tile/service/portal:recent.tile] [chair:tile] 962ms 302 0 http://consumeprod.stable.alipay.net/tile/service/record:recent.tile
-2016-09-22 15:42:45,935 INFO 51283 [-/-/127.0.0.1/c0a802e114745301644161007dc853/1519ms GET /tile/service/portal:recent.tile] status 200 (rt: 1519ms)
+      at node_modules/_thunks@4.9.6@thunks/index.js:336:9
+
+  23) test/tar/index.test.js tar.compressFile() tar.compressFile(sourceStream, stream):
+     Error: ENOENT: no such file or directory, open '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+  
+
+  24) test/tar/index.test.js tar.compressFile() tar.compressFile(sourceStream, stream, { size }):
+     Error: ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.statSync (fs.js:1132:3)
+      at Context.<anonymous> (test/tar/index.test.js:87:103)
+      at Generator.next (<anonymous>)
+      at runGenerator (node_modules/_thunks@4.9.6@thunks/index.js:252:37)
+      at Context.<anonymous> (node_modules/_thunks@4.9.6@thunks/index.js:247:7)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
+
+  25) test/tar/index.test.js tar.compressFile() tar.compressFile(buffer, stream):
+     Error: ENOENT: no such file or directory, open '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.openSync (fs.js:498:3)
+      at Object.readFileSync (fs.js:394:35)
+      at Context.<anonymous> (test/tar/index.test.js:93:31)
+      at Generator.next (<anonymous>)
+      at runGenerator (node_modules/_thunks@4.9.6@thunks/index.js:252:37)
+      at Context.<anonymous> (node_modules/_thunks@4.9.6@thunks/index.js:247:7)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
+
+  26) test/tar/stream.test.js .addEntry(file):
+
+      Uncaught AssertionError [ERR_ASSERTION] [ERR_ASSERTION]:   # test/tar/stream.test.js:27
+  
+  assert(!err)
+         ||   
+         |Error{message:"ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+         false
+  
+      + expected - actual
+
+      -false
+      +true
+      
+      at Decorator._callFunc (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:114:29)
+      at Decorator.concreteAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:103:17)
+      at decoratedAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorate.js:49:30)
+      at powerAssert (node_modules/_empower-core@1.2.0@empower-core/index.js:63:32)
+      at test/tar/stream.test.js:27:7
+      at node_modules/_pump@3.0.0@pump/index.js:75:7
+      at f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at WriteStream.<anonymous> (node_modules/_pump@3.0.0@pump/index.js:31:21)
+      at WriteStream.f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at onclosenexttick (node_modules/_end-of-stream@1.4.4@end-of-stream/index.js:54:73)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+
+  27) test/tar/stream.test.js .addEntry(file, { relativePath }):
+
+      Uncaught AssertionError [ERR_ASSERTION] [ERR_ASSERTION]:   # test/tar/stream.test.js:43
+  
+  assert(!err)
+         ||   
+         |Error{message:"ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+         false
+  
+      + expected - actual
+
+      -false
+      +true
+      
+      at Decorator._callFunc (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:114:29)
+      at Decorator.concreteAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:103:17)
+      at decoratedAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorate.js:49:30)
+      at powerAssert (node_modules/_empower-core@1.2.0@empower-core/index.js:63:32)
+      at test/tar/stream.test.js:43:7
+      at node_modules/_pump@3.0.0@pump/index.js:75:7
+      at f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at WriteStream.<anonymous> (node_modules/_pump@3.0.0@pump/index.js:31:21)
+      at WriteStream.f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at onclosenexttick (node_modules/_end-of-stream@1.4.4@end-of-stream/index.js:54:73)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+
+  28) test/tar/stream.test.js .addEntry(buffer, { relativePath }):
+     Error: ENOENT: no such file or directory, open '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.openSync (fs.js:498:3)
+      at Object.readFileSync (fs.js:394:35)
+      at Context.<anonymous> (test/tar/stream.test.js:119:27)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
+
+  29) test/tar/stream.test.js .addEntry(stream, { relativePath }):
+
+      Uncaught AssertionError [ERR_ASSERTION] [ERR_ASSERTION]:   # test/tar/stream.test.js:139
+  
+  assert(!err)
+         ||   
+         |Error{message:"ENOENT: no such file or directory, open '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+         false
+  
+      + expected - actual
+
+      -false
+      +true
+      
+      at Decorator._callFunc (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:114:29)
+      at Decorator.concreteAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:103:17)
+      at decoratedAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorate.js:49:30)
+      at powerAssert (node_modules/_empower-core@1.2.0@empower-core/index.js:63:32)
+      at test/tar/stream.test.js:139:7
+      at node_modules/_pump@3.0.0@pump/index.js:75:7
+      at f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at WriteStream.<anonymous> (node_modules/_pump@3.0.0@pump/index.js:31:21)
+      at WriteStream.f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at onclosenexttick (node_modules/_end-of-stream@1.4.4@end-of-stream/index.js:54:73)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+
+  30) test/tar/stream.test.js .addEntry(stream, { relativePath, size }):
+     Error: ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.statSync (fs.js:1132:3)
+      at Context.<anonymous> (test/tar/stream.test.js:156:95)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
+
+  31) test/tar/stream.test.js .addEntry multiple times:
+     Error: ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.statSync (fs.js:1132:3)
+      at Context.<anonymous> (test/tar/stream.test.js:174:96)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
+
+  32) test/tgz/file_stream.test.js tgz.FileStream:
+
+      Uncaught AssertionError [ERR_ASSERTION] [ERR_ASSERTION]:   # test/tgz/file_stream.test.js:21
+  
+  assert(!err)
+         ||   
+         |Error{message:"ENOENT: no such file or directory, open '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+         false
+  
+      + expected - actual
+
+      -false
+      +true
+      
+      at Decorator._callFunc (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:114:29)
+      at Decorator.concreteAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:103:17)
+      at decoratedAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorate.js:49:30)
+      at powerAssert (node_modules/_empower-core@1.2.0@empower-core/index.js:63:32)
+      at test/tgz/file_stream.test.js:21:7
+      at node_modules/_pump@3.0.0@pump/index.js:75:7
+      at f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at WriteStream.<anonymous> (node_modules/_pump@3.0.0@pump/index.js:31:21)
+      at WriteStream.f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at onclosenexttick (node_modules/_end-of-stream@1.4.4@end-of-stream/index.js:54:73)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+
+  33) test/tgz/index.test.js tgz.compressFile() tgz.compressFile(file, stream):
+     Error: ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+  
+
+  34) test/tgz/index.test.js tgz.compressFile() tgz.compressFile(file, stream, { relativePath }):
+     Error: ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+  
+
+  35) test/tgz/index.test.js tgz.compressFile() tgz.compressFile(file, destStream) should error if destStream emit error:
+
+      AssertionError [ERR_ASSERTION] [ERR_ASSERTION]:   # test/tgz/index.test.js:58
+  
+  assert(err && err.message === 'xx')
+         |   |  |   |       |        
+         |   |  |   |       false    
+         |   |  |   "ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'"
+         |   |  Error{message:"ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+         |   false                   
+         Error{message:"ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+  
+  --- [string] 'xx'
+  +++ [string] err.message
+  @@ -1,2 +1,117 @@
+  -xx
+  +ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+  
+  
+      + expected - actual
+
+      -false
+      +true
+      
+      at Decorator._callFunc (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:114:29)
+      at Decorator.concreteAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:103:17)
+      at decoratedAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorate.js:49:30)
+      at powerAssert (node_modules/_empower-core@1.2.0@empower-core/index.js:63:32)
+      at Context.<anonymous> (test/tgz/index.test.js:58:7)
+      at Generator.throw (<anonymous>)
+      at runGenerator (node_modules/_thunks@4.9.6@thunks/index.js:252:58)
+      at next (node_modules/_thunks@4.9.6@thunks/index.js:263:11)
+      at node_modules/_thunks@4.9.6@thunks/index.js:336:9
+
+  36) test/tgz/stream.test.js .addEntry(file):
+
+      Uncaught AssertionError [ERR_ASSERTION] [ERR_ASSERTION]:   # test/tgz/stream.test.js:27
+  
+  assert(!err)
+         ||   
+         |Error{message:"ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+         false
+  
+      + expected - actual
+
+      -false
+      +true
+      
+      at Decorator._callFunc (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:114:29)
+      at Decorator.concreteAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:103:17)
+      at decoratedAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorate.js:49:30)
+      at powerAssert (node_modules/_empower-core@1.2.0@empower-core/index.js:63:32)
+      at test/tgz/stream.test.js:27:7
+      at node_modules/_pump@3.0.0@pump/index.js:75:7
+      at f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at WriteStream.<anonymous> (node_modules/_pump@3.0.0@pump/index.js:31:21)
+      at WriteStream.f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at onclosenexttick (node_modules/_end-of-stream@1.4.4@end-of-stream/index.js:54:73)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+
+  37) test/tgz/stream.test.js .addEntry(file, { relativePath }):
+
+      Uncaught AssertionError [ERR_ASSERTION] [ERR_ASSERTION]:   # test/tgz/stream.test.js:43
+  
+  assert(!err)
+         ||   
+         |Error{message:"ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+         false
+  
+      + expected - actual
+
+      -false
+      +true
+      
+      at Decorator._callFunc (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:114:29)
+      at Decorator.concreteAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:103:17)
+      at decoratedAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorate.js:49:30)
+      at powerAssert (node_modules/_empower-core@1.2.0@empower-core/index.js:63:32)
+      at test/tgz/stream.test.js:43:7
+      at node_modules/_pump@3.0.0@pump/index.js:75:7
+      at f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at WriteStream.<anonymous> (node_modules/_pump@3.0.0@pump/index.js:31:21)
+      at WriteStream.f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at onclosenexttick (node_modules/_end-of-stream@1.4.4@end-of-stream/index.js:54:73)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+
+  38) test/tgz/stream.test.js .addEntry(buffer, { relativePath }):
+     Error: ENOENT: no such file or directory, open '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.openSync (fs.js:498:3)
+      at Object.readFileSync (fs.js:394:35)
+      at Context.<anonymous> (test/tgz/stream.test.js:119:27)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
+
+  39) test/tgz/stream.test.js .addEntry(stream, { relativePath }):
+
+      Uncaught AssertionError [ERR_ASSERTION] [ERR_ASSERTION]:   # test/tgz/stream.test.js:139
+  
+  assert(!err)
+         ||   
+         |Error{message:"ENOENT: no such file or directory, open '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+         false
+  
+      + expected - actual
+
+      -false
+      +true
+      
+      at Decorator._callFunc (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:114:29)
+      at Decorator.concreteAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:103:17)
+      at decoratedAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorate.js:49:30)
+      at powerAssert (node_modules/_empower-core@1.2.0@empower-core/index.js:63:32)
+      at test/tgz/stream.test.js:139:7
+      at node_modules/_pump@3.0.0@pump/index.js:75:7
+      at f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at WriteStream.<anonymous> (node_modules/_pump@3.0.0@pump/index.js:31:21)
+      at WriteStream.f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at onclosenexttick (node_modules/_end-of-stream@1.4.4@end-of-stream/index.js:54:73)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+
+  40) test/tgz/stream.test.js .addEntry(stream, { relativePath, size }):
+     Error: ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.statSync (fs.js:1132:3)
+      at Context.<anonymous> (test/tgz/stream.test.js:156:95)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
+
+  41) test/tgz/stream.test.js .addEntry multiple times:
+     Error: ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.statSync (fs.js:1132:3)
+      at Context.<anonymous> (test/tgz/stream.test.js:174:96)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
+
+  42) test/zip/index.test.js zip.compressFile() zip.compressFile(file, stream):
+     Error: ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+  
+
+  43) test/zip/index.test.js zip.compressFile() zip.compressFile(buffer, stream):
+     Error: ENOENT: no such file or directory, open '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.openSync (fs.js:498:3)
+      at Object.readFileSync (fs.js:394:35)
+      at Context.<anonymous> (test/zip/index.test.js:65:31)
+      at Generator.next (<anonymous>)
+      at runGenerator (node_modules/_thunks@4.9.6@thunks/index.js:252:37)
+      at Context.<anonymous> (node_modules/_thunks@4.9.6@thunks/index.js:247:7)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
+
+  44) test/zip/index.test.js zip.compressFile() zip.compressFile(sourceStream, targetStream):
+     Uncaught Error: ENOENT: no such file or directory, open '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+  
+
+  45) test/zip/stream.test.js .addEntry(file):
+
+      Uncaught AssertionError [ERR_ASSERTION] [ERR_ASSERTION]:   # test/zip/stream.test.js:26
+  
+  assert(!err)
+         ||   
+         |Error{message:"ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+         false
+  
+      + expected - actual
+
+      -false
+      +true
+      
+      at Decorator._callFunc (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:114:29)
+      at Decorator.concreteAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:103:17)
+      at decoratedAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorate.js:49:30)
+      at powerAssert (node_modules/_empower-core@1.2.0@empower-core/index.js:63:32)
+      at test/zip/stream.test.js:26:7
+      at node_modules/_pump@3.0.0@pump/index.js:75:7
+      at f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at WriteStream.<anonymous> (node_modules/_pump@3.0.0@pump/index.js:31:21)
+      at WriteStream.f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at onclosenexttick (node_modules/_end-of-stream@1.4.4@end-of-stream/index.js:54:73)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+
+  46) test/zip/stream.test.js .addEntry(file, { relativePath }):
+
+      Uncaught AssertionError [ERR_ASSERTION] [ERR_ASSERTION]:   # test/zip/stream.test.js:42
+  
+  assert(!err)
+         ||   
+         |Error{message:"ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+         false
+  
+      + expected - actual
+
+      -false
+      +true
+      
+      at Decorator._callFunc (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:114:29)
+      at Decorator.concreteAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:103:17)
+      at decoratedAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorate.js:49:30)
+      at powerAssert (node_modules/_empower-core@1.2.0@empower-core/index.js:63:32)
+      at test/zip/stream.test.js:42:7
+      at node_modules/_pump@3.0.0@pump/index.js:75:7
+      at f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at WriteStream.<anonymous> (node_modules/_pump@3.0.0@pump/index.js:31:21)
+      at WriteStream.f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at onclosenexttick (node_modules/_end-of-stream@1.4.4@end-of-stream/index.js:54:73)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+
+  47) test/zip/stream.test.js .addEntry(buffer, { relativePath }):
+     Error: ENOENT: no such file or directory, open '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.openSync (fs.js:498:3)
+      at Object.readFileSync (fs.js:394:35)
+      at Context.<anonymous> (test/zip/stream.test.js:118:27)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
+
+  48) test/zip/stream.test.js .addEntry(stream, { relativePath }):
+
+      Uncaught AssertionError [ERR_ASSERTION] [ERR_ASSERTION]:   # test/zip/stream.test.js:138
+  
+  assert(!err)
+         ||   
+         |Error{message:"ENOENT: no such file or directory, open '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'",code:"ENOENT"}
+         false
+  
+      + expected - actual
+
+      -false
+      +true
+      
+      at Decorator._callFunc (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:114:29)
+      at Decorator.concreteAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorator.js:103:17)
+      at decoratedAssert (node_modules/_empower-core@1.2.0@empower-core/lib/decorate.js:49:30)
+      at powerAssert (node_modules/_empower-core@1.2.0@empower-core/index.js:63:32)
+      at test/zip/stream.test.js:138:7
+      at node_modules/_pump@3.0.0@pump/index.js:75:7
+      at f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at WriteStream.<anonymous> (node_modules/_pump@3.0.0@pump/index.js:31:21)
+      at WriteStream.f (node_modules/_once@1.4.0@once/once.js:25:25)
+      at onclosenexttick (node_modules/_end-of-stream@1.4.4@end-of-stream/index.js:54:73)
+      at processTicksAndRejections (internal/process/task_queues.js:77:11)
+
+  49) test/zip/stream.test.js .addEntry(stream, { relativePath, size }):
+     Error: ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.statSync (fs.js:1132:3)
+      at Context.<anonymous> (test/zip/stream.test.js:155:95)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
+
+  50) test/zip/stream.test.js .addEntry multiple times:
+     Error: ENOENT: no such file or directory, stat '/Users/fengmk2/git/github.com/node-modules/compressing/test/fixtures/xx.log'
+      at Object.statSync (fs.js:1132:3)
+      at Context.<anonymous> (test/zip/stream.test.js:173:96)
+      at apply (node_modules/_thunks@4.9.6@thunks/index.js:354:38)
+      at tryRun (node_modules/_thunks@4.9.6@thunks/index.js:224:19)
+      at runThunk (node_modules/_thunks@4.9.6@thunks/index.js:217:15)
+      at continuation (node_modules/_thunks@4.9.6@thunks/index.js:164:10)
+      at child (node_modules/_thunks@4.9.6@thunks/index.js:155:24)
+      at thunkFunction (node_modules/_thunks@4.9.6@thunks/index.js:145:14)
+      at Context._fn (node_modules/_thunk-mocha@1.0.8@thunk-mocha/index.js:26:59)
+      at callFnAsync (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:371:21)
+      at Test.Runnable.run (node_modules/_mocha@3.5.3@mocha/lib/runnable.js:318:7)
+      at Runner.runTest (node_modules/_mocha@3.5.3@mocha/lib/runner.js:443:10)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:549:12
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:361:14)
+      at node_modules/_mocha@3.5.3@mocha/lib/runner.js:371:7
+      at next (node_modules/_mocha@3.5.3@mocha/lib/runner.js:295:14)
+      at Immediate._onImmediate (node_modules/_mocha@3.5.3@mocha/lib/runner.js:339:5)
+      at processImmediate (internal/timers.js:464:21)
