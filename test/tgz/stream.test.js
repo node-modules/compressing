@@ -189,4 +189,19 @@ describe('test/tgz/stream.test.js', () => {
     });
   });
 
+  it('.ctor(opts)', done => {
+    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+    const fileStream = fs.createWriteStream(destFile);
+    console.log('dest', destFile);
+
+    mm(console, 'warn', () => {});
+
+    const tgzStream = new TgzStream();
+    tgzStream.addEntry(fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xx.log')), { relativePath: 'xx.log' });
+    pump(tgzStream, fileStream, err => {
+      assert(!err);
+      assert(console.warn.called === undefined);
+      done();
+    });
+  });
 });

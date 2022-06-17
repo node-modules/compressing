@@ -52,6 +52,8 @@ export namespace gzip {
 
 export namespace tar {
 
+  import StreamSizeOptions = tgz.StreamSizeOptions
+
   function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>
 
   function compressDir(source: sourceType, dest: destType, opts?: any): Promise<void>
@@ -71,10 +73,8 @@ export namespace tar {
 
     constructor(opts?: {
       relativePath?: string,
-      size?: number,
-      suppressSizeWarning?: boolean,
       source?: sourceType
-    });
+    } & StreamSizeOptions);
 
   }
 
@@ -103,22 +103,25 @@ export namespace tgz {
 
   export class Stream extends ReadStream {
 
-    constructor();
+    constructor(opts?: StreamSizeOptions);
 
     addEntry(entry: string, opts?: streamEntryOpts): void
 
     addEntry(entry: Buffer | ReadStream, opts: streamEntryOpts): void
   }
 
+  export interface StreamSizeOptions {
+    suppressSizeWarning?: boolean,
+    size?: number,
+  }
+
   export class FileStream extends ReadStream {
 
     constructor(opts?: {
       relativePath?: string,
-      size?: number,
-      suppressSizeWarning?: boolean,
       zlib?: object,
       source?: sourceType
-    });
+    } & StreamSizeOptions);
 
   }
 
