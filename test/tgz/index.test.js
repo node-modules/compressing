@@ -6,10 +6,16 @@ const path = require('path');
 const uuid = require('uuid');
 const compressing = require('../..');
 const assert = require('power-assert');
+const rimraf = require('rimraf');
 const dircompare = require('dir-compare');
 const mkdirp = require('mz-modules/mkdirp');
 
 describe('test/tgz/index.test.js', () => {
+  let destDir;
+  afterEach(() => {
+    destDir && rimraf.sync(destDir);
+  });
+
   describe('tgz.compressFile()', () => {
     it('tgz.compressFile(file, stream)', function* () {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
@@ -67,7 +73,7 @@ describe('test/tgz/index.test.js', () => {
       yield compressing.tgz.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
 
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), uuid.v4());
       yield mkdirp(destDir);
       yield compressing.tgz.uncompress(destFile, destDir);
       const stat = fs.statSync(path.join(destDir, 'bin'));
@@ -148,7 +154,7 @@ describe('test/tgz/index.test.js', () => {
   describe('tgz.uncompress()', () => {
     it('tgz.uncompress(sourceFile, destDir)', function* () {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tgz');
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), uuid.v4());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       yield compressing.tgz.uncompress(sourceFile, destDir);
 
@@ -172,7 +178,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.uncompress(sourceStream, destDir)', function* () {
       const sourceStream = fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xxx.tgz'));
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), uuid.v4());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       yield compressing.tgz.uncompress(sourceStream, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -184,7 +190,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.uncompress(sourceBuffer, destDir)', function* () {
       const sourceBuffer = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xxx.tgz'));
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), uuid.v4());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       yield compressing.tgz.uncompress(sourceBuffer, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));

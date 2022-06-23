@@ -10,16 +10,21 @@ const mkdirp = require('mkdirp');
 const pump = require('pump');
 const compressing = require('../..');
 const dircompare = require('dir-compare');
+const rimraf = require('rimraf');
 
 const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
 const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
 
 describe('test/zip/uncompress_stream.test.js', () => {
-  afterEach(mm.restore);
+  let destDir;
+  afterEach(() => {
+    mm.restore();
+    destDir && rimraf.sync(destDir);
+  });
 
   it('should be a writable stream', done => {
     const sourceStream = fs.createReadStream(sourceFile);
-    const destDir = path.join(os.tmpdir(), uuid.v4());
+    destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream();
     mkdirp.sync(destDir);
@@ -48,7 +53,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
   });
 
   it('should uncompress according to file path', done => {
-    const destDir = path.join(os.tmpdir(), uuid.v4());
+    destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream({ source: sourceFile });
     mkdirp.sync(destDir);
@@ -78,7 +83,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
 
   it('should uncompress buffer', done => {
     const sourceBuffer = fs.readFileSync(sourceFile);
-    const destDir = path.join(os.tmpdir(), uuid.v4());
+    destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream({ source: sourceBuffer });
     mkdirp.sync(destDir);
@@ -108,7 +113,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
 
   it('should uncompress stream', done => {
     const sourceStream = fs.createReadStream(sourceFile);
-    const destDir = path.join(os.tmpdir(), uuid.v4());
+    destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream({ source: sourceStream });
     mkdirp.sync(destDir);
@@ -169,7 +174,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
 
   it('should uncompress with strip 1', done => {
     const sourceStream = fs.createReadStream(sourceFile);
-    const destDir = path.join(os.tmpdir(), uuid.v4());
+    destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream({ strip: 1 });
     mkdirp.sync(destDir);
@@ -199,7 +204,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
 
   it('should uncompress with strip 2', done => {
     const sourceStream = fs.createReadStream(sourceFile);
-    const destDir = path.join(os.tmpdir(), uuid.v4());
+    destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream({ strip: 2 });
     mkdirp.sync(destDir);

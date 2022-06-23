@@ -4,6 +4,8 @@ const mm = require('mm');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
+const rimraf = require('rimraf');
+
 const uuid = require('uuid');
 const compressing = require('../..');
 const assert = require('power-assert');
@@ -11,7 +13,11 @@ const dircompare = require('dir-compare');
 const mkdirp = require('mz-modules/mkdirp');
 
 describe('test/tar/index.test.js', () => {
-  afterEach(mm.restore);
+  let destDir;
+  afterEach(() => {
+    mm.restore();
+    destDir && rimraf.sync(destDir);
+  });
 
   describe('tar.compressFile()', () => {
     it('tar.compressFile(file, stream)', function* () {
@@ -107,7 +113,7 @@ describe('test/tar/index.test.js', () => {
       yield compressing.tar.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
 
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), uuid.v4());
       yield mkdirp(destDir);
       yield compressing.tar.uncompress(destFile, destDir);
       const stat = fs.statSync(path.join(destDir, 'bin'));
@@ -188,7 +194,7 @@ describe('test/tar/index.test.js', () => {
   describe('tar.uncompress()', () => {
     it('tar.uncompress(sourceFile, destDir)', function* () {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tar');
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), uuid.v4());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       yield compressing.tar.uncompress(sourceFile, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -200,7 +206,7 @@ describe('test/tar/index.test.js', () => {
 
     it('tar.uncompress(sourceStream, destDir)', function* () {
       const sourceStream = fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xxx.tar'));
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), uuid.v4());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       yield compressing.tar.uncompress(sourceStream, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -212,7 +218,7 @@ describe('test/tar/index.test.js', () => {
 
     it('tar.uncompress(sourceBuffer, destDir)', function* () {
       const sourceBuffer = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xxx.tar'));
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), uuid.v4());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       // console.log('sourceBuffer', destDir, originalDir);
       yield compressing.tar.uncompress(sourceBuffer, destDir);

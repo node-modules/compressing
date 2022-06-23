@@ -13,7 +13,7 @@ const dircompare = require('dir-compare');
 describe('test/zip/index.test.js', () => {
   let destDir;
   afterEach(() => {
-    rimraf.sync(destDir);
+    destDir && rimraf.sync(destDir);
   });
 
   describe('zip.compressFile()', () => {
