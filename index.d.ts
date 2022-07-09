@@ -85,7 +85,7 @@ export namespace tar {
     });
 
     on(event: string, listener: (...args: any[]) => void): this
-    on(event: 'entry', listener: (header: streamHeaderWithMode, stream: WriteStream, next: () => void) => void): this
+    on(event: 'entry', listener: (header: streamHeaderWithMode, stream: ReadStream, next: () => void) => void): this
     on(event: 'finish', listener: () => void): this
     on(event: 'error', listener: (err: Error) => void): this
 
@@ -130,7 +130,7 @@ export namespace tgz {
     });
 
     on(event: string, listener: (...args: any[]) => void): this
-    on(event: 'entry', listener: (header: streamHeaderWithMode, stream: WriteStream, next: () => void) => void): this
+    on(event: 'entry', listener: (header: streamHeaderWithMode, stream: ReadStream, next: () => void) => void): this
     on(event: 'finish', listener: () => void): this
     on(event: 'error', listener: (err: Error) => void): this
 
@@ -183,7 +183,7 @@ export namespace zip {
     });
 
     on(event: string, listener: (...args: any[]) => void): this
-    on(event: 'entry', listener: (header: streamHeaderWithMode, stream: WriteStream, next: () => void) => void): this
+    on(event: 'entry', listener: (header: streamHeaderWithMode, stream: ReadStream, next: () => void) => void): this
     on(event: 'finish', listener: () => void): this
     on(event: 'error', listener: (err: Error) => void): this
 
