@@ -370,8 +370,8 @@ Although the API is streaming style(try to keep it handy), it still loads all da
 
 |[<img src="https://avatars.githubusercontent.com/u/456108?v=4" width="100px;"/><br/><sub><b>shaoshuai0102</b></sub>](https://github.com/shaoshuai0102)<br/>|[<img src="https://avatars.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>|[<img src="https://avatars.githubusercontent.com/u/360661?v=4" width="100px;"/><br/><sub><b>popomore</b></sub>](https://github.com/popomore)<br/>|[<img src="https://avatars.githubusercontent.com/u/9692408?v=4" width="100px;"/><br/><sub><b>DiamondYuan</b></sub>](https://github.com/DiamondYuan)<br/>|[<img src="https://avatars.githubusercontent.com/u/13938334?v=4" width="100px;"/><br/><sub><b>bytemain</b></sub>](https://github.com/bytemain)<br/>|[<img src="https://avatars.githubusercontent.com/u/8382136?v=4" width="100px;"/><br/><sub><b>Ryqsky</b></sub>](https://github.com/Ryqsky)<br/>|
 | :---: | :---: | :---: | :---: | :---: | :---: |
-[<img src="https://avatars.githubusercontent.com/u/9857273?v=4" width="100px;"/><br/><sub><b>ShadyZOZ</b></sub>](https://github.com/ShadyZOZ)<br/>
+[<img src="https://avatars.githubusercontent.com/u/47357585?v=4" width="100px;"/><br/><sub><b>songhn233</b></sub>](https://github.com/songhn233)<br/>|[<img src="https://avatars.githubusercontent.com/u/9857273?v=4" width="100px;"/><br/><sub><b>ShadyZOZ</b></sub>](https://github.com/ShadyZOZ)<br/>
 
-This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Mon Jun 13 2022 13:26:08 GMT+0800`.
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Mon Jul 11 2022 08:28:25 GMT+0800`.
 
 <!-- GITCONTRIBUTOR_END -->

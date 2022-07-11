@@ -1,4 +1,13 @@
 
+1.6.1 / 2022-07-11
+==================
+
+**fixes**
+  * [[`ba49232`](http://github.com/node-modules/compressing/commit/ba49232780a57c9a3800642d7d39ae1dcdfc9409)] - fix(types): onEntry stream type should ReadStream (#73) (Songhn <<songhn233@gmail.com>>)
+
+**others**
+  * [[`054d4a4`](http://github.com/node-modules/compressing/commit/054d4a41ae4ca5d7b9b83e7298e32cc1d62d7ef4)] - 🤖 TEST: Use GitHub Action (#69) (fengmk2 <<fengmk2@gmail.com>>)
+
 1.6.0 / 2022-06-13
 ==================
 
