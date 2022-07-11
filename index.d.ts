@@ -8,6 +8,7 @@ interface streamEntryOpts {
   relativePath?: string
   ignoreBase?: boolean
   size?: number
+  suppressSizeWarning?: boolean
 }
 
 interface streamHeader {
