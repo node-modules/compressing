@@ -1,4 +1,10 @@
 
+1.6.2 / 2022-07-11
+==================
+
+**fixes**
+  * [[`96226d3`](http://github.com/node-modules/compressing/commit/96226d363c7c8fa9ef1a8098af646de19e729ce7)] - fix: add `suppressSizeWarning` to types and typo fix (#72) (Zeeko <<zeeko@zeeko.dev>>)
+
 1.6.1 / 2022-07-11
 ==================
 
