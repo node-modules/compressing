@@ -65,10 +65,10 @@
     "uuid": "^8.3.2"
   },
   "engines": {
-    "node": ">= 4.0.0"
+    "node": ">= 14.0.0"
   },
   "ci": {
-    "version": "10, 12, 14, 16, 18",
+    "version": "14, 16, 18",
     "os": "linux, macos",
     "license": {
       "year": "2017",
