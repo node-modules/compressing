@@ -10,7 +10,7 @@ const uuid = require('uuid');
 const compressing = require('../..');
 const assert = require('power-assert');
 const dircompare = require('dir-compare');
-const mkdirp = require('mkdirp');
+const { mkdirp } = require('../../lib/utils');
 
 describe('test/tar/index.test.js', () => {
   let destDir;
@@ -75,7 +75,7 @@ describe('test/tar/index.test.js', () => {
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       mm(console, 'warn', msg => {
-        assert(msg === 'You should specify the size of streamming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.suppressSizeWarning: true to suppress this warning');
+        assert(msg === 'You should specify the size of streaming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.suppressSizeWarning: true to suppress this warning');
       });
       await compressing.tar.compressFile(sourceStream, fileStream, { relativePath: 'xx.log' });
       assert(fs.existsSync(destFile));

@@ -6,7 +6,8 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
-const mkdirp = require('mkdirp');
+const { mkdirp, mkdirpSync } = require('../../lib/utils');
+
 const pump = require('pump');
 const compressing = require('../..');
 const dircompare = require('dir-compare');
@@ -17,6 +18,10 @@ const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tgz');
 
 describe('test/tgz/uncompress_stream.test.js', () => {
   let destDir;
+  beforeEach(() => {
+    destDir = path.join(os.tmpdir(), uuid.v4());
+    mkdirpSync(destDir);
+  });
   afterEach(() => {
     mm.restore();
     destDir && rimraf.sync(destDir);
@@ -24,10 +29,8 @@ describe('test/tgz/uncompress_stream.test.js', () => {
 
   it.skip('should be a writable stream', done => {
     const sourceStream = fs.createReadStream(sourceFile);
-    destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.tgz.UncompressStream();
-    mkdirp.sync(destDir);
     pump(sourceStream, uncompressStream, err => {
       console.error(err);
       assert(!err);
@@ -51,10 +54,8 @@ describe('test/tgz/uncompress_stream.test.js', () => {
   });
 
   it('should uncompress according to file path', done => {
-    destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.tgz.UncompressStream({ source: sourceFile });
-    mkdirp.sync(destDir);
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -79,10 +80,8 @@ describe('test/tgz/uncompress_stream.test.js', () => {
 
   it('should uncompress buffer', done => {
     const sourceBuffer = fs.readFileSync(sourceFile);
-    destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.tgz.UncompressStream({ source: sourceBuffer });
-    mkdirp.sync(destDir);
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -106,10 +105,8 @@ describe('test/tgz/uncompress_stream.test.js', () => {
 
   it('should uncompress stream', done => {
     const sourceStream = fs.createReadStream(sourceFile);
-    destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.tgz.UncompressStream({ source: sourceStream });
-    mkdirp.sync(destDir);
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));

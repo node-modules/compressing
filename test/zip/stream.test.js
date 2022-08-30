@@ -129,7 +129,7 @@ describe('test/zip/stream.test.js', () => {
     console.log('dest', destFile);
 
     mm(console, 'warn', msg => {
-      assert(msg === 'You should specify the size of streamming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.suppressSizeWarning: true to suppress this warning');
+      assert(msg === 'You should specify the size of streaming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.suppressSizeWarning: true to suppress this warning');
     });
 
     const zipStream = new ZipStream();

@@ -6,7 +6,7 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
-const mkdirp = require('mkdirp');
+const { mkdirp, mkdirpSync } = require('../../lib/utils');
 const pump = require('pump');
 const compressing = require('../..');
 const dircompare = require('dir-compare');
@@ -19,7 +19,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
   let destDir;
   beforeEach(() => {
     destDir = path.join(os.tmpdir(), uuid.v4());
-    mkdirp.sync(destDir);
+    mkdirpSync(destDir);
   });
 
   afterEach(() => {
@@ -95,7 +95,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
       if (header.type === 'file') {
         stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
       } else { // directory
-        mkdirp(path.join(destDir, header.name)).then(() => stream.resume()).catch(done);
+        mkdirp(path.join(destDir, header.name)).then(() => stream.resume()).catch(err => done(err));
       }
     });
   });
@@ -160,7 +160,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
     const sourceStream = fs.createReadStream(sourceFile);
 
     const uncompressStream = new compressing.zip.UncompressStream({ strip: 1 });
-    mkdirp.sync(destDir);
+    mkdirpSync(destDir);
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, destDir);
@@ -186,7 +186,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
     const sourceStream = fs.createReadStream(sourceFile);
 
     const uncompressStream = new compressing.zip.UncompressStream({ strip: 2 });
-    mkdirp.sync(destDir);
+    mkdirpSync(destDir);
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(path.join(__dirname, '../fixtures/xxx-strip2'), destDir);

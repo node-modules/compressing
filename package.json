@@ -41,7 +41,6 @@
     "flushwritable": "^1.0.0",
     "get-ready": "^2.0.1",
     "iconv-lite": "^0.6.3",
-    "mkdirp": "^1.0.4",
     "pump": "^3.0.0",
     "streamifier": "^0.1.1",
     "tar-stream": "^2.2.0",
@@ -49,7 +48,6 @@
     "yazl": "^2.5.1"
   },
   "devDependencies": {
-    "@types/mkdirp": "^1.0.2",
     "@types/mocha": "^9.1.1",
     "@types/node": "^18.6.1",
     "dir-compare": "^4.0.0",

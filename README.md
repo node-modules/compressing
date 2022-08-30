@@ -179,7 +179,7 @@ __stream style__
 
 ```js
 const compressing = require('compressing');
-const mkdirp = require('mkdirp');
+const fsp = require('fs/promises');
 
 function onEntry(header, stream, next) => {
   stream.on('end', next);
@@ -190,7 +190,7 @@ function onEntry(header, stream, next) => {
   if (header.type === 'file') {
     stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
   } else { // directory
-    mkdirp(path.join(destDir, header.name)).then(() => stream.resume()).catch(handleError);
+    fsp.mkdir(path.join(destDir, header.name), { recursive: true }).then(() => stream.resume()).catch(handleError);
   }
 }
 
