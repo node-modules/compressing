@@ -6,7 +6,7 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
-const pump = require('pump');
+const { pipeline } = require('stream');
 const compressing = require('../..');
 
 describe('test/tar/file_stream.test.js', () => {
@@ -23,7 +23,7 @@ describe('test/tar/file_stream.test.js', () => {
 
     const fileStream = fs.createWriteStream(destFile);
     const tarStream = new compressing.tar.FileStream({ relativePath: 'xx.log' });
-    pump(sourceStream, tarStream, fileStream, err => {
+    pipeline(sourceStream, tarStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -42,7 +42,7 @@ describe('test/tar/file_stream.test.js', () => {
 
     const fileStream = fs.createWriteStream(destFile);
     const tarStream = new compressing.tar.FileStream({ relativePath: 'xx.log', size: fs.statSync(sourceFile).size });
-    pump(sourceStream, tarStream, fileStream, err => {
+    pipeline(sourceStream, tarStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();

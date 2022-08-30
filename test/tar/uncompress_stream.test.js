@@ -8,7 +8,7 @@ const uuid = require('uuid');
 const assert = require('assert');
 const { mkdirp, mkdirpSync } = require('../../lib/utils');
 
-const pump = require('pump');
+const { pipeline } = require('stream');
 const rimraf = require('rimraf');
 
 const compressing = require('../..');
@@ -31,7 +31,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
 
     const uncompressStream = new compressing.tar.UncompressStream();
     mkdirpSync(destDir);
-    pump(sourceStream, uncompressStream, err => {
+    pipeline(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
       assert(res.distinct === 0);

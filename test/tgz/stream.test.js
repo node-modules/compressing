@@ -5,7 +5,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
-const pump = require('pump');
+const { pipeline } = require('stream');
 const compressing = require('../..');
 const assert = require('power-assert');
 const TgzStream = compressing.tgz.Stream;
@@ -22,7 +22,7 @@ describe('test/tgz/stream.test.js', () => {
     const tgzStream = new TgzStream();
     tgzStream.addEntry(path.join(__dirname, '..', 'fixtures', 'xx.log'));
 
-    pump(tgzStream, fileStream, err => {
+    pipeline(tgzStream, fileStream, err => {
       console.log('error', err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -38,7 +38,7 @@ describe('test/tgz/stream.test.js', () => {
     const tgzStream = new TgzStream();
     tgzStream.addEntry(path.join(__dirname, '..', 'fixtures', 'xx.log'), { relativePath: 'dd/dd.log' });
 
-    pump(tgzStream, fileStream, err => {
+    pipeline(tgzStream, fileStream, err => {
       console.log('error', err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -54,7 +54,7 @@ describe('test/tgz/stream.test.js', () => {
     const tgzStream = new TgzStream();
     tgzStream.addEntry(path.join(__dirname, '..', 'fixtures'));
 
-    pump(tgzStream, fileStream, err => {
+    pipeline(tgzStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -70,7 +70,7 @@ describe('test/tgz/stream.test.js', () => {
     const tgzStream = new TgzStream();
     tgzStream.addEntry(path.join(__dirname, '..', 'fixtures'), { ignoreBase: true });
 
-    pump(tgzStream, fileStream, err => {
+    pipeline(tgzStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -86,7 +86,7 @@ describe('test/tgz/stream.test.js', () => {
     const tgzStream = new TgzStream();
     tgzStream.addEntry(path.join(__dirname, '..', 'fixtures'), { relativePath: 'xxx' });
 
-    pump(tgzStream, fileStream, err => {
+    pipeline(tgzStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -102,7 +102,7 @@ describe('test/tgz/stream.test.js', () => {
     const tgzStream = new TgzStream();
     tgzStream.addEntry(path.join(__dirname, '..', 'fixtures'), { relativePath: 'xxx', ignoreBase: true });
 
-    pump(tgzStream, fileStream, err => {
+    pipeline(tgzStream, fileStream, err => {
       console.log(err);
       assert(!err);
       assert(fs.existsSync(destFile));
@@ -117,7 +117,7 @@ describe('test/tgz/stream.test.js', () => {
 
     const tgzStream = new TgzStream();
     tgzStream.addEntry(fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xx.log')), { relativePath: 'xx.log' });
-    pump(tgzStream, fileStream, err => {
+    pipeline(tgzStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -135,7 +135,7 @@ describe('test/tgz/stream.test.js', () => {
 
     const tgzStream = new TgzStream();
     tgzStream.addEntry(fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xx.log')), { relativePath: 'xx.log' });
-    pump(tgzStream, fileStream, err => {
+    pipeline(tgzStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -154,7 +154,7 @@ describe('test/tgz/stream.test.js', () => {
     const tgzStream = new TgzStream();
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     tgzStream.addEntry(fs.createReadStream(sourceFile), { relativePath: 'dd/xx.log', size: fs.statSync(sourceFile).size });
-    pump(tgzStream, fileStream, err => {
+    pipeline(tgzStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -182,7 +182,7 @@ describe('test/tgz/stream.test.js', () => {
     // add dir
     tgzStream.addEntry(sourceDir);
 
-    pump(tgzStream, fileStream, err => {
+    pipeline(tgzStream, fileStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
       done();

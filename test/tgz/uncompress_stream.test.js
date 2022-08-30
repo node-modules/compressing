@@ -8,7 +8,7 @@ const uuid = require('uuid');
 const assert = require('assert');
 const { mkdirp, mkdirpSync } = require('../../lib/utils');
 
-const pump = require('pump');
+const { pipeline } = require('stream');
 const compressing = require('../..');
 const dircompare = require('dir-compare');
 const rimraf = require('rimraf');
@@ -31,7 +31,7 @@ describe('test/tgz/uncompress_stream.test.js', () => {
     const sourceStream = fs.createReadStream(sourceFile);
 
     const uncompressStream = new compressing.tgz.UncompressStream();
-    pump(sourceStream, uncompressStream, err => {
+    pipeline(sourceStream, uncompressStream, err => {
       console.error(err);
       assert(!err);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));

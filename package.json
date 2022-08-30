@@ -41,7 +41,6 @@
     "flushwritable": "^1.0.0",
     "get-ready": "^2.0.1",
     "iconv-lite": "^0.6.3",
-    "pump": "^3.0.0",
     "streamifier": "^0.1.1",
     "tar-stream": "^2.2.0",
     "yauzl": "^2.10.0",
