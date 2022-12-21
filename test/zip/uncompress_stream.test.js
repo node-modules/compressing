@@ -237,7 +237,8 @@ it('should emit error if uncompress source is undefined', done => {
       .finally(() => clearTimeout(timeout));
   }catch(err) {
     clearTimeout(timeout);
-    assert(err.message === 'uncompress source connot be undefined');
+    assert(err.name === 'IlligalSourceError');
+    assert(err.message === 'Type is not supported, must be a file path, file buffer, or a readable stream');
     done();
   }
 })
