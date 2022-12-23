@@ -8,7 +8,8 @@
     "ts-test": "tsc -p ./test/fixtures/types/tsconfig.json",
     "test": "egg-bin test && npm run ts-test",
     "cov": "egg-bin cov",
-    "lint": "eslint . --fix",
+    "lint-fix": "eslint . --fix",
+    "lint": "eslint .",
     "ci": "npm run lint && npm run ts-test && npm run cov"
   },
   "repository": {
