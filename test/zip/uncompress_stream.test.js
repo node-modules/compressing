@@ -229,16 +229,16 @@ describe('test/zip/uncompress_stream.test.js', () => {
 });
 
 it('should emit error if uncompress source is undefined', done => {
-  const timeout = setTimeout(()=>{
-    done("uncompress timeout");
+  const timeout = setTimeout(() => {
+    done('uncompress timeout');
   }, 1000);
   try {
     compressing.zip.uncompress(undefined, originalDir)
       .finally(() => clearTimeout(timeout));
-  }catch(err) {
+  } catch (err) {
     clearTimeout(timeout);
     assert(err.name === 'IlligalSourceError');
     assert(err.message === 'Type is not supported, must be a file path, file buffer, or a readable stream');
     done();
   }
-})
+});
