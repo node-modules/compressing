@@ -173,6 +173,16 @@ describe('test/zip/index.test.js', () => {
       assert(res.totalDirs === 1);
     });
 
+    it('zip.uncompress(sourceFile, destDir) support file mode', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
+      destDir = path.join(os.tmpdir(), uuid.v4());
+      yield compressing.zip.uncompress(sourceFile, destDir, {
+        mode: 32804,
+      });
+      const stat = fs.statSync(path.join(destDir, 'xxx', 'foo'));
+      assert(stat.mode === 32804);
+    });
+
     // only test on local
     it.skip('zip.uncompress(sourceFile, destDir) support chinese gbk path', function* () {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'chinese-path-test.zip');
