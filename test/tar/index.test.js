@@ -6,7 +6,7 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const compressing = require('../..');
-const assert = require('power-assert');
+const assert = require('assert');
 const dircompare = require('dir-compare');
 const mkdirp = require('mz-modules/mkdirp');
 

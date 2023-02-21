@@ -5,7 +5,7 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const compressing = require('../..');
-const assert = require('power-assert');
+const assert = require('assert');
 
 describe('test/gzip/index.test.js', () => {
   describe('gzip.compressFile()', () => {

@@ -7,7 +7,7 @@ const uuid = require('uuid');
 const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
 const compressing = require('../..');
-const assert = require('power-assert');
+const assert = require('assert');
 const dircompare = require('dir-compare');
 
 describe('test/zip/index.test.js', () => {
@@ -276,7 +276,7 @@ describe('test/zip/index.test.js', () => {
     assert(fs.existsSync(destFile));
 
     destDir = path.join(os.tmpdir(), uuid.v4());
-    yield mkdirp(destDir);
+    mkdirp.sync(destDir);
     yield compressing.zip.uncompress(destFile, destDir);
     const stat = fs.statSync(path.join(destDir, 'bin'));
     assert(stat.mode === originStat.mode);

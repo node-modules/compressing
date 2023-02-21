@@ -6,7 +6,7 @@ const path = require('path');
 const uuid = require('uuid');
 const pump = require('pump');
 const compressing = require('../..');
-const assert = require('power-assert');
+const assert = require('assert');
 
 describe.skip('test/zip/file_stream.test.js', () => {
   it('zip.FileStream', done => {

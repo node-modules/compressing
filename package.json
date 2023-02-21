@@ -6,8 +6,8 @@
   "scripts": {
     "contributor": "git-contributor",
     "ts-test": "tsc -p ./test/fixtures/types/tsconfig.json",
-    "test": "egg-bin test && npm run ts-test",
-    "cov": "egg-bin cov",
+    "test": "egg-bin test --espower=false --full-trace && npm run ts-test",
+    "cov": "egg-bin cov --espower=false",
     "lint-fix": "eslint . --fix",
     "lint": "eslint .",
     "ci": "npm run lint && npm run ts-test && npm run cov"
@@ -53,13 +53,12 @@
     "@types/mocha": "^5.2.5",
     "@types/node": "^10.12.9",
     "dir-compare": "^1.3.0",
-    "egg-bin": "^1.9.1",
+    "egg-bin": "4",
     "eslint": "^3.10.2",
     "eslint-config-egg": "^3.2.0",
     "git-contributor": "^1.1.0",
     "mm": "^2.0.0",
     "mz-modules": "^2.1.0",
-    "power-assert": "^1.4.2",
     "rimraf": "^2.6.2",
     "typescript": "^3.1.6",
     "uuid": "^3.0.1"
