@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.8.0](https://github.com/node-modules/compressing/compare/v1.7.0...v1.8.0) (2023-02-24)
+
+
+### Features
+
+* use @eggjs/yauzl to close Buffer() is deprecated message ([#86](https://github.com/node-modules/compressing/issues/86)) ([3a0a5f5](https://github.com/node-modules/compressing/commit/3a0a5f5d9b1cc8e3bc33735b8cd511ecdf2ddf70))
+
 ## [1.7.0](https://github.com/node-modules/compressing/compare/v1.6.3...v1.7.0) (2023-01-12)
 
 
