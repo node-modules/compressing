@@ -46,7 +46,7 @@
     "pump": "^3.0.0",
     "streamifier": "^0.1.1",
     "tar-stream": "^1.5.2",
-    "yauzl": "^2.7.0",
+    "@eggjs/yauzl": "^2.11.0",
     "yazl": "^2.4.2"
   },
   "devDependencies": {
