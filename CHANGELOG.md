@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.0](https://github.com/node-modules/compressing/compare/v1.8.0...v1.9.0) (2023-03-26)
+
+
+### Features
+
+* add decompress alias to uncompress ([#90](https://github.com/node-modules/compressing/issues/90)) ([290b7b3](https://github.com/node-modules/compressing/commit/290b7b3c864d8901550239e066ec753de4bb91ba))
+
 ## [1.8.0](https://github.com/node-modules/compressing/compare/v1.7.0...v1.8.0) (2023-02-24)
 
 
