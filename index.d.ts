@@ -28,6 +28,8 @@ export namespace gzip {
 
   function uncompress(source: sourceType, dest: destType, opts?: any): Promise<void>
 
+  function decompress(source: sourceType, dest: destType, opts?: any): Promise<void>
+
   export class FileStream extends ReadStream {
 
     constructor(opts?: {
@@ -58,6 +60,8 @@ export namespace tar {
   function compressDir(source: sourceType, dest: destType, opts?: any): Promise<void>
 
   function uncompress(source: sourceType, dest: string, opts?: any): Promise<void>
+
+  function decompress(source: sourceType, dest: string, opts?: any): Promise<void>
 
   export class Stream extends ReadStream {
 
@@ -101,6 +105,8 @@ export namespace tgz {
   function compressDir(source: sourceType, dest: destType, opts?: any): Promise<void>
 
   function uncompress(source: sourceType, dest: string, opts?: any): Promise<void>
+
+  function decompress(source: sourceType, dest: string, opts?: any): Promise<void>
 
   export class Stream extends ReadStream {
 
@@ -146,6 +152,8 @@ export namespace zip {
   function compressDir(source: sourceType, dest: destType, opts?: any): Promise<void>
 
   function uncompress(source: sourceType, dest: string, opts?: any): Promise<void>
+
+  function decompress(source: sourceType, dest: string, opts?: any): Promise<void>
 
   export class Stream extends ReadStream {
 
