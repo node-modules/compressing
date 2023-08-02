@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.9.1](https://github.com/node-modules/compressing/compare/v1.9.0...v1.9.1) (2023-08-02)
+
+
+### Bug Fixes
+
+* Use '/' path separator on Windows for tar archives ([#24](https://github.com/node-modules/compressing/issues/24)) ([3aa065b](https://github.com/node-modules/compressing/commit/3aa065b755c481a7a3f92b6184cd8bfd7b776a09))
+
 ## [1.9.0](https://github.com/node-modules/compressing/compare/v1.8.0...v1.9.0) (2023-03-26)
 
 
