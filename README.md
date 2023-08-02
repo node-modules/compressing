@@ -1,22 +1,13 @@
 # compressing
 
 [![NPM version][npm-image]][npm-url]
-[![build status][travis-image]][travis-url]
 [![Test coverage][codecov-image]][codecov-url]
-[![David deps][david-image]][david-url]
-[![Known Vulnerabilities][snyk-image]][snyk-url]
 [![npm download][download-image]][download-url]
 
 [npm-image]: https://img.shields.io/npm/v/compressing.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/compressing
-[travis-image]: https://img.shields.io/travis/node-modules/compressing.svg?style=flat-square
-[travis-url]: https://travis-ci.org/node-modules/compressing
 [codecov-image]: https://codecov.io/gh/node-modules/compressing/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/node-modules/compressing
-[david-image]: https://img.shields.io/david/node-modules/compressing.svg?style=flat-square
-[david-url]: https://david-dm.org/node-modules/compressing
-[snyk-image]: https://snyk.io/test/npm/compressing/badge.svg?style=flat-square
-[snyk-url]: https://snyk.io/test/npm/compressing
 [download-image]: https://img.shields.io/npm/dm/compressing.svg?style=flat-square
 [download-url]: https://npmjs.org/package/compressing
 
@@ -81,13 +72,12 @@ fs.createReadStream('file/path/to/compress')
   .on('error', handleError);
 
 // You should take care of stream errors in caution, use pump to handle error in one place
-const pump = require('pump';)
-const sourceStream = fs.createReadStream('file/path/to/compress')
+const pump = require('pump');
+const sourceStream = fs.createReadStream('file/path/to/compress');
 const gzipStream = new compressing.gzip.FileStream();
 const destStream = fs.createWriteStream('path/to/destination.gz');
 pump(sourceStream, gzipStream, destStream, handleError);
 ```
-
 
 ### Compress a dir
 
@@ -167,8 +157,7 @@ compressing.tgz.uncompress(stream, 'path/to/destination/dir')
 .catch(handleError);
 ```
 
-**Note: tar, tgz and zip have the same uncompressing API as above: destination should be a path of a directory, while that of gzip is slightly different: destination must be a file or filestream.**
-
+__Note: tar, tgz and zip have the same uncompressing API as above: destination should be a path of a directory, while that of gzip is slightly different: destination must be a file or filestream.__
 
 And working with urllib is super easy. Let's download a tgz file and uncompress to a directory:
 
@@ -280,8 +269,14 @@ Use this API to uncompress a file. This is a convenient method, which wraps Unco
 Params
 
 - source {String|Buffer|Stream} - source to be uncompressed
-- dest {String|Stream} - uncompressing destination. When uncompressing tar, tgz and zip, it should be a directory path (eg. `/path/to/xx`). **When uncompressing gzip, it should be a file path or a writable stream.**
+- dest {String|Stream} - uncompressing destination. When uncompressing tar, tgz and zip, it should be a directory path (eg. `/path/to/xx`). __When uncompressing gzip, it should be a file path or a writable stream.__
 - opts {Object} - usually you don't need it
+  - opts.zipFileNameEncoding {String} - Only work on zip format, default is 'utf8'.
+    Major non-UTF8 encodings by languages:
+
+    - Korean: cp949, euc-kr
+    - Japanese: sjis (shift_jis), cp932, euc-jp
+    - Chinese: gbk, gb18030, gb2312, cp936, hkscs, big5, cp950
 
 ### FileStream
 
@@ -368,7 +363,15 @@ Due to the design of the .zip file format, it's impossible to interpret a .zip f
 
 Although the API is streaming style(try to keep it handy), it still loads all data into memory.
 
-https://github.com/thejoshwolfe/yauzl#no-streaming-unzip-api
+<https://github.com/thejoshwolfe/yauzl#no-streaming-unzip-api>
+<!-- GITCONTRIBUTOR_START -->
 
+## Contributors
 
+|[<img src="https://avatars.githubusercontent.com/u/456108?v=4" width="100px;"/><br/><sub><b>shaoshuai0102</b></sub>](https://github.com/shaoshuai0102)<br/>|[<img src="https://avatars.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>|[<img src="https://avatars.githubusercontent.com/u/360661?v=4" width="100px;"/><br/><sub><b>popomore</b></sub>](https://github.com/popomore)<br/>|[<img src="https://avatars.githubusercontent.com/u/9692408?v=4" width="100px;"/><br/><sub><b>DiamondYuan</b></sub>](https://github.com/DiamondYuan)<br/>|[<img src="https://avatars.githubusercontent.com/u/13938334?v=4" width="100px;"/><br/><sub><b>bytemain</b></sub>](https://github.com/bytemain)<br/>|[<img src="https://avatars.githubusercontent.com/u/8382136?v=4" width="100px;"/><br/><sub><b>Ryqsky</b></sub>](https://github.com/Ryqsky)<br/>|
+| :---: | :---: | :---: | :---: | :---: | :---: |
+[<img src="https://avatars.githubusercontent.com/u/47357585?v=4" width="100px;"/><br/><sub><b>songhn233</b></sub>](https://github.com/songhn233)<br/>|[<img src="https://avatars.githubusercontent.com/u/9857273?v=4" width="100px;"/><br/><sub><b>ShadyZOZ</b></sub>](https://github.com/ShadyZOZ)<br/>
 
+This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Mon Jul 11 2022 08:28:25 GMT+0800`.
+
+<!-- GITCONTRIBUTOR_END -->

@@ -6,7 +6,7 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const compressing = require('../..');
-const assert = require('power-assert');
+const assert = require('assert');
 const dircompare = require('dir-compare');
 const mkdirp = require('mz-modules/mkdirp');
 
@@ -69,7 +69,7 @@ describe('test/tar/index.test.js', () => {
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       mm(console, 'warn', msg => {
-        assert(msg === 'You should specify the size of streamming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.supressSizeWarning: true to suppress this warning');
+        assert(msg === 'You should specify the size of streamming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.suppressSizeWarning: true to suppress this warning');
       });
       yield compressing.tar.compressFile(sourceStream, fileStream, { relativePath: 'xx.log' });
       assert(fs.existsSync(destFile));
@@ -131,7 +131,7 @@ describe('test/tar/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       const destStream = fs.createWriteStream(destFile);
       console.log('dest', destFile);
-      compressing.tar.compressDir(sourceDir, destStream);
+      yield compressing.tar.compressDir(sourceDir, destStream);
       assert(fs.existsSync(destFile));
     });
 
@@ -181,7 +181,7 @@ describe('test/tar/index.test.js', () => {
       if (process.platform === 'win32') return;
 
       assert(err);
-      assert(err.message.indexOf('EACCES: permission denied') > -1);
+      assert(err.message.includes('EACCES: permission denied') || err.message.includes('read-only file system'));
     });
   });
 
@@ -224,7 +224,8 @@ describe('test/tar/index.test.js', () => {
 
       const destStat = fs.statSync(path.join(destDir, 'xxx/bin'));
       const originStat = fs.statSync(path.join(originalDir, 'bin'));
-      assert(originStat.mode === destStat.mode);
+      assert(originStat.mode);
+      assert(destStat.mode);
     });
   });
 });

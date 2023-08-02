@@ -7,7 +7,7 @@ const uuid = require('uuid');
 const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
 const compressing = require('../..');
-const assert = require('power-assert');
+const assert = require('assert');
 const dircompare = require('dir-compare');
 
 describe('test/zip/index.test.js', () => {
@@ -156,7 +156,7 @@ describe('test/zip/index.test.js', () => {
       }
       if (process.platform === 'win32') return;
       assert(err);
-      assert(err.message.indexOf('EACCES: permission denied') > -1);
+      assert(err.message.includes('EACCES: permission denied') || err.message.includes('read-only file system'));
     });
   });
 
@@ -171,6 +171,56 @@ describe('test/zip/index.test.js', () => {
       assert(res.equal === 5);
       assert(res.totalFiles === 4);
       assert(res.totalDirs === 1);
+    });
+
+    it('zip.uncompress(sourceFile, destDir) support file mode', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
+      destDir = path.join(os.tmpdir(), uuid.v4());
+      yield compressing.zip.uncompress(sourceFile, destDir, {
+        mode: 32804,
+      });
+      const stat = fs.statSync(path.join(destDir, 'xxx', 'foo'));
+      assert(stat.mode === 32804);
+    });
+
+    // only test on local
+    it.skip('zip.uncompress(sourceFile, destDir) support chinese gbk path', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'chinese-path-test.zip');
+      destDir = path.join(os.tmpdir(), uuid.v4());
+      yield compressing.zip.uncompress(sourceFile, destDir, {
+        zipFileNameEncoding: 'gbk',
+      });
+      assert(fs.readdirSync(destDir).indexOf('发布周期.md') >= 0);
+    });
+
+    it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = gbk', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
+      destDir = path.join(os.tmpdir(), uuid.v4());
+      yield compressing.zip.uncompress(sourceFile, destDir, {
+        zipFileNameEncoding: 'gbk',
+        strip: 1,
+      });
+      assert(fs.readdirSync(destDir).indexOf('foo') >= 0);
+    });
+
+    it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = utf8', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
+      destDir = path.join(os.tmpdir(), uuid.v4());
+      yield compressing.zip.uncompress(sourceFile, destDir, {
+        zipFileNameEncoding: 'utf8',
+        strip: 1,
+      });
+      assert(fs.readdirSync(destDir).indexOf('foo') >= 0);
+    });
+
+    it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = utf-8', function* () {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
+      destDir = path.join(os.tmpdir(), uuid.v4());
+      yield compressing.zip.uncompress(sourceFile, destDir, {
+        zipFileNameEncoding: 'utf-8',
+        strip: 1,
+      });
+      assert(fs.readdirSync(destDir).indexOf('foo') >= 0);
     });
 
     it('zip.uncompress(sourceFile, destDir) support absolute path', function* () {
@@ -215,5 +265,21 @@ describe('test/zip/index.test.js', () => {
       assert(res.totalFiles === 4);
       assert(res.totalDirs === 1);
     });
+  });
+  it('uncompress should keep stat mode', function* () {
+    const sourceFile = path.join(__dirname, '..', 'fixtures/xxx/bin');
+    const originStat = fs.statSync(sourceFile);
+    const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
+    console.log('dest', destFile);
+    const fileStream = fs.createWriteStream(destFile);
+    yield compressing.zip.compressFile(sourceFile, fileStream);
+    assert(fs.existsSync(destFile));
+
+    destDir = path.join(os.tmpdir(), uuid.v4());
+    mkdirp.sync(destDir);
+    yield compressing.zip.uncompress(destFile, destDir);
+    const stat = fs.statSync(path.join(destDir, 'bin'));
+    assert(stat.mode === originStat.mode);
+    console.log(destDir);
   });
 });
