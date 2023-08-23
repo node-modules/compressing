@@ -1,10 +1,7 @@
-'use strict';
-
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
-const rimraf = require('rimraf');
 const mkdirp = require('mkdirp');
 const compressing = require('../..');
 const assert = require('assert');
@@ -13,7 +10,9 @@ const dircompare = require('dir-compare');
 describe('test/zip/index.test.js', () => {
   let destDir;
   afterEach(() => {
-    rimraf.sync(destDir);
+    if (destDir) {
+      fs.rmSync(destDir, { force: true, recursive: true });
+    }
   });
 
   describe('zip.compressFile()', () => {
@@ -239,7 +238,7 @@ describe('test/zip/index.test.js', () => {
         'index.html',
         'styles',
       ]);
-      rimraf.sync(destDir);
+      fs.rmSync(destDir, { force: true, recursive: true });
     });
 
     it('zip.uncompress(sourceStream, destDir)', function* () {
