@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const mm = require('mm');
 const os = require('os');
@@ -7,14 +5,13 @@ const uuid = require('uuid');
 const path = require('path');
 const assert = require('assert');
 const pump = require('pump');
-const compressing = require('../..');
 const streamifier = require('streamifier');
+const compressing = require('../..');
 
 const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
 const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log.gz');
 
 describe('test/gzip/uncompress_stream.test.js', () => {
-
   afterEach(mm.restore);
 
   it('should be transform stream', done => {
@@ -26,7 +23,10 @@ describe('test/gzip/uncompress_stream.test.js', () => {
     pump(sourceStream, uncompressStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
-      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      const originalFileBuffer = fs.readFileSync(originalFile);
+      const destFileBuffer = fs.readFileSync(destFile);
+      assert.equal(destFileBuffer.size, originalFileBuffer.size);
+      assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
       done();
     });
   });
@@ -39,7 +39,10 @@ describe('test/gzip/uncompress_stream.test.js', () => {
     pump(uncompressStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
-      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      const originalFileBuffer = fs.readFileSync(originalFile);
+      const destFileBuffer = fs.readFileSync(destFile);
+      assert.equal(destFileBuffer.size, originalFileBuffer.size);
+      assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
       done();
     });
   });
@@ -53,7 +56,10 @@ describe('test/gzip/uncompress_stream.test.js', () => {
     pump(uncompressStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
-      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      const originalFileBuffer = fs.readFileSync(originalFile);
+      const destFileBuffer = fs.readFileSync(destFile);
+      assert.equal(destFileBuffer.size, originalFileBuffer.size);
+      assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
       done();
     });
   });
@@ -67,7 +73,10 @@ describe('test/gzip/uncompress_stream.test.js', () => {
     pump(uncompressStream, destStream, err => {
       assert(!err);
       assert(fs.existsSync(destFile));
-      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      const originalFileBuffer = fs.readFileSync(originalFile);
+      const destFileBuffer = fs.readFileSync(destFile);
+      assert.equal(destFileBuffer.size, originalFileBuffer.size);
+      assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
       done();
     });
   });
