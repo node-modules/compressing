@@ -10,6 +10,7 @@ const compressing = require('../..');
 
 const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
 const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log.gz');
+const isWindows = os.platform() === 'win32';
 
 describe('test/gzip/uncompress_stream.test.js', () => {
   afterEach(mm.restore);
@@ -26,7 +27,10 @@ describe('test/gzip/uncompress_stream.test.js', () => {
       const originalFileBuffer = fs.readFileSync(originalFile);
       const destFileBuffer = fs.readFileSync(destFile);
       assert.equal(destFileBuffer.size, originalFileBuffer.size);
-      assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
+      if (!isWindows) {
+        // EOL not equal to linux
+        assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
+      }
       done();
     });
   });
@@ -42,7 +46,9 @@ describe('test/gzip/uncompress_stream.test.js', () => {
       const originalFileBuffer = fs.readFileSync(originalFile);
       const destFileBuffer = fs.readFileSync(destFile);
       assert.equal(destFileBuffer.size, originalFileBuffer.size);
-      assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
+      if (!isWindows) {
+        assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
+      }
       done();
     });
   });
@@ -59,7 +65,9 @@ describe('test/gzip/uncompress_stream.test.js', () => {
       const originalFileBuffer = fs.readFileSync(originalFile);
       const destFileBuffer = fs.readFileSync(destFile);
       assert.equal(destFileBuffer.size, originalFileBuffer.size);
-      assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
+      if (!isWindows) {
+        assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
+      }
       done();
     });
   });
@@ -76,7 +84,9 @@ describe('test/gzip/uncompress_stream.test.js', () => {
       const originalFileBuffer = fs.readFileSync(originalFile);
       const destFileBuffer = fs.readFileSync(destFile);
       assert.equal(destFileBuffer.size, originalFileBuffer.size);
-      assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
+      if (!isWindows) {
+        assert.equal(destFileBuffer.toString('utf8'), originalFileBuffer.toString('utf8'));
+      }
       done();
     });
   });
