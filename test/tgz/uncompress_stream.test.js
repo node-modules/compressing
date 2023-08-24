@@ -34,15 +34,16 @@ describe('test/tgz/uncompress_stream.test.js', () => {
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         mkdirp(path.join(destDir, header.name), err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
@@ -64,15 +65,16 @@ describe('test/tgz/uncompress_stream.test.js', () => {
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         mkdirp(path.join(destDir, header.name), err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
@@ -94,15 +96,16 @@ describe('test/tgz/uncompress_stream.test.js', () => {
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         mkdirp(path.join(destDir, header.name), err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
