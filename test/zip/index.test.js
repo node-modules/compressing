@@ -187,7 +187,7 @@ describe('test/zip/index.test.js', () => {
       const stat = fs.statSync(path.join(destDir, 'xxx', 'foo'));
       if (isWindows) {
         const statMode = '0' + (stat.mode & parseInt('777', 8)).toString(8);
-        assert.equal(statMode, '044');
+        assert.equal(statMode, '0444');
       } else {
         assert(stat.mode === 32804);
       }
