@@ -14,33 +14,33 @@ describe('test/tar/index.test.js', () => {
   afterEach(mm.restore);
 
   describe('tar.compressFile()', () => {
-    it('tar.compressFile(file, stream)', function* () {
+    it('tar.compressFile(file, stream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressing.tar.compressFile(sourceFile, fileStream);
+      await compressing.tar.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
     });
 
-    it('tar.compressFile(file, stream, { relativePath })', function* () {
+    it('tar.compressFile(file, stream, { relativePath })', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressing.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
+      await compressing.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
       assert(fs.existsSync(destFile));
       // TODO 检查 uncompress 之后 relativePath
     });
 
-    it('tar.compressFile(file, stream) should error if file not exist', function* () {
+    it('tar.compressFile(file, stream) should error if file not exist', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'not-exist.log');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       let err;
       try {
-        yield compressing.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
+        await compressing.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
       } catch (e) {
         err = e;
       }
@@ -48,21 +48,21 @@ describe('test/tar/index.test.js', () => {
       assert(err.message.indexOf('no such file or directory') > -1);
     });
 
-    it('tar.compressFile(file, destStream) should error if destStream emit error', function* () {
+    it('tar.compressFile(file, destStream) should error if destStream emit error', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       const fileStream = fs.createWriteStream(destFile);
       setImmediate(() => fileStream.emit('error', new Error('xx')));
       let err;
       try {
-        yield compressing.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
+        await compressing.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
       } catch (e) {
         err = e;
       }
       assert(err && err.message === 'xx');
     });
 
-    it('tar.compressFile(sourceStream, stream)', function* () {
+    it('tar.compressFile(sourceStream, stream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceStream = fs.createReadStream(sourceFile);
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
@@ -71,11 +71,11 @@ describe('test/tar/index.test.js', () => {
       mm(console, 'warn', msg => {
         assert(msg === 'You should specify the size of streamming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.suppressSizeWarning: true to suppress this warning');
       });
-      yield compressing.tar.compressFile(sourceStream, fileStream, { relativePath: 'xx.log' });
+      await compressing.tar.compressFile(sourceStream, fileStream, { relativePath: 'xx.log' });
       assert(fs.existsSync(destFile));
     });
 
-    it('tar.compressFile(sourceStream, stream, { size })', function* () {
+    it('tar.compressFile(sourceStream, stream, { size })', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceStream = fs.createReadStream(sourceFile);
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
@@ -84,32 +84,32 @@ describe('test/tar/index.test.js', () => {
       mm(console, 'warn', msg => {
         assert(!msg);
       });
-      yield compressing.tar.compressFile(sourceStream, fileStream, { relativePath: 'xx.log', size: fs.statSync(sourceFile).size });
+      await compressing.tar.compressFile(sourceStream, fileStream, { relativePath: 'xx.log', size: fs.statSync(sourceFile).size });
       assert(fs.existsSync(destFile));
     });
 
-    it('tar.compressFile(buffer, stream)', function* () {
+    it('tar.compressFile(buffer, stream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceBuffer = fs.readFileSync(sourceFile);
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressing.tar.compressFile(sourceBuffer, fileStream, { relativePath: 'xx.log' });
+      await compressing.tar.compressFile(sourceBuffer, fileStream, { relativePath: 'xx.log' });
       assert(fs.existsSync(destFile));
     });
 
-    it('should keep stat mode', function* () {
+    it('should keep stat mode', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures/xxx/bin');
       const originStat = fs.statSync(sourceFile);
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
-      yield compressing.tar.compressFile(sourceFile, fileStream);
+      await compressing.tar.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
 
       const destDir = path.join(os.tmpdir(), uuid.v4());
-      yield mkdirp(destDir);
-      yield compressing.tar.uncompress(destFile, destDir);
+      await mkdirp(destDir);
+      await compressing.tar.uncompress(destFile, destDir);
       const stat = fs.statSync(path.join(destDir, 'bin'));
       assert(stat.mode === originStat.mode);
       console.log(destDir);
@@ -118,41 +118,41 @@ describe('test/tar/index.test.js', () => {
   });
 
   describe('tar.compressDir()', () => {
-    it('tar.compressDir(dir, destFile)', function* () {
+    it('tar.compressDir(dir, destFile)', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
-      yield compressing.tar.compressDir(sourceDir, destFile);
+      await compressing.tar.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
 
-    it('tar.compressDir(dir, destStream)', function* () {
-      const sourceDir = path.join(__dirname, '..', 'fixtures');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-      const destStream = fs.createWriteStream(destFile);
-      console.log('dest', destFile);
-      yield compressing.tar.compressDir(sourceDir, destStream);
-      assert(fs.existsSync(destFile));
-    });
-
-    it('tar.compressDir(dir, destStream, { ignoreBase: true })', function* () {
+    it('tar.compressDir(dir, destStream)', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       const destStream = fs.createWriteStream(destFile);
       console.log('dest', destFile);
-      yield compressing.tar.compressDir(sourceDir, destStream, { ignoreBase: true });
+      await compressing.tar.compressDir(sourceDir, destStream);
       assert(fs.existsSync(destFile));
     });
 
-    it('tar.compressDir(dir, destStream) should return promise', function* () {
+    it('tar.compressDir(dir, destStream, { ignoreBase: true })', async () => {
+      const sourceDir = path.join(__dirname, '..', 'fixtures');
+      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
+      const destStream = fs.createWriteStream(destFile);
+      console.log('dest', destFile);
+      await compressing.tar.compressDir(sourceDir, destStream, { ignoreBase: true });
+      assert(fs.existsSync(destFile));
+    });
+
+    it('tar.compressDir(dir, destStream) should return promise', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       console.log('dest', destFile);
-      yield compressing.tar.compressDir(sourceDir, destFile);
+      await compressing.tar.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
 
-    it('tar.compressDir(dir, destStream) should reject when destStream emit error', function* () {
+    it('tar.compressDir(dir, destStream) should reject when destStream emit error', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       const destStream = fs.createWriteStream(destFile);
@@ -162,19 +162,19 @@ describe('test/tar/index.test.js', () => {
       });
       let err;
       try {
-        yield compressing.tar.compressDir(sourceDir, destStream);
+        await compressing.tar.compressDir(sourceDir, destStream);
       } catch (e) {
         err = e;
       }
       assert(err && err.message === 'xxx');
     });
 
-    it('tar.compressDir(dir, destStream) should reject when destFile cannot be created', function* () {
+    it('tar.compressDir(dir, destStream) should reject when destFile cannot be created', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join('/permision-deny');
       let err;
       try {
-        yield compressing.tar.compressDir(sourceDir, destFile);
+        await compressing.tar.compressDir(sourceDir, destFile);
       } catch (e) {
         err = e;
       }
@@ -186,11 +186,11 @@ describe('test/tar/index.test.js', () => {
   });
 
   describe('tar.uncompress()', () => {
-    it('tar.uncompress(sourceFile, destDir)', function* () {
+    it('tar.uncompress(sourceFile, destDir)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tar');
       const destDir = path.join(os.tmpdir(), uuid.v4());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
-      yield compressing.tar.uncompress(sourceFile, destDir);
+      await compressing.tar.uncompress(sourceFile, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
       assert(res.distinct === 0);
       assert(res.equal === 5);
@@ -198,11 +198,11 @@ describe('test/tar/index.test.js', () => {
       assert(res.totalDirs === 1);
     });
 
-    it('tar.uncompress(sourceStream, destDir)', function* () {
+    it('tar.uncompress(sourceStream, destDir)', async () => {
       const sourceStream = fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xxx.tar'));
       const destDir = path.join(os.tmpdir(), uuid.v4());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
-      yield compressing.tar.uncompress(sourceStream, destDir);
+      await compressing.tar.uncompress(sourceStream, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
       assert(res.distinct === 0);
       assert(res.equal === 5);
@@ -210,12 +210,12 @@ describe('test/tar/index.test.js', () => {
       assert(res.totalDirs === 1);
     });
 
-    it('tar.uncompress(sourceBuffer, destDir)', function* () {
+    it('tar.uncompress(sourceBuffer, destDir)', async () => {
       const sourceBuffer = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xxx.tar'));
       const destDir = path.join(os.tmpdir(), uuid.v4());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       // console.log('sourceBuffer', destDir, originalDir);
-      yield compressing.tar.uncompress(sourceBuffer, destDir);
+      await compressing.tar.uncompress(sourceBuffer, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
       assert(res.distinct === 0);
       assert(res.equal === 5);
