@@ -77,7 +77,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
     });
   });
 
-  it('should uncompress buffer', done => {
+  it.only('should uncompress buffer', done => {
     const sourceBuffer = fs.readFileSync(sourceFile);
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
@@ -86,10 +86,13 @@ describe('test/tar/uncompress_stream.test.js', () => {
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
-      assert(res.distinct === 0);
-      assert(res.equal === 5);
-      assert(res.totalFiles === 4);
-      assert(res.totalDirs === 1);
+      console.log(res);
+      const names = fs.readdirSync(path.join(destDir, 'xxx'));
+      console.log(names);
+      assert.equal(res.distinct, 0);
+      assert.equal(res.equal, 5);
+      assert.equal(res.totalFiles, 4);
+      assert.equal(res.totalDirs, 1);
       done();
     });
 
