@@ -3,9 +3,11 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const mkdirp = require('mkdirp');
-const compressing = require('../..');
 const assert = require('assert');
 const dircompare = require('dir-compare');
+const compressing = require('../..');
+
+const isWindows = os.platform() === 'win32';
 
 describe('test/zip/index.test.js', () => {
   let destDir;
@@ -183,7 +185,12 @@ describe('test/zip/index.test.js', () => {
         mode: 32804,
       });
       const stat = fs.statSync(path.join(destDir, 'xxx', 'foo'));
-      assert(stat.mode === 32804);
+      if (isWindows) {
+        const statMode = '0' + (stat.mode & parseInt('777', 8)).toString(8);
+        assert.equal(statMode, '044');
+      } else {
+        assert(stat.mode === 32804);
+      }
     });
 
     // only test on local
