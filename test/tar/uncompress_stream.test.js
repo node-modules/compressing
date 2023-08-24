@@ -1,5 +1,3 @@
-'use strict';
-
 const mm = require('mm');
 const fs = require('fs');
 const os = require('os');
@@ -7,24 +5,14 @@ const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
 const mkdirp = require('mkdirp');
-const stream = require('stream');
 const pump = require('pump');
-const compressing = require('../..');
 const dircompare = require('dir-compare');
 const streamifier = require('streamifier');
+const { pipelinePromise } = require('../util');
+const compressing = require('../..');
 
 const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
 const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tar');
-
-// impl promise pipeline on Node.js 14
-const pipelinePromise = stream.promises?.pipeline ?? function pipeline(...args) {
-  return new Promise((resolve, reject) => {
-    pump(...args, err => {
-      if (err) return reject(err);
-      resolve();
-    });
-  });
-};
 
 describe('test/tar/uncompress_stream.test.js', () => {
   afterEach(mm.restore);
