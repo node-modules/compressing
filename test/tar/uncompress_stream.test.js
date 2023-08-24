@@ -1,5 +1,3 @@
-'use strict';
-
 const mm = require('mm');
 const fs = require('fs');
 const os = require('os');
@@ -8,9 +6,10 @@ const uuid = require('uuid');
 const assert = require('assert');
 const mkdirp = require('mkdirp');
 const pump = require('pump');
-const compressing = require('../..');
 const dircompare = require('dir-compare');
 const streamifier = require('streamifier');
+const { pipelinePromise } = require('../util');
+const compressing = require('../..');
 
 const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
 const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tar');
@@ -35,15 +34,16 @@ describe('test/tar/uncompress_stream.test.js', () => {
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         mkdirp(path.join(destDir, header.name), err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
@@ -64,15 +64,16 @@ describe('test/tar/uncompress_stream.test.js', () => {
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         mkdirp(path.join(destDir, header.name), err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
@@ -86,23 +87,27 @@ describe('test/tar/uncompress_stream.test.js', () => {
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
-      assert(res.distinct === 0);
-      assert(res.equal === 5);
-      assert(res.totalFiles === 4);
-      assert(res.totalDirs === 1);
+      // console.log(res);
+      const names = fs.readdirSync(path.join(destDir, 'xxx'));
+      console.log(names);
+      assert.equal(res.distinct, 0);
+      assert.equal(res.equal, 5);
+      assert.equal(res.totalFiles, 4);
+      assert.equal(res.totalDirs, 1);
       done();
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         mkdirp(path.join(destDir, header.name), err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
@@ -124,15 +129,16 @@ describe('test/tar/uncompress_stream.test.js', () => {
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         mkdirp(path.join(destDir, header.name), err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
