@@ -7,6 +7,7 @@ const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
 const mkdirp = require('mkdirp');
+const stream = require('stream');
 const pump = require('pump');
 const compressing = require('../..');
 const dircompare = require('dir-compare');
@@ -14,6 +15,16 @@ const streamifier = require('streamifier');
 
 const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
 const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tar');
+
+// impl promise pipeline on Node.js 14
+const pipelinePromise = stream.promises?.pipeline ?? function pipeline(...args) {
+  return new Promise((resolve, reject) => {
+    pump(...args, err => {
+      if (err) return reject(err);
+      resolve();
+    });
+  });
+};
 
 describe('test/tar/uncompress_stream.test.js', () => {
   afterEach(mm.restore);
@@ -77,7 +88,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
     });
   });
 
-  it.only('should uncompress buffer', done => {
+  it('should uncompress buffer', done => {
     const sourceBuffer = fs.readFileSync(sourceFile);
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
@@ -86,7 +97,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
-      console.log(res);
+      // console.log(res);
       const names = fs.readdirSync(path.join(destDir, 'xxx'));
       console.log(names);
       assert.equal(res.distinct, 0);
@@ -97,15 +108,16 @@ describe('test/tar/uncompress_stream.test.js', () => {
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         mkdirp(path.join(destDir, header.name), err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
