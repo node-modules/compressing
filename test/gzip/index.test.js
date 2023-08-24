@@ -6,6 +6,7 @@ const path = require('path');
 const uuid = require('uuid');
 const compressing = require('../..');
 const assert = require('assert');
+const isWindows = os.platform() === 'win32';
 
 describe('test/gzip/index.test.js', () => {
   describe('gzip.compressFile()', () => {
@@ -62,7 +63,10 @@ describe('test/gzip/index.test.js', () => {
       const fileStream = fs.createWriteStream(destFile);
       await compressing.gzip.uncompress(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
-      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      if (!isWindows) {
+        // EOL not equal to linux
+        assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      }
     });
 
     it('gzip.uncompress(sourceStream, destStream)', async () => {
@@ -72,7 +76,10 @@ describe('test/gzip/index.test.js', () => {
       const fileStream = fs.createWriteStream(destFile);
       await compressing.gzip.uncompress(sourceStream, fileStream);
       assert(fs.existsSync(destFile));
-      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      if (!isWindows) {
+        // EOL not equal to linux
+        assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      }
     });
 
     it('gzip.uncompress(sourceStream, destFile)', async () => {
@@ -81,7 +88,10 @@ describe('test/gzip/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
       await compressing.gzip.uncompress(sourceStream, destFile);
       assert(fs.existsSync(destFile));
-      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      if (!isWindows) {
+        // EOL not equal to linux
+        assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      }
     });
 
     it('gzip.uncompress(sourceFile, destFile)', async () => {
@@ -90,7 +100,10 @@ describe('test/gzip/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
       await compressing.gzip.uncompress(sourceFile, destFile);
       assert(fs.existsSync(destFile));
-      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      if (!isWindows) {
+        // EOL not equal to linux
+        assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      }
     });
 
     it('gzip.uncompress(buffer, destFile)', async () => {
@@ -99,7 +112,10 @@ describe('test/gzip/index.test.js', () => {
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
       await compressing.gzip.uncompress(sourceBuffer, destFile);
       assert(fs.existsSync(destFile));
-      assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      if (!isWindows) {
+        // EOL not equal to linux
+        assert(fs.readFileSync(destFile, 'utf8') === fs.readFileSync(originalFile, 'utf8'));
+      }
     });
   });
 });

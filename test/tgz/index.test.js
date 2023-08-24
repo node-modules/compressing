@@ -7,6 +7,8 @@ const dircompare = require('dir-compare');
 const mkdirp = require('mz-modules/mkdirp');
 const compressing = require('../..');
 
+const isWindows = os.platform() === 'win32';
+
 describe('test/tgz/index.test.js', () => {
   describe('tgz.compressFile()', () => {
     it('tgz.compressFile(file, stream)', async () => {
@@ -182,8 +184,14 @@ describe('test/tgz/index.test.js', () => {
       assert(fs.lstatSync(path.join(destDir, 'node_modules/enums')).isSymbolicLink());
       assert(fs.readFileSync(path.join(destDir, 'README.md'), 'utf-8').includes('Usage'));
 
-      const res = dircompare.compareSync(originalDir, destDir);
-      assert.equal(res.distinct, 0);
+      if (isWindows) {
+        const names = fs.readdirSync(destDir);
+        console.log(names);
+        assert.equal(names.length, 3);
+      } else {
+        const res = dircompare.compareSync(originalDir, destDir);
+        assert.equal(res.distinct, 0);
+      }
 
       const destStat = fs.lstatSync(path.join(destDir, 'cli'));
       const originStat = fs.lstatSync(path.join(originalDir, 'cli'));

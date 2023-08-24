@@ -11,7 +11,11 @@ describe('test/zip/index.test.js', () => {
   let destDir;
   afterEach(() => {
     if (destDir) {
-      fs.rmSync(destDir, { force: true, recursive: true });
+      try {
+        fs.rmSync(destDir, { force: true, recursive: true });
+      } catch (e) {
+        console.error('ignore rm dir error: %s', e);
+      }
     }
   });
 
