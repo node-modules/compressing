@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.0](https://github.com/node-modules/compressing/compare/v1.9.1...v1.10.0) (2023-08-24)
+
+
+### Features
+
+* support uncompressing symlink ([#31](https://github.com/node-modules/compressing/issues/31)) ([d596d88](https://github.com/node-modules/compressing/commit/d596d8876e09f67d50f6676e0fa511e4afde2c40))
+
 ## [1.9.1](https://github.com/node-modules/compressing/compare/v1.9.0...v1.9.1) (2023-08-02)
 
 
