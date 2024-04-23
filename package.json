@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "contributor": "git-contributor",
-    "ts-test": "tsc -p ./test/fixtures/types/tsconfig.json",
-    "test": "egg-bin test --ts false && npm run ts-test",
+    "test:ts": "tsc -p ./test/fixtures/types/tsconfig.json",
+    "test:js": "egg-bin test --ts false",
+    "test": "npm run test:js && npm run test:ts",
     "cov": "egg-bin cov --ts false",
     "lint-fix": "eslint . --fix",
     "lint": "eslint .",
-    "ci": "npm run lint && npm run ts-test && npm run cov"
+    "ci": "npm run lint && npm run test:ts && npm run cov"
   },
   "repository": {
     "type": "git",
