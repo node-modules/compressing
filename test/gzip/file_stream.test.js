@@ -1,5 +1,3 @@
-'use strict';
-
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -34,6 +32,19 @@ describe('test/gzip/file_stream.test.js', () => {
       assert(fs.existsSync(destFile));
       done();
     });
+  });
+
+  it('should compress file into Buffer', async () => {
+    const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
+    const gzipStream = new compressing.gzip.FileStream({ source: sourceFile });
+    const gzipChunks = [];
+    for await (const chunk of gzipStream) {
+      gzipChunks.push(chunk);
+    }
+
+    const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
+    await fs.promises.writeFile(destFile, Buffer.concat(gzipChunks));
+    console.log(destFile);
   });
 
   it('should compress buffer', done => {

@@ -4,8 +4,6 @@ on:
   push:
     branches: [ master ]
 
-  workflow_dispatch: {}
-
 jobs:
   release:
     name: Node.js
@@ -13,5 +11,3 @@ jobs:
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       GIT_TOKEN: ${{ secrets.GIT_TOKEN }}
-    with:
-      checkTest: false
