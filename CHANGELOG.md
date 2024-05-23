@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.1](https://github.com/node-modules/compressing/compare/v1.10.0...v1.10.1) (2024-05-23)
+
+
+### Bug Fixes
+
+* support windows directory detect ([#106](https://github.com/node-modules/compressing/issues/106)) ([122091b](https://github.com/node-modules/compressing/commit/122091b9abc95bed876b06d980323b6937e77c0d))
+
 ## [1.10.0](https://github.com/node-modules/compressing/compare/v1.9.1...v1.10.0) (2023-08-24)
 
 
