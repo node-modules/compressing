@@ -370,6 +370,6 @@ Although the API is streaming style(try to keep it handy), it still loads all da
 
 ## Contributors
 
-[![Contributors](https://contrib.rocks/image?repo={group/repo})](https://github.com/{group/repo}/graphs/contributors)
+[![Contributors](https://contrib.rocks/image?repo=node-modules/compressing)](https://github.com/node-modules/compressing/graphs/contributors)
 
 Made with [contributors-img](https://contrib.rocks).
