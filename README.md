@@ -3,6 +3,9 @@
 [![NPM version][npm-image]][npm-url]
 [![Test coverage][codecov-image]][codecov-url]
 [![npm download][download-image]][download-url]
+[![Node.js Version](https://img.shields.io/node/v/compressing.svg?style=flat)](https://nodejs.org/en/download/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://makeapullrequest.com)
+![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/node-modules/compressing)
 
 [npm-image]: https://img.shields.io/npm/v/compressing.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/compressing
@@ -364,15 +367,9 @@ Due to the design of the .zip file format, it's impossible to interpret a .zip f
 Although the API is streaming style(try to keep it handy), it still loads all data into memory.
 
 <https://github.com/thejoshwolfe/yauzl#no-streaming-unzip-api>
-<!-- GITCONTRIBUTOR_START -->
 
 ## Contributors
 
-|[<img src="https://avatars.githubusercontent.com/u/156269?v=4" width="100px;"/><br/><sub><b>fengmk2</b></sub>](https://github.com/fengmk2)<br/>|[<img src="https://avatars.githubusercontent.com/u/456108?v=4" width="100px;"/><br/><sub><b>shaoshuai0102</b></sub>](https://github.com/shaoshuai0102)<br/>|[<img src="https://avatars.githubusercontent.com/u/360661?v=4" width="100px;"/><br/><sub><b>popomore</b></sub>](https://github.com/popomore)<br/>|[<img src="https://avatars.githubusercontent.com/u/32174276?v=4" width="100px;"/><br/><sub><b>semantic-release-bot</b></sub>](https://github.com/semantic-release-bot)<br/>|[<img src="https://avatars.githubusercontent.com/u/9692408?v=4" width="100px;"/><br/><sub><b>DiamondYuan</b></sub>](https://github.com/DiamondYuan)<br/>|[<img src="https://avatars.githubusercontent.com/u/101238421?v=4" width="100px;"/><br/><sub><b>acyza</b></sub>](https://github.com/acyza)<br/>|
-| :---: | :---: | :---: | :---: | :---: | :---: |
-|[<img src="https://avatars.githubusercontent.com/u/13938334?v=4" width="100px;"/><br/><sub><b>bytemain</b></sub>](https://github.com/bytemain)<br/>|[<img src="https://avatars.githubusercontent.com/u/20432815?v=4" width="100px;"/><br/><sub><b>rickyes</b></sub>](https://github.com/rickyes)<br/>|[<img src="https://avatars.githubusercontent.com/u/8382136?v=4" width="100px;"/><br/><sub><b>Ryqsky</b></sub>](https://github.com/Ryqsky)<br/>|[<img src="https://avatars.githubusercontent.com/u/47357585?v=4" width="100px;"/><br/><sub><b>songhn233</b></sub>](https://github.com/songhn233)<br/>|[<img src="https://avatars.githubusercontent.com/u/160386?v=4" width="100px;"/><br/><sub><b>Infiltrator</b></sub>](https://github.com/Infiltrator)<br/>|[<img src="https://avatars.githubusercontent.com/u/13861843?v=4" width="100px;"/><br/><sub><b>ZeekoZhu</b></sub>](https://github.com/ZeekoZhu)<br/>|
-[<img src="https://avatars.githubusercontent.com/u/6897780?v=4" width="100px;"/><br/><sub><b>killagu</b></sub>](https://github.com/killagu)<br/>|[<img src="https://avatars.githubusercontent.com/u/59508678?v=4" width="100px;"/><br/><sub><b>okaponta</b></sub>](https://github.com/okaponta)<br/>|[<img src="https://avatars.githubusercontent.com/u/9857273?v=4" width="100px;"/><br/><sub><b>ShadyZOZ</b></sub>](https://github.com/ShadyZOZ)<br/>
+[![Contributors](https://contrib.rocks/image?repo=node-modules/compressing)](https://github.com/node-modules/compressing/graphs/contributors)
 
-This project follows the git-contributor [spec](https://github.com/xudafeng/git-contributor), auto updated at `Thu Aug 03 2023 01:39:37 GMT+0800`.
-
-<!-- GITCONTRIBUTOR_END -->
+Made with [contributors-img](https://contrib.rocks).
