@@ -4,7 +4,6 @@
   "description": "Everything you need for compressing and uncompressing",
   "main": "index.js",
   "scripts": {
-    "contributor": "git-contributor",
     "test:ts": "tsc -p ./test/fixtures/types/tsconfig.json",
     "test:js": "egg-bin test --ts false",
     "test": "npm run test:js && npm run test:ts",
@@ -57,7 +56,6 @@
     "egg-bin": "6",
     "eslint": "8",
     "eslint-config-egg": "12",
-    "git-contributor": "2",
     "mm": "^2.0.0",
     "mz-modules": "^2.1.0",
     "typescript": "5",
