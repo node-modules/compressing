@@ -52,6 +52,10 @@ describe('test/utils.test.js', () => {
       assert(utils.stripFileName(0, '/home/../../../foo.txt', 'file') === 'foo.txt');
       assert(utils.stripFileName(0, '///../../../../foo', 'file') === 'foo');
       assert(utils.stripFileName(0, '../../../../etc/hosts', 'file') === 'etc/hosts');
+
+      assert(utils.stripFileName(0, './etc/hosts', 'file') === 'etc/hosts');
+      assert(utils.stripFileName(0, './././etc/hosts', 'file') === 'etc/hosts');
+      assert(utils.stripFileName(1, './././etc/hosts', 'file') === 'hosts');
     });
 
     it('should replace \\', () => {
