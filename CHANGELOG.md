@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.10.3](https://github.com/node-modules/compressing/compare/v1.10.2...v1.10.3) (2025-05-24)
+
+
+### Bug Fixes
+
+* link relative paths for better portability ([#111](https://github.com/node-modules/compressing/issues/111)) ([2684ca2](https://github.com/node-modules/compressing/commit/2684ca212a10736ac222acf9d9bc4884dd46e139))
+
 ## [1.10.2](https://github.com/node-modules/compressing/compare/v1.10.1...v1.10.2) (2025-05-22)
 
 
