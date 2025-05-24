@@ -22,6 +22,7 @@ Currently supported:
 - gzip
 - tgz
 - zip
+- xz
 
 ## Install
 
@@ -33,7 +34,7 @@ npm install compressing
 
 ### Compress a single file
 
-Use gzip as an example, tar, tgz and zip is same as gzip.
+Use gzip as an example, tar, tgz, zip and xz is same as gzip.
 
 __promise style__
 
@@ -235,6 +236,7 @@ Use this API to compress a single file. This is a convenient method, which wraps
 - tar.compressFile(source, dest, opts)
 - tgz.compressFile(source, dest, opts)
 - zip.compressFile(source, dest, opts)
+- xz.compressFile(source, dest, opts)
 
 Params
 
@@ -268,6 +270,7 @@ Use this API to uncompress a file. This is a convenient method, which wraps Unco
 - tgz.uncompress(source, dest, opts)
 - zip.uncompress(source, dest, opts)
 - gzip.uncompress(source, dest, opts)
+- xz.uncompress(source, dest, opts)
 
 Params
 
@@ -291,6 +294,7 @@ __Note: If you are not very familiar with streams, just use compressFile() API, 
 - new tar.FileStream(opts)
 - new tgz.FileStream(opts)
 - new zip.FileStream(opts)
+- new xz.FileStream(opts)
 
 Common params:
 
@@ -314,6 +318,10 @@ Zip params:
 
 - opts.relativePath {String} - Adds a file from source into the compressed result file as opts.relativePath. Uncompression programs would extract the file from the compressed file as relativePath. If opts.source is a file path, opts.relativePath is optional, otherwise it's required.
 - opts.yazl {Object} - zip.FileStream compression uses [yazl](https://github.com/thejoshwolfe/yazl), pass this param to control the behavior of yazl.
+
+XZ params:
+
+- opts.lzma - {Object} xz.FileStream uses lzma-native to compress, pass this param to control the behavior of lzma-native.
 
 ### Stream
 
@@ -355,10 +363,19 @@ __Constructor__
 - new tar.UncompressStream(opts)
 - new tgz.UncompressStream(opts)
 - new zip.UncompressStream(opts)
+- new xz.UncompressStream(opts)
 
 Common params:
 
 - opts.source {String|Buffer|Stream} - source to be uncompressed, could be a file path, buffer, or a readable stream.
+
+Gzip params:
+
+- opts.zlib - {Object} gzip.UncompressStream uses zlib to uncompress, pass this param to control the behavior of zlib.
+
+XZ params:
+
+- opts.lzma - {Object} xz.UncompressStream uses lzma-native to uncompress, pass this param to control the behavior of lzma-native.
 
 __CAUTION for zip.UncompressStream__
 
