@@ -88,4 +88,4 @@ describe('test/xz/file_stream.test.js', () => {
       })
       .catch(done);
   });
-}); 
+});
