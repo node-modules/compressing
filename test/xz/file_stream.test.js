@@ -28,6 +28,7 @@ describe('test/xz/file_stream.test.js', () => {
         // 内容应该一致
         const raw = fs.readFileSync(sourceFile);
         const out = fs.readFileSync(dest);
+        assert.equal(out.length, raw.length);
         assert.deepEqual(out, raw);
         fs.unlinkSync(dest);
         done();
@@ -55,6 +56,7 @@ describe('test/xz/file_stream.test.js', () => {
         assert(fs.existsSync(dest));
         const raw = fs.readFileSync(sourceFile);
         const out = fs.readFileSync(dest);
+        assert.equal(out.length, raw.length);
         assert.deepEqual(out, raw);
         fs.unlinkSync(dest);
         done();
@@ -63,7 +65,7 @@ describe('test/xz/file_stream.test.js', () => {
   });
 
   it('should compress/decompress utf-8 text to xz', async () => {
-    const buf = Buffer.from('你好\nhello xz\n');
+    const buf = Buffer.from('你好\nhello xz\nWindows\r\n');
     const dest = path.join(__dirname, '../fixtures/xx.log.xz.utf8.tmp');
     await compressing.xz.compressFile(buf, dest);
     assert(fs.existsSync(dest));
@@ -98,6 +100,7 @@ describe('test/xz/file_stream.test.js', () => {
         assert(fs.existsSync(dest));
         const raw = fs.readFileSync(sourceFile);
         const out = fs.readFileSync(dest);
+        assert.equal(out.length, raw.length);
         assert.equal(out.toString(), raw.toString());
         fs.unlinkSync(dest);
         done();
