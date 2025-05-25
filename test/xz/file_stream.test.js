@@ -62,6 +62,22 @@ describe('test/xz/file_stream.test.js', () => {
       .catch(done);
   });
 
+  it('should compress/decompress utf-8 text to xz', async () => {
+    const buf = Buffer.from('你好\nhello xz\n');
+    const dest = path.join(__dirname, '../fixtures/xx.log.xz.utf8.tmp');
+    await compressing.xz.compressFile(buf, dest);
+    assert(fs.existsSync(dest));
+
+    const dest2 = path.join(__dirname, '../fixtures/xx.log.utf8.tmp');
+    const xzBuf = fs.readFileSync(dest);
+    await compressing.xz.uncompress(xzBuf, dest2);
+    const outBuf = fs.readFileSync(dest2);
+    assert.deepEqual(outBuf.toString(), buf.toString());
+
+    fs.unlinkSync(dest);
+    fs.unlinkSync(dest2);
+  });
+
   it('should compress stream to xz', done => {
     const src = fs.createReadStream(sourceFile);
     const dest = path.join(__dirname, '../fixtures/xx.log.xz.tmp');
