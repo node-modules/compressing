@@ -22,12 +22,18 @@ Currently supported:
 - gzip
 - tgz
 - zip
-- xz
+- xz (requires optional dependency `lzma-native`)
 
 ## Install
 
 ```bash
 npm install compressing
+```
+
+For xz compression/decompression support, you need to install the optional dependency:
+
+```bash
+npm install lzma-native
 ```
 
 ## Usage
@@ -322,6 +328,8 @@ Zip params:
 XZ params:
 
 - opts.lzma - {Object} xz.FileStream uses lzma-native to compress, pass this param to control the behavior of lzma-native.
+
+__Note: xz compression/decompression requires the optional dependency `lzma-native`. If you try to use xz features without installing it, you'll get an error asking you to install it.__
 
 ### Stream
 

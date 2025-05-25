@@ -42,13 +42,15 @@
     "flushwritable": "^1.0.0",
     "get-ready": "^1.0.0",
     "iconv-lite": "^0.5.0",
-    "lzma-native": "^8.0.5",
     "mkdirp": "^0.5.1",
     "pump": "^3.0.0",
     "streamifier": "^0.1.1",
     "tar-stream": "^1.5.2",
     "@eggjs/yauzl": "^2.11.0",
     "yazl": "^2.4.2"
+  },
+  "optionalDependencies": {
+    "lzma-native": "^8.0.6"
   },
   "devDependencies": {
     "@types/mocha": "10",
