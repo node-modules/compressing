@@ -82,7 +82,7 @@ describe('test/xz/file_stream.test.js', () => {
         assert(fs.existsSync(dest));
         const raw = fs.readFileSync(sourceFile);
         const out = fs.readFileSync(dest);
-        assert.deepEqual(out, raw);
+        assert.equal(out.toString(), raw.toString());
         fs.unlinkSync(dest);
         done();
       })
