@@ -28,7 +28,7 @@ describe('test/xz/file_stream.test.js', () => {
         // 内容应该一致
         const raw = fs.readFileSync(sourceFile);
         const out = fs.readFileSync(dest);
-        assert(raw.equals(out));
+        assert.deepEqual(out, raw);
         fs.unlinkSync(dest);
         done();
       })
@@ -55,7 +55,7 @@ describe('test/xz/file_stream.test.js', () => {
         assert(fs.existsSync(dest));
         const raw = fs.readFileSync(sourceFile);
         const out = fs.readFileSync(dest);
-        assert(raw.equals(out));
+        assert.deepEqual(out, raw);
         fs.unlinkSync(dest);
         done();
       })
@@ -82,7 +82,7 @@ describe('test/xz/file_stream.test.js', () => {
         assert(fs.existsSync(dest));
         const raw = fs.readFileSync(sourceFile);
         const out = fs.readFileSync(dest);
-        assert(raw.equals(out));
+        assert.deepEqual(out, raw);
         fs.unlinkSync(dest);
         done();
       })
