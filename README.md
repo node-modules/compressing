@@ -40,7 +40,7 @@ npm install lzma-native
 
 ### Compress a single file
 
-Use gzip as an example, tar, tgz, zip and xz is same as gzip.
+Use gzip as an example; tar, tgz, zip, and xz are the same as gzip.
 
 __promise style__
 
