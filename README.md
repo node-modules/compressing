@@ -30,12 +30,6 @@ Currently supported:
 npm install compressing
 ```
 
-For xz compression/decompression support, you need to install the optional dependency:
-
-```bash
-npm install lzma-native
-```
-
 ## Usage
 
 ### Compress a single file
