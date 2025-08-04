@@ -6,7 +6,7 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
-const pump = require('pump');
+const { pipeline: pump } = require('stream');
 const compressing = require('../..');
 
 describe('test/tar/file_stream.test.js', () => {

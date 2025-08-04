@@ -75,7 +75,7 @@ fs.createReadStream('file/path/to/compress')
   .on('error', handleError);
 
 // You should take care of stream errors in caution, use pump to handle error in one place
-const pump = require('pump');
+const { pipeline: pump } = require('stream');
 const sourceStream = fs.createReadStream('file/path/to/compress');
 const gzipStream = new compressing.gzip.FileStream();
 const destStream = fs.createWriteStream('path/to/destination.gz');
