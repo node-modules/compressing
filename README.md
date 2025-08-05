@@ -193,7 +193,7 @@ function onEntry(header, stream, next) => {
   if (header.type === 'file') {
     stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
   } else { // directory
-    mkdirp(path.join(destDir, header.name), err => {
+    fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
       if (err) return handleError(err);
       stream.resume();
     });

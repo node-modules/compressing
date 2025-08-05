@@ -43,7 +43,6 @@
     "flushwritable": "^1.0.0",
     "get-ready": "^1.0.0",
     "iconv-lite": "^0.5.0",
-    "mkdirp": "^0.5.1",
     "streamifier": "^0.1.1",
     "tar-stream": "^1.5.2",
     "yazl": "^2.4.2"
@@ -61,6 +60,6 @@
     "uuid": "^3.0.1"
   },
   "engines": {
-    "node": ">= 10.0.0"
+    "node": ">= 18.0.0"
   }
 }

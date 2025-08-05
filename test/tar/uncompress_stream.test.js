@@ -4,7 +4,6 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
-const mkdirp = require('mkdirp');
 const { pipeline: pump } = require('stream');
 const dircompare = require('dir-compare');
 const streamifier = require('streamifier');
@@ -22,7 +21,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.tar.UncompressStream();
-    mkdirp.sync(destDir);
+    fs.mkdirSync(destDir, { recursive: true });
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -39,7 +38,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        mkdirp(path.join(destDir, header.name), err => {
+        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
@@ -52,7 +51,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.tar.UncompressStream({ source: sourceFile });
-    mkdirp.sync(destDir);
+    fs.mkdirSync(destDir, { recursive: true });
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -69,7 +68,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        mkdirp(path.join(destDir, header.name), err => {
+        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
@@ -83,7 +82,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.tar.UncompressStream({ source: sourceBuffer });
-    mkdirp.sync(destDir);
+    fs.mkdirSync(destDir, { recursive: true });
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -103,7 +102,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        mkdirp(path.join(destDir, header.name), err => {
+        fs.mkdir(path.join(destDir, header.name), err => {
           if (err) return done(err);
           stream.resume();
         });
@@ -117,7 +116,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.tar.UncompressStream({ source: sourceStream });
-    mkdirp.sync(destDir);
+    fs.mkdirSync(destDir, { recursive: true });
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -134,7 +133,7 @@ describe('test/tar/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        mkdirp(path.join(destDir, header.name), err => {
+        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });

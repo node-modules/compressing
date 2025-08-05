@@ -8,7 +8,6 @@ const uuid = require('uuid');
 const compressing = require('../..');
 const assert = require('assert');
 const dircompare = require('dir-compare');
-const mkdirp = require('mz-modules/mkdirp');
 
 describe('test/tar/index.test.js', () => {
   afterEach(mm.restore);
@@ -108,7 +107,7 @@ describe('test/tar/index.test.js', () => {
       assert(fs.existsSync(destFile));
 
       const destDir = path.join(os.tmpdir(), uuid.v4());
-      await mkdirp(destDir);
+      await fs.promises.mkdir(destDir, { recursive: true });
       await compressing.tar.uncompress(destFile, destDir);
       const stat = fs.statSync(path.join(destDir, 'bin'));
       assert(stat.mode === originStat.mode);

@@ -4,7 +4,6 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
-const mkdirp = require('mkdirp');
 const { pipeline: pump } = require('stream');
 const dircompare = require('dir-compare');
 const { pipelinePromise } = require('../util');
@@ -21,7 +20,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream();
-    mkdirp.sync(destDir);
+    fs.mkdirSync(destDir, { recursive: true });
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -38,7 +37,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        mkdirp(path.join(destDir, header.name), err => {
+        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
@@ -51,7 +50,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream({ source: sourceFile });
-    mkdirp.sync(destDir);
+    fs.mkdirSync(destDir, { recursive: true });
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -70,7 +69,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        mkdirp(path.join(destDir, header.name), err => {
+        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
@@ -84,7 +83,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream({ source: sourceBuffer });
-    mkdirp.sync(destDir);
+    fs.mkdirSync(destDir, { recursive: true });
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -103,7 +102,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        mkdirp(path.join(destDir, header.name), err => {
+        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
@@ -117,7 +116,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream({ source: sourceStream });
-    mkdirp.sync(destDir);
+    fs.mkdirSync(destDir, { recursive: true });
 
     uncompressStream.on('finish', () => {
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -136,7 +135,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        mkdirp(path.join(destDir, header.name), err => {
+        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
@@ -181,7 +180,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream({ strip: 1 });
-    mkdirp.sync(destDir);
+    fs.mkdirSync(destDir, { recursive: true });
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, destDir);
@@ -198,7 +197,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
       if (header.type === 'file') {
         stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
       } else { // directory
-        mkdirp(path.join(destDir, header.name), err => {
+        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
@@ -211,7 +210,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
     const destDir = path.join(os.tmpdir(), uuid.v4());
 
     const uncompressStream = new compressing.zip.UncompressStream({ strip: 2 });
-    mkdirp.sync(destDir);
+    fs.mkdirSync(destDir, { recursive: true });
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(path.join(__dirname, '../fixtures/xxx-strip2'), destDir);
@@ -228,7 +227,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
       if (header.type === 'file') {
         stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
       } else { // directory
-        mkdirp(path.join(destDir, header.name), err => {
+        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });

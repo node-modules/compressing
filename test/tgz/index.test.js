@@ -4,7 +4,6 @@ const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
 const dircompare = require('dir-compare');
-const mkdirp = require('mz-modules/mkdirp');
 const compressing = require('../..');
 
 const isWindows = os.platform() === 'win32';
@@ -68,7 +67,7 @@ describe('test/tgz/index.test.js', () => {
       assert(fs.existsSync(destFile));
 
       const destDir = path.join(os.tmpdir(), uuid.v4());
-      await mkdirp(destDir);
+      await fs.promises.mkdir(destDir, { recursive: true });
       await compressing.tgz.uncompress(destFile, destDir);
       const stat = fs.statSync(path.join(destDir, 'bin'));
       assert(stat.mode);
