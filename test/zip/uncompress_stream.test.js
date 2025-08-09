@@ -21,6 +21,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
 
     const uncompressStream = new compressing.zip.UncompressStream();
     fs.mkdirSync(destDir, { recursive: true });
+
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
