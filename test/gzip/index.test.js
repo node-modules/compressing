@@ -13,7 +13,7 @@ describe('test/gzip/index.test.js', () => {
     it('gzip.compressFile(file, stream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
-      console.log('destFile', destFile);
+      // console.log('destFile', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.gzip.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
@@ -38,7 +38,7 @@ describe('test/gzip/index.test.js', () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceBuffer = fs.readFileSync(sourceFile);
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
-      console.log('destFile', destFile);
+      // console.log('destFile', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.gzip.compressFile(sourceBuffer, fileStream);
       assert(fs.existsSync(destFile));
@@ -48,7 +48,7 @@ describe('test/gzip/index.test.js', () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceStream = fs.createReadStream(sourceFile);
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
-      console.log('destFile', destFile);
+      // console.log('destFile', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.gzip.compressFile(sourceStream, fileStream);
       assert(fs.existsSync(destFile));

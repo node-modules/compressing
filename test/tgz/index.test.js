@@ -13,7 +13,7 @@ describe('test/tgz/index.test.js', () => {
     it('tgz.compressFile(file, stream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.tgz.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
@@ -22,7 +22,7 @@ describe('test/tgz/index.test.js', () => {
     it('tgz.compressFile(file, stream, { relativePath })', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.tgz.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
       assert(fs.existsSync(destFile));
@@ -61,7 +61,7 @@ describe('test/tgz/index.test.js', () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures/xxx/bin');
       const originStat = fs.statSync(sourceFile);
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.tgz.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
@@ -72,7 +72,7 @@ describe('test/tgz/index.test.js', () => {
       const stat = fs.statSync(path.join(destDir, 'bin'));
       assert(stat.mode);
       assert(originStat.mode);
-      console.log(destDir);
+      // console.log(destDir);
     });
 
   });
@@ -81,7 +81,7 @@ describe('test/tgz/index.test.js', () => {
     it('tgz.compressDir(dir, destFile)', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.tgz.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
@@ -90,7 +90,7 @@ describe('test/tgz/index.test.js', () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
       const destStream = fs.createWriteStream(destFile);
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.tgz.compressDir(sourceDir, destStream);
       assert(fs.existsSync(destFile));
     });
@@ -99,7 +99,7 @@ describe('test/tgz/index.test.js', () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
       const destStream = fs.createWriteStream(destFile);
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.tgz.compressDir(sourceDir, destStream, { ignoreBase: true });
       assert(fs.existsSync(destFile));
     });
@@ -107,7 +107,7 @@ describe('test/tgz/index.test.js', () => {
     it('tgz.compressDir(dir, destStream) should return promise', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.tgz.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
@@ -185,7 +185,7 @@ describe('test/tgz/index.test.js', () => {
 
       if (isWindows) {
         const names = fs.readdirSync(destDir);
-        console.log(names);
+        // console.log(names);
         assert.equal(names.length, 3);
       } else {
         const res = dircompare.compareSync(originalDir, destDir);

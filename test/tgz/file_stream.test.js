@@ -13,7 +13,7 @@ describe('test/tgz/file_stream.test.js', () => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const sourceStream = fs.createReadStream(sourceFile);
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
     const fileStream = fs.createWriteStream(destFile);
     const tgzStream = new compressing.tgz.FileStream({ relativePath: 'dd/dd.log' });
     pump(sourceStream, tgzStream, fileStream, err => {

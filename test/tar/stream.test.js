@@ -17,13 +17,13 @@ describe('test/tar/stream.test.js', () => {
   it('.addEntry(file)', done => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
     const fileStream = fs.createWriteStream(destFile);
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures', 'xx.log'));
 
     pump(tarStream, fileStream, err => {
-      console.log('error', err);
+      // console.log('error', err);
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -33,13 +33,13 @@ describe('test/tar/stream.test.js', () => {
   it('.addEntry(file, { relativePath })', done => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
     const fileStream = fs.createWriteStream(destFile);
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures', 'xx.log'), { relativePath: 'dd/dd.log' });
 
     pump(tarStream, fileStream, err => {
-      console.log('error', err);
+      // console.log('error', err);
       assert(!err);
       assert(fs.existsSync(destFile));
       done();
@@ -49,7 +49,7 @@ describe('test/tar/stream.test.js', () => {
   it('.addEntry(dir)', done => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
     const fileStream = fs.createWriteStream(destFile);
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures'));
@@ -65,7 +65,7 @@ describe('test/tar/stream.test.js', () => {
   it('.addEntry(dir, { ignoreBase: true })', done => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
     const fileStream = fs.createWriteStream(destFile);
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures'), { ignoreBase: true });
@@ -81,7 +81,7 @@ describe('test/tar/stream.test.js', () => {
   it('.addEntry(dir, { relativePath })', done => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
     const fileStream = fs.createWriteStream(destFile);
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures'), { relativePath: 'xxx' });
@@ -97,7 +97,7 @@ describe('test/tar/stream.test.js', () => {
   it('.addEntry(dir, { relativePath, ignoreBase: true })', done => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
     const fileStream = fs.createWriteStream(destFile);
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     const tarStream = new TarStream();
     tarStream.addEntry(path.join(__dirname, '..', 'fixtures'), { relativePath: 'xxx', ignoreBase: true });
@@ -113,7 +113,7 @@ describe('test/tar/stream.test.js', () => {
   it('.addEntry(buffer, { relativePath })', done => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
     const fileStream = fs.createWriteStream(destFile);
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     const tarStream = new TarStream();
     tarStream.addEntry(fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xx.log')), { relativePath: 'xx.log' });
@@ -127,7 +127,7 @@ describe('test/tar/stream.test.js', () => {
   it('.addEntry(stream, { relativePath })', done => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
     const fileStream = fs.createWriteStream(destFile);
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     mm(console, 'warn', msg => {
       assert(msg === 'You should specify the size of streamming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.suppressSizeWarning: true to suppress this warning');
@@ -145,7 +145,7 @@ describe('test/tar/stream.test.js', () => {
   it('.addEntry(stream, { relativePath, size })', done => {
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
     const fileStream = fs.createWriteStream(destFile);
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     mm(console, 'warn', msg => {
       assert(!msg);
@@ -166,7 +166,7 @@ describe('test/tar/stream.test.js', () => {
     const sourceDir = path.join(__dirname, '..', 'fixtures');
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
     const fileStream = fs.createWriteStream(destFile);
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     const tarStream = new TarStream();
 

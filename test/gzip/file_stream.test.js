@@ -11,7 +11,7 @@ describe('test/gzip/file_stream.test.js', () => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const sourceStream = fs.createReadStream(sourceFile);
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
-    console.log('destFile', destFile);
+    // console.log('destFile', destFile);
     const gzipStream = new compressing.gzip.FileStream();
     const destStream = fs.createWriteStream(destFile);
     pump(sourceStream, gzipStream, destStream, err => {
@@ -24,7 +24,7 @@ describe('test/gzip/file_stream.test.js', () => {
   it('should compress according to file path', done => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
-    console.log('destFile', destFile);
+    // console.log('destFile', destFile);
     const gzipStream = new compressing.gzip.FileStream({ source: sourceFile });
     const destStream = fs.createWriteStream(destFile);
     pump(gzipStream, destStream, err => {
@@ -44,14 +44,14 @@ describe('test/gzip/file_stream.test.js', () => {
 
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
     await fs.promises.writeFile(destFile, Buffer.concat(gzipChunks));
-    console.log(destFile);
+    // console.log(destFile);
   });
 
   it('should compress buffer', done => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const sourceBuffer = fs.readFileSync(sourceFile);
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
-    console.log('destFile', destFile);
+    // console.log('destFile', destFile);
     const destStream = fs.createWriteStream(destFile);
     const gzipStream = new compressing.gzip.FileStream({ source: sourceBuffer });
     pump(gzipStream, destStream, err => {
@@ -66,7 +66,7 @@ describe('test/gzip/file_stream.test.js', () => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const sourceStream = fs.createReadStream(sourceFile);
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
-    console.log('destFile', destFile);
+    // console.log('destFile', destFile);
     const destStream = fs.createWriteStream(destFile);
     const gzipStream = new compressing.gzip.FileStream({ source: sourceStream });
     pump(gzipStream, destStream, err => {

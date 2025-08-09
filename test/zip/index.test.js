@@ -26,7 +26,7 @@ describe('test/zip/index.test.js', () => {
       destDir = path.join(os.tmpdir(), uuid.v4());
       fs.mkdirSync(destDir, { recursive: true });
       const destFile = path.join(destDir, uuid.v4() + '.zip');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.zip.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
@@ -37,7 +37,7 @@ describe('test/zip/index.test.js', () => {
       destDir = path.join(os.tmpdir(), uuid.v4());
       fs.mkdirSync(destDir, { recursive: true });
       const destFile = path.join(destDir, uuid.v4() + '.zip');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       let err;
       try {
@@ -70,7 +70,7 @@ describe('test/zip/index.test.js', () => {
       destDir = path.join(os.tmpdir(), uuid.v4());
       fs.mkdirSync(destDir, { recursive: true });
       const destFile = path.join(destDir, uuid.v4() + '.zip');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.zip.compressFile(sourceBuffer, fileStream, { relativePath: 'dd/dd.log' });
       assert(fs.existsSync(destFile));
@@ -82,7 +82,7 @@ describe('test/zip/index.test.js', () => {
       destDir = path.join(os.tmpdir(), uuid.v4());
       fs.mkdirSync(destDir, { recursive: true });
       const destFile = path.join(destDir, uuid.v4() + '.zip');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.zip.compressFile(sourceStream, fileStream, { relativePath: 'dd/dd.log' });
       assert(fs.existsSync(destFile));
@@ -95,7 +95,7 @@ describe('test/zip/index.test.js', () => {
       destDir = path.join(os.tmpdir(), uuid.v4());
       fs.mkdirSync(destDir, { recursive: true });
       const destFile = path.join(destDir, uuid.v4() + '.zip');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.zip.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
@@ -106,7 +106,7 @@ describe('test/zip/index.test.js', () => {
       fs.mkdirSync(destDir, { recursive: true });
       const destFile = path.join(destDir, uuid.v4() + '.zip');
       const destStream = fs.createWriteStream(destFile);
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.zip.compressDir(sourceDir, destStream);
       assert(fs.existsSync(destFile));
     });
@@ -117,7 +117,7 @@ describe('test/zip/index.test.js', () => {
       fs.mkdirSync(destDir, { recursive: true });
       const destFile = path.join(destDir, uuid.v4() + '.zip');
       const destStream = fs.createWriteStream(destFile);
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.zip.compressDir(sourceDir, destStream, { ignoreBase: true });
       assert(fs.existsSync(destFile));
     });
@@ -127,7 +127,7 @@ describe('test/zip/index.test.js', () => {
       destDir = path.join(os.tmpdir(), uuid.v4());
       fs.mkdirSync(destDir, { recursive: true });
       const destFile = path.join(destDir, uuid.v4() + '.zip');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.zip.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
@@ -279,7 +279,7 @@ describe('test/zip/index.test.js', () => {
     const sourceFile = path.join(__dirname, '..', 'fixtures/xxx/bin');
     const originStat = fs.statSync(sourceFile);
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
     const fileStream = fs.createWriteStream(destFile);
     await compressing.zip.compressFile(sourceFile, fileStream);
     assert(fs.existsSync(destFile));
@@ -289,6 +289,6 @@ describe('test/zip/index.test.js', () => {
     await compressing.zip.uncompress(destFile, destDir);
     const stat = fs.statSync(path.join(destDir, 'bin'));
     assert(stat.mode === originStat.mode);
-    console.log(destDir);
+    // console.log(destDir);
   });
 });

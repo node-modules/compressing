@@ -16,7 +16,7 @@ describe('test/tar/index.test.js', () => {
     it('tar.compressFile(file, stream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.tar.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
@@ -25,7 +25,7 @@ describe('test/tar/index.test.js', () => {
     it('tar.compressFile(file, stream, { relativePath })', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.tar.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
       assert(fs.existsSync(destFile));
@@ -35,7 +35,7 @@ describe('test/tar/index.test.js', () => {
     it('tar.compressFile(file, stream) should error if file not exist', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'not-exist.log');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       let err;
       try {
@@ -65,7 +65,7 @@ describe('test/tar/index.test.js', () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceStream = fs.createReadStream(sourceFile);
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       mm(console, 'warn', msg => {
         assert(msg === 'You should specify the size of streamming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.suppressSizeWarning: true to suppress this warning');
@@ -78,7 +78,7 @@ describe('test/tar/index.test.js', () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceStream = fs.createReadStream(sourceFile);
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-      console.log('destFile', destFile);
+      // console.log('destFile', destFile);
       const fileStream = fs.createWriteStream(destFile);
       mm(console, 'warn', msg => {
         assert(!msg);
@@ -91,7 +91,7 @@ describe('test/tar/index.test.js', () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceBuffer = fs.readFileSync(sourceFile);
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.tar.compressFile(sourceBuffer, fileStream, { relativePath: 'xx.log' });
       assert(fs.existsSync(destFile));
@@ -101,7 +101,7 @@ describe('test/tar/index.test.js', () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures/xxx/bin');
       const originStat = fs.statSync(sourceFile);
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.tar.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
@@ -111,7 +111,7 @@ describe('test/tar/index.test.js', () => {
       await compressing.tar.uncompress(destFile, destDir);
       const stat = fs.statSync(path.join(destDir, 'bin'));
       assert(stat.mode === originStat.mode);
-      console.log(destDir);
+      // console.log(destDir);
     });
 
   });
@@ -120,7 +120,7 @@ describe('test/tar/index.test.js', () => {
     it('tar.compressDir(dir, destFile)', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.tar.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
@@ -129,7 +129,7 @@ describe('test/tar/index.test.js', () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       const destStream = fs.createWriteStream(destFile);
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.tar.compressDir(sourceDir, destStream);
       assert(fs.existsSync(destFile));
     });
@@ -138,7 +138,7 @@ describe('test/tar/index.test.js', () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       const destStream = fs.createWriteStream(destFile);
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.tar.compressDir(sourceDir, destStream, { ignoreBase: true });
       assert(fs.existsSync(destFile));
     });
@@ -146,7 +146,7 @@ describe('test/tar/index.test.js', () => {
     it('tar.compressDir(dir, destStream) should return promise', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       await compressing.tar.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
     });
@@ -155,7 +155,7 @@ describe('test/tar/index.test.js', () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
       const destStream = fs.createWriteStream(destFile);
-      console.log('dest', destFile);
+      // console.log('dest', destFile);
       setImmediate(() => {
         destStream.emit('error', new Error('xxx'));
       });

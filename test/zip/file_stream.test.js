@@ -13,7 +13,7 @@ describe.skip('test/zip/file_stream.test.js', () => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const sourceStream = fs.createReadStream(sourceFile);
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
     const fileStream = fs.createWriteStream(destFile);
     const zipStream = new compressing.zip.FileStream({ relativePath: 'dd/dd.log' });
     pump(sourceStream, zipStream, fileStream, err => {
