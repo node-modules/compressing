@@ -1,4 +1,4 @@
-# compressing
+# compressing@1
 
 [![NPM version][npm-image]][npm-url]
 [![Test coverage][codecov-image]][codecov-url]
@@ -26,7 +26,7 @@ Currently supported:
 ## Install
 
 ```bash
-npm install compressing
+npm install compressing@1
 ```
 
 ## Usage
