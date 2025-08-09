@@ -4,7 +4,7 @@ const os = require('os');
 const uuid = require('uuid');
 const path = require('path');
 const assert = require('assert');
-const pump = require('pump');
+const { pipeline: pump } = require('stream');
 const streamifier = require('streamifier');
 const compressing = require('../..');
 

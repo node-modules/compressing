@@ -75,7 +75,7 @@ fs.createReadStream('file/path/to/compress')
   .on('error', handleError);
 
 // You should take care of stream errors in caution, use pump to handle error in one place
-const pump = require('pump');
+const { pipeline: pump } = require('stream');
 const sourceStream = fs.createReadStream('file/path/to/compress');
 const gzipStream = new compressing.gzip.FileStream();
 const destStream = fs.createWriteStream('path/to/destination.gz');
@@ -193,7 +193,7 @@ function onEntry(header, stream, next) => {
   if (header.type === 'file') {
     stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
   } else { // directory
-    mkdirp(path.join(destDir, header.name), err => {
+    fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
       if (err) return handleError(err);
       stream.resume();
     });
