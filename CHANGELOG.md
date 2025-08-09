@@ -1,5 +1,36 @@
 # Changelog
 
+## 2.0.0 (2025-08-09)
+
+* fix: impl _final method instead hack pipe event (#114) ([ba52b7b](https://github.com/node-modules/compressing/commit/ba52b7b)), closes [#114](https://github.com/node-modules/compressing/issues/114)
+* feat: remove `pump` and raise minimum node to v18 (#113) ([8ac1164](https://github.com/node-modules/compressing/commit/8ac1164)), closes [#113](https://github.com/node-modules/compressing/issues/113)
+
+
+### BREAKING CHANGE
+
+* Drop Node.js < 18 support
+
+Node.js 4 is long EOL, so this PR raises it to 18 as per comment. Node
+10 has built-in `stream.pipeline` and `fs.mkdir` with `recursive`
+option, which can be used instead of `pump` (they are the same).
+
+Also 3 tests fail for me but they fail on main branch as well (timeout)
+
+<!-- This is an auto-generated comment: release notes by coderabbit.ai
+-->
+## Summary by CodeRabbit
+
+* **Chores**
+* Replaced the external stream piping utility with the native Node.js
+stream API throughout the codebase and tests.
+* Updated documentation examples to reflect the new usage of the native
+stream API.
+* Replaced external directory creation utilities with native Node.js
+directory creation methods using recursive options.
+* Removed obsolete dependencies and increased the minimum required
+Node.js version to 18.0.0.
+<!-- end of auto-generated comment: release notes by coderabbit.ai -->
+
 ## [1.10.3](https://github.com/node-modules/compressing/compare/v1.10.2...v1.10.3) (2025-05-24)
 
 
