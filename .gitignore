@@ -7,3 +7,4 @@ test/fixtures/chinese-path-test.zip
 .DS_Store
 yarn.lock
 !test/fixtures/symlink/node_modules
+pnpm-lock.yaml

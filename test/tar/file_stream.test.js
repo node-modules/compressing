@@ -15,7 +15,7 @@ describe('test/tar/file_stream.test.js', () => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const sourceStream = fs.createReadStream(sourceFile);
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     mm(console, 'warn', msg => {
       assert(msg === 'You should specify the size of streamming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.suppressSizeWarning: true to suppress this warning');
@@ -34,7 +34,7 @@ describe('test/tar/file_stream.test.js', () => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const sourceStream = fs.createReadStream(sourceFile);
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
-    console.log('dest', destFile);
+    // console.log('dest', destFile);
 
     mm(console, 'warn', msg => {
       assert(!msg);

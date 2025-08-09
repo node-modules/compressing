@@ -21,6 +21,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
 
     const uncompressStream = new compressing.zip.UncompressStream();
     fs.mkdirSync(destDir, { recursive: true });
+
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -44,6 +45,14 @@ describe('test/zip/uncompress_stream.test.js', () => {
         stream.on('end', next);
       }
     });
+  });
+
+  it('should throw error when file format is not zip', async () => {
+    const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tgz');
+    const uncompressStream = new compressing.zip.UncompressStream();
+    await assert.rejects(async () => {
+      await pipelinePromise(fs.createReadStream(sourceFile), uncompressStream);
+    }, /end of central directory record signature not found/);
   });
 
   it('should uncompress according to file path', done => {
