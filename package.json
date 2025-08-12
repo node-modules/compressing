@@ -43,6 +43,7 @@
     "flushwritable": "^1.0.0",
     "get-ready": "^1.0.0",
     "iconv-lite": "^0.5.0",
+    "lzma-native": "^8.0.6",
     "streamifier": "^0.1.1",
     "tar-stream": "^1.5.2",
     "yazl": "^2.4.2"
