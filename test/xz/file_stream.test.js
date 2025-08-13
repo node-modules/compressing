@@ -79,9 +79,9 @@ describe('test/xz/file_stream.test.js', () => {
   it('should compress with custom level', done => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.xz');
-    const xzStream = new compressing.xz.FileStream({ 
+    const xzStream = new compressing.xz.FileStream({
       source: sourceFile,
-      level: 6
+      level: 6,
     });
     const destStream = fs.createWriteStream(destFile);
     pump(xzStream, destStream, err => {

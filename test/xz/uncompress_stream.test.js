@@ -15,12 +15,12 @@ const isWindows = os.platform() === 'win32';
 function createXzFile() {
   const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
   const destFile = path.join(os.tmpdir(), 'test-xx.log.xz');
-  
+
   return new Promise((resolve, reject) => {
     const sourceStream = fs.createReadStream(sourceFile);
     const xzStream = new compressing.xz.FileStream();
     const destStream = fs.createWriteStream(destFile);
-    
+
     pump(sourceStream, xzStream, destStream, err => {
       if (err) reject(err);
       else resolve(destFile);
@@ -30,11 +30,11 @@ function createXzFile() {
 
 describe('test/xz/uncompress_stream.test.js', () => {
   let sourceFile;
-  
+
   before(async () => {
     sourceFile = await createXzFile();
   });
-  
+
   afterEach(mm.restore);
 
   it('should be transform stream', done => {

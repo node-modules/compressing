@@ -65,7 +65,7 @@ describe('test/xz/index.test.js', () => {
 
   describe('xz.uncompress()', () => {
     let compressedFile;
-    
+
     before(async () => {
       // Create a compressed file for testing
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
