@@ -192,12 +192,14 @@ describe('test/zip/uncompress_stream.test.js', () => {
     fs.mkdirSync(destDir, { recursive: true });
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
-      const res = dircompare.compareSync(originalDir, destDir);
-      assert(res.distinct === 0);
-      assert.equal(res.equal, 5, 'equal files count mismatch');
-      assert(res.totalFiles === 4);
-      assert(res.totalDirs === 1);
-      done();
+      setTimeout(() => {
+        const res = dircompare.compareSync(originalDir, destDir);
+        assert(res.distinct === 0);
+        assert.equal(res.equal, 5, 'equal files count mismatch');
+        assert(res.totalFiles === 4);
+        assert(res.totalDirs === 1);
+        done();
+      }, 0);
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
