@@ -193,7 +193,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, destDir);
-      assert(res.distinct === 0);
+      assert.equal(res.distinct, 0, 'distinct files count mismatch');
       assert.equal(res.equal, 5, 'equal files count mismatch');
       assert(res.totalFiles === 4);
       assert(res.totalDirs === 1);
