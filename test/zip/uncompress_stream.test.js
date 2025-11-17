@@ -193,23 +193,24 @@ describe('test/zip/uncompress_stream.test.js', () => {
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
       const res = dircompare.compareSync(originalDir, destDir);
-      assert(res.distinct === 0);
-      assert(res.equal === 5);
+      assert.equal(res.distinct, 0, 'distinct files count mismatch');
+      assert.equal(res.equal, 5, 'equal files count mismatch');
       assert(res.totalFiles === 4);
       assert(res.totalDirs === 1);
       done();
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
@@ -231,15 +232,16 @@ describe('test/zip/uncompress_stream.test.js', () => {
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
