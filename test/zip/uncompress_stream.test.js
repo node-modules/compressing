@@ -192,26 +192,25 @@ describe('test/zip/uncompress_stream.test.js', () => {
     fs.mkdirSync(destDir, { recursive: true });
     pump(sourceStream, uncompressStream, err => {
       assert(!err);
-      setTimeout(() => {
-        const res = dircompare.compareSync(originalDir, destDir);
-        assert(res.distinct === 0);
-        assert.equal(res.equal, 5, 'equal files count mismatch');
-        assert(res.totalFiles === 4);
-        assert(res.totalDirs === 1);
-        done();
-      }, 0);
+      const res = dircompare.compareSync(originalDir, destDir);
+      assert.equal(res.distinct, 0, 'distinct files count mismatch');
+      assert.equal(res.equal, 5, 'equal files count mismatch');
+      assert(res.totalFiles === 4);
+      assert(res.totalDirs === 1);
+      done();
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
@@ -233,15 +232,16 @@ describe('test/zip/uncompress_stream.test.js', () => {
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
