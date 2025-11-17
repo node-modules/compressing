@@ -201,15 +201,16 @@ describe('test/zip/uncompress_stream.test.js', () => {
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
@@ -231,15 +232,16 @@ describe('test/zip/uncompress_stream.test.js', () => {
     });
 
     uncompressStream.on('entry', (header, stream, next) => {
-      stream.on('end', next);
-
       if (header.type === 'file') {
-        stream.pipe(fs.createWriteStream(path.join(destDir, header.name)));
+        pipelinePromise(stream, fs.createWriteStream(path.join(destDir, header.name)))
+          .then(next)
+          .catch(done);
       } else { // directory
         fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
           if (err) return done(err);
           stream.resume();
         });
+        stream.on('end', next);
       }
     });
   });
