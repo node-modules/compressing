@@ -221,5 +221,28 @@ describe('test/tgz/index.test.js', () => {
       assert(res.totalFiles === 4);
       assert(res.totalDirs === 1);
     });
+
+    it('tgz.uncompress(sourceFile, destDir) with strip 1', async () => {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tgz');
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
+      await compressing.tgz.uncompress(sourceFile, destDir, { strip: 1 });
+      const res = dircompare.compareSync(originalDir, destDir);
+      assert.equal(res.distinct, 0, 'distinct files count mismatch');
+      assert.equal(res.equal, 5, 'equal files count mismatch');
+      assert(res.totalFiles === 4);
+      assert(res.totalDirs === 1);
+    });
+
+    it('tgz.uncompress(sourceFile, destDir) with strip 2', async () => {
+      const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tgz');
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      await compressing.tgz.uncompress(sourceFile, destDir, { strip: 2 });
+      const res = dircompare.compareSync(path.join(__dirname, '..', 'fixtures', 'xxx-strip2'), destDir);
+      assert.equal(res.distinct, 0);
+      assert.equal(res.equal, 4);
+      assert(res.totalFiles === 4);
+      assert(res.totalDirs === 0);
+    });
   });
 });
