@@ -54,7 +54,7 @@
     "egg-bin": "6",
     "eslint": "8",
     "eslint-config-egg": "12",
-    "mm": "^2.0.0",
+    "mm": "^4.0.0",
     "mz-modules": "^2.1.0",
     "typescript": "5",
     "uuid": "^3.0.1"
