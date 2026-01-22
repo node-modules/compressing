@@ -47,6 +47,9 @@
     "tar-stream": "^1.5.2",
     "yazl": "^2.4.2"
   },
+  "optionalDependencies": {
+    "lzma-native": "^8.0.6"
+  },
   "devDependencies": {
     "@types/mocha": "10",
     "@types/node": "20",
