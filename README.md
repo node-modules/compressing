@@ -14,6 +14,10 @@
 [download-image]: https://img.shields.io/npm/dm/compressing.svg?style=flat-square
 [download-url]: https://npmjs.org/package/compressing
 
+## ⚠️ Warning
+
+**Version 1.x is no longer maintained. Please upgrade to version 2.x as soon as possible.**
+
 The missing compressing and uncompressing lib for node.
 
 Currently supported:
