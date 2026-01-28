@@ -280,6 +280,7 @@ Params
     - Korean: cp949, euc-kr
     - Japanese: sjis (shift_jis), cp932, euc-jp
     - Chinese: gbk, gb18030, gb2312, cp936, hkscs, big5, cp950
+  - opts.strip {Number} - Strip leading path segments when extracting (tar/tgz/zip). Default is 0.
 
 ### FileStream
 
@@ -359,6 +360,7 @@ __Constructor__
 Common params:
 
 - opts.source {String|Buffer|Stream} - source to be uncompressed, could be a file path, buffer, or a readable stream.
+- opts.strip {Number} - Strip leading path segments when extracting (tar/tgz/zip). Default is 0.
 
 __CAUTION for zip.UncompressStream__
 
