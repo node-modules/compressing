@@ -1,5 +1,14 @@
 # Changelog
 
+## <small>1.10.4 (2026-01-28)</small>
+
+* fix: prevent arbitrary file write via symlink extraction (#133) ([8d16c19](https://github.com/node-modules/compressing/commit/8d16c19)), closes [#133](https://github.com/node-modules/compressing/issues/133)
+* chore: add permissions to auto release ([01acc46](https://github.com/node-modules/compressing/commit/01acc46))
+* chore: add warnning message ([2368a03](https://github.com/node-modules/compressing/commit/2368a03))
+* chore: start 1.x branch ([6f936e0](https://github.com/node-modules/compressing/commit/6f936e0))
+* chore: support auto merge queue ([f2344e7](https://github.com/node-modules/compressing/commit/f2344e7))
+* chore: typo fix on branch ([41a5eae](https://github.com/node-modules/compressing/commit/41a5eae))
+
 ## [1.10.3](https://github.com/node-modules/compressing/compare/v1.10.2...v1.10.3) (2025-05-24)
 
 
