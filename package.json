@@ -52,7 +52,7 @@
     "@types/node": "20",
     "dir-compare": "^1.3.0",
     "egg-bin": "6",
-    "eslint": "8",
+    "eslint": "9",
     "eslint-config-egg": "12",
     "mm": "^2.0.0",
     "mz-modules": "^2.1.0",
