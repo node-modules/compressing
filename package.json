@@ -1,6 +1,6 @@
 {
   "name": "compressing",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "Everything you need for compressing and uncompressing",
   "main": "index.js",
   "scripts": {

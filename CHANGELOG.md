@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0 (2026-01-28)
+
+* feat: support strip for all archive `uncompress` (#117) ([15d24cd](https://github.com/node-modules/compressing/commit/15d24cd)), closes [#117](https://github.com/node-modules/compressing/issues/117) [hi#level](https://github.com/hi/issues/level)
+
 ## <small>2.0.1 (2026-01-28)</small>
 
 * fix: prevent arbitrary file write via symlink extraction ([b8dca23](https://github.com/node-modules/compressing/commit/b8dca23))
