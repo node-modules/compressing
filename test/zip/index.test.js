@@ -288,7 +288,7 @@ describe('test/zip/index.test.js', () => {
     fs.mkdirSync(destDir, { recursive: true });
     await compressing.zip.uncompress(destFile, destDir);
     const stat = fs.statSync(path.join(destDir, 'bin'));
-    assert(stat.mode === originStat.mode);
+    assert.equal(stat.mode, originStat.mode, 'file mode should be same after uncompress');
     // console.log(destDir);
   });
 });
