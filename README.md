@@ -169,7 +169,7 @@ const urllib = require('urllib');
 const targetDir = require('os').tmpdir();
 const compressing = require('compressing');
 
-urllib.request('http://registry.npmjs.org/pedding/-/pedding-1.1.0.tgz', {
+urllib.request('http://registry.npmjs.org/compressing/-/compressing-2.0.0.tgz', {
   streaming: true,
   followRedirect: true,
 })

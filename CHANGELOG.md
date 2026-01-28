@@ -1,5 +1,13 @@
 # Changelog
 
+## <small>2.0.1 (2026-01-28)</small>
+
+* fix: prevent arbitrary file write via symlink extraction ([b8dca23](https://github.com/node-modules/compressing/commit/b8dca23))
+* Merge commit from fork ([ce1c013](https://github.com/node-modules/compressing/commit/ce1c013))
+* chore: Configure Renovate (#121) ([fd321da](https://github.com/node-modules/compressing/commit/fd321da)), closes [#121](https://github.com/node-modules/compressing/issues/121)
+* chore: fix trust publish ([92df8f9](https://github.com/node-modules/compressing/commit/92df8f9))
+* test: fix test cases for uncompress stream (#118) ([5f281d9](https://github.com/node-modules/compressing/commit/5f281d9)), closes [#118](https://github.com/node-modules/compressing/issues/118)
+
 ## 2.0.0 (2025-08-09)
 
 * fix: impl _final method instead hack pipe event (#114) ([ba52b7b](https://github.com/node-modules/compressing/commit/ba52b7b)), closes [#114](https://github.com/node-modules/compressing/issues/114)
