@@ -45,7 +45,8 @@
     "iconv-lite": "^0.5.0",
     "streamifier": "^0.1.1",
     "tar-stream": "^1.5.2",
-    "yazl": "^2.4.2"
+    "yazl": "^2.4.2",
+    "lzma-native": "^8.0.1"
   },
   "devDependencies": {
     "@types/mocha": "10",
