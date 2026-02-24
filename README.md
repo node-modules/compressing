@@ -8,11 +8,11 @@
 ![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/node-modules/compressing)
 
 [npm-image]: https://img.shields.io/npm/v/compressing.svg?style=flat-square
-[npm-url]: https://npmjs.org/package/compressing
+[npm-url]: https://npmx.dev/package/compressing
 [codecov-image]: https://codecov.io/gh/node-modules/compressing/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/node-modules/compressing
 [download-image]: https://img.shields.io/npm/dm/compressing.svg?style=flat-square
-[download-url]: https://npmjs.org/package/compressing
+[download-url]: https://npmx.dev/package/compressing
 
 The missing compressing and uncompressing lib for node.
 
