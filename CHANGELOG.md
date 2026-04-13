@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>1.10.5 (2026-04-13)</small>
+
+* fix: prevent symlink path traversal via pre-existing symlinks during tar extraction ([18def23](https://github.com/node-modules/compressing/commit/18def23))
+
 ## <small>1.10.4 (2026-01-28)</small>
 
 * fix: prevent arbitrary file write via symlink extraction (#133) ([8d16c19](https://github.com/node-modules/compressing/commit/8d16c19)), closes [#133](https://github.com/node-modules/compressing/issues/133)
