@@ -57,7 +57,7 @@
     "mm": "^2.0.0",
     "mz-modules": "^2.1.0",
     "typescript": "5",
-    "uuid": "^3.0.1"
+    "uuid": "^13.0.0"
   },
   "engines": {
     "node": ">= 18.0.0"
