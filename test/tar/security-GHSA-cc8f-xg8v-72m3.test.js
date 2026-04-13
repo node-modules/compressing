@@ -5,8 +5,8 @@ const os = require('os');
 const path = require('path');
 const uuid = require('uuid');
 const assert = require('assert');
-const tar = require('tar-stream');
 const compressing = require('../..');
+const { createTarBuffer } = require('../util');
 
 describe('test/tar/security-GHSA-cc8f-xg8v-72m3.test.js', () => {
   let tempDir;
@@ -19,34 +19,6 @@ describe('test/tar/security-GHSA-cc8f-xg8v-72m3.test.js', () => {
   afterEach(() => {
     fs.rmSync(tempDir, { recursive: true, force: true });
   });
-
-  /**
-   * Helper function to create a TAR buffer with given entries
-   * @param {Array<{name: string, type?: string, linkname?: string, content?: string}>} entries
-   * @returns {Promise<Buffer>}
-   */
-  function createTarBuffer(entries) {
-    return new Promise((resolve, reject) => {
-      const pack = tar.pack();
-      const chunks = [];
-
-      pack.on('data', chunk => chunks.push(chunk));
-      pack.on('end', () => resolve(Buffer.concat(chunks)));
-      pack.on('error', reject);
-
-      for (const entry of entries) {
-        if (entry.type === 'symlink') {
-          pack.entry({ name: entry.name, type: 'symlink', linkname: entry.linkname });
-        } else if (entry.type === 'directory') {
-          pack.entry({ name: entry.name, type: 'directory' });
-        } else {
-          pack.entry({ name: entry.name, type: 'file' }, entry.content || '');
-        }
-      }
-
-      pack.finalize();
-    });
-  }
 
   describe('symlink escape vulnerability (CVE-2021-32803 style)', () => {
     it('should block symlink pointing outside extraction directory', async () => {
