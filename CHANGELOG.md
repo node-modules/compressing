@@ -1,5 +1,10 @@
 # Changelog
 
+## <small>2.1.1 (2026-04-13)</small>
+
+* fix: prevent symlink path traversal via pre-existing symlinks during tar extraction ([9c885e5](https://github.com/node-modules/compressing/commit/9c885e5))
+* chore: map npm package links to npmx.dev (#134) ([fba303c](https://github.com/node-modules/compressing/commit/fba303c)), closes [#134](https://github.com/node-modules/compressing/issues/134)
+
 ## 2.1.0 (2026-01-28)
 
 * feat: support strip for all archive `uncompress` (#117) ([15d24cd](https://github.com/node-modules/compressing/commit/15d24cd)), closes [#117](https://github.com/node-modules/compressing/issues/117) [hi#level](https://github.com/hi/issues/level)
