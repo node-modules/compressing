@@ -68,7 +68,7 @@ describe('test/tar/index.test.js', () => {
       // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       mm(console, 'warn', msg => {
-        assert(msg === 'You should specify the size of streamming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.suppressSizeWarning: true to suppress this warning');
+        assert(msg === 'You should specify the size of streaming data by opts.size to prevent all streaming data from loading into memory. If you are sure about memory cost, pass opts.suppressSizeWarning: true to suppress this warning');
       });
       await compressing.tar.compressFile(sourceStream, fileStream, { relativePath: 'xx.log' });
       assert(fs.existsSync(destFile));
@@ -123,6 +123,12 @@ describe('test/tar/index.test.js', () => {
       // console.log('dest', destFile);
       await compressing.tar.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
+
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      await compressing.tar.uncompress(destFile, destDir);
+      const res = dircompare.compareSync(sourceDir, path.join(destDir, 'fixtures'));
+      assert.equal(res.distinct, 0);
+      assert(res.equal > 0);
     });
 
     it('tar.compressDir(dir, destStream)', async () => {
