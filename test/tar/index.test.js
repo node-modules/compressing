@@ -123,6 +123,12 @@ describe('test/tar/index.test.js', () => {
       // console.log('dest', destFile);
       await compressing.tar.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
+
+      const destDir = path.join(os.tmpdir(), uuid.v4());
+      await compressing.tar.uncompress(destFile, destDir);
+      const res = dircompare.compareSync(sourceDir, path.join(destDir, 'fixtures'));
+      assert.equal(res.distinct, 0);
+      assert(res.equal > 0);
     });
 
     it('tar.compressDir(dir, destStream)', async () => {
