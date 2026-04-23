@@ -56,7 +56,7 @@
     "eslint-config-egg": "12",
     "mm": "^2.0.0",
     "mz-modules": "^2.1.0",
-    "typescript": "5",
+    "typescript": "6",
     "uuid": "^3.0.1"
   },
   "engines": {
