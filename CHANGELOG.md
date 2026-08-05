@@ -1,5 +1,10 @@
 # Changelog
 
+## <small>1.10.6 (2026-08-05)</small>
+
+* fix: resolve symlink chains fully when extracting (#142) ([90b2e54](https://github.com/node-modules/compressing/commit/90b2e54)), closes [#142](https://github.com/node-modules/compressing/issues/142) [#140](https://github.com/node-modules/compressing/issues/140)
+* chore: replace var with let/const in isRealPathSafe (#135) ([60fa3af](https://github.com/node-modules/compressing/commit/60fa3af)), closes [#135](https://github.com/node-modules/compressing/issues/135)
+
 ## <small>1.10.5 (2026-04-13)</small>
 
 * fix: prevent symlink path traversal via pre-existing symlinks during tar extraction ([18def23](https://github.com/node-modules/compressing/commit/18def23))
