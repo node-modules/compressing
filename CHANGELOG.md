@@ -1,5 +1,11 @@
 # Changelog
 
+## <small>2.1.3 (2026-08-05)</small>
+
+* fix: replace @eggjs/yauzl with upstream yauzl 3.4.0, update yazl to 3.3.1 (#145) ([572a0ba](https://github.com/node-modules/compressing/commit/572a0ba)), closes [#145](https://github.com/node-modules/compressing/issues/145) [#140](https://github.com/node-modules/compressing/issues/140)
+* chore(deps): update dependency @types/node to v24 (#123) ([3499eb2](https://github.com/node-modules/compressing/commit/3499eb2)), closes [#123](https://github.com/node-modules/compressing/issues/123)
+* chore(deps): update dependency iconv-lite to ^0.7.0 (#122) ([e7ba2a5](https://github.com/node-modules/compressing/commit/e7ba2a5)), closes [#122](https://github.com/node-modules/compressing/issues/122)
+
 ## <small>2.1.2 (2026-08-05)</small>
 
 * test: use node:crypto randomUUID instead of uuid dependency (#143) ([c0d269f](https://github.com/node-modules/compressing/commit/c0d269f)), closes [#143](https://github.com/node-modules/compressing/issues/143) [#139](https://github.com/node-modules/compressing/issues/139)
