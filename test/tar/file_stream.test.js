@@ -4,7 +4,7 @@ const mm = require('mm');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const uuid = require('uuid');
+const { randomUUID } = require('node:crypto');
 const assert = require('assert');
 const { pipeline: pump } = require('stream');
 const compressing = require('../..');
@@ -14,7 +14,7 @@ describe('test/tar/file_stream.test.js', () => {
   it('tar.FileStream without size', done => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const sourceStream = fs.createReadStream(sourceFile);
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tar');
     // console.log('dest', destFile);
 
     mm(console, 'warn', msg => {
@@ -33,7 +33,7 @@ describe('test/tar/file_stream.test.js', () => {
   it('tar.FileStream with size', done => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const sourceStream = fs.createReadStream(sourceFile);
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tar');
     // console.log('dest', destFile);
 
     mm(console, 'warn', msg => {

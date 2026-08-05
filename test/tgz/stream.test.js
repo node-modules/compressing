@@ -4,7 +4,7 @@ const mm = require('mm');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const uuid = require('uuid');
+const { randomUUID } = require('node:crypto');
 const { pipeline: pump } = require('stream');
 const compressing = require('../..');
 const assert = require('assert');
@@ -15,7 +15,7 @@ describe('test/tgz/stream.test.js', () => {
   afterEach(mm.restore);
 
   it('.addEntry(file)', done => {
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
     const fileStream = fs.createWriteStream(destFile);
     // console.log('dest', destFile);
 
@@ -31,7 +31,7 @@ describe('test/tgz/stream.test.js', () => {
   });
 
   it('.addEntry(file, { relativePath })', done => {
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
     const fileStream = fs.createWriteStream(destFile);
     // console.log('dest', destFile);
 
@@ -47,7 +47,7 @@ describe('test/tgz/stream.test.js', () => {
   });
 
   it('.addEntry(dir)', done => {
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
     const fileStream = fs.createWriteStream(destFile);
     // console.log('dest', destFile);
 
@@ -63,7 +63,7 @@ describe('test/tgz/stream.test.js', () => {
   });
 
   it('.addEntry(dir, { ignoreBase: true })', done => {
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
     const fileStream = fs.createWriteStream(destFile);
     // console.log('dest', destFile);
 
@@ -79,7 +79,7 @@ describe('test/tgz/stream.test.js', () => {
   });
 
   it('.addEntry(dir, { relativePath })', done => {
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
     const fileStream = fs.createWriteStream(destFile);
     // console.log('dest', destFile);
 
@@ -95,7 +95,7 @@ describe('test/tgz/stream.test.js', () => {
   });
 
   it('.addEntry(dir, { relativePath, ignoreBase: true })', done => {
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
     const fileStream = fs.createWriteStream(destFile);
     // console.log('dest', destFile);
 
@@ -111,7 +111,7 @@ describe('test/tgz/stream.test.js', () => {
   });
 
   it('.addEntry(buffer, { relativePath })', done => {
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
     const fileStream = fs.createWriteStream(destFile);
     // console.log('dest', destFile);
 
@@ -125,7 +125,7 @@ describe('test/tgz/stream.test.js', () => {
   });
 
   it('.addEntry(stream, { relativePath })', done => {
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
     const fileStream = fs.createWriteStream(destFile);
     // console.log('dest', destFile);
 
@@ -143,7 +143,7 @@ describe('test/tgz/stream.test.js', () => {
   });
 
   it('.addEntry(stream, { relativePath, size })', done => {
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
     const fileStream = fs.createWriteStream(destFile);
     // console.log('dest', destFile);
 
@@ -164,7 +164,7 @@ describe('test/tgz/stream.test.js', () => {
   it('.addEntry multiple times', done => {
     const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
     const sourceDir = path.join(__dirname, '..', 'fixtures');
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
     const fileStream = fs.createWriteStream(destFile);
     // console.log('dest', destFile);
 

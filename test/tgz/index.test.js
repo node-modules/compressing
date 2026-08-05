@@ -1,7 +1,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const uuid = require('uuid');
+const { randomUUID } = require('node:crypto');
 const assert = require('assert');
 const dircompare = require('dir-compare');
 const compressing = require('../..');
@@ -12,7 +12,7 @@ describe('test/tgz/index.test.js', () => {
   describe('tgz.compressFile()', () => {
     it('tgz.compressFile(file, stream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
       // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.tgz.compressFile(sourceFile, fileStream);
@@ -21,7 +21,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.compressFile(file, stream, { relativePath })', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
       // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.tgz.compressFile(sourceFile, fileStream, { relativePath: 'dd/dd.log' });
@@ -31,7 +31,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.compressFile(file, stream) should error if file not exist', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'not-exist.log');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
       const fileStream = fs.createWriteStream(destFile);
       let err;
       try {
@@ -45,7 +45,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.compressFile(file, destStream) should error if destStream emit error', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
       const fileStream = fs.createWriteStream(destFile);
       setImmediate(() => fileStream.emit('error', new Error('xx')));
       let err;
@@ -60,13 +60,13 @@ describe('test/tgz/index.test.js', () => {
     it('should keep stat mode', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures/xxx/bin');
       const originStat = fs.statSync(sourceFile);
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tar');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tar');
       // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.tgz.compressFile(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
 
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const destDir = path.join(os.tmpdir(), randomUUID());
       await fs.promises.mkdir(destDir, { recursive: true });
       await compressing.tgz.uncompress(destFile, destDir);
       const stat = fs.statSync(path.join(destDir, 'bin'));
@@ -80,7 +80,7 @@ describe('test/tgz/index.test.js', () => {
   describe('tgz.compressDir()', () => {
     it('tgz.compressDir(dir, destFile)', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
       // console.log('dest', destFile);
       await compressing.tgz.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
@@ -88,7 +88,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.compressDir(dir, destStream)', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
       const destStream = fs.createWriteStream(destFile);
       // console.log('dest', destFile);
       await compressing.tgz.compressDir(sourceDir, destStream);
@@ -97,7 +97,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.compressDir(dir, destStream, { ignoreBase: true })', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
       const destStream = fs.createWriteStream(destFile);
       // console.log('dest', destFile);
       await compressing.tgz.compressDir(sourceDir, destStream, { ignoreBase: true });
@@ -106,7 +106,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.compressDir(dir, destStream) should return promise', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
       // console.log('dest', destFile);
       await compressing.tgz.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
@@ -114,7 +114,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.compressDir(dir, destStream) should reject when destStream emit error', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.tgz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tgz');
       const destStream = fs.createWriteStream(destFile);
       setImmediate(() => {
         destStream.emit('error', new Error('xxx'));
@@ -147,7 +147,7 @@ describe('test/tgz/index.test.js', () => {
   describe('tgz.uncompress()', () => {
     it('tgz.uncompress(sourceFile, destDir)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tgz');
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const destDir = path.join(os.tmpdir(), randomUUID());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       await compressing.tgz.uncompress(sourceFile, destDir);
 
@@ -173,7 +173,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.uncompress(sourceFile, destDir) with symlink', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'symlink.tgz');
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const destDir = path.join(os.tmpdir(), randomUUID());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'symlink');
       await compressing.tgz.uncompress(sourceFile, destDir);
       // console.log(destDir);
@@ -200,7 +200,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.uncompress(sourceStream, destDir)', async () => {
       const sourceStream = fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xxx.tgz'));
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const destDir = path.join(os.tmpdir(), randomUUID());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       await compressing.tgz.uncompress(sourceStream, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -212,7 +212,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.uncompress(sourceBuffer, destDir)', async () => {
       const sourceBuffer = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xxx.tgz'));
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const destDir = path.join(os.tmpdir(), randomUUID());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       await compressing.tgz.uncompress(sourceBuffer, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -224,7 +224,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.uncompress(sourceFile, destDir) with strip 1', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tgz');
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const destDir = path.join(os.tmpdir(), randomUUID());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       await compressing.tgz.uncompress(sourceFile, destDir, { strip: 1 });
       const res = dircompare.compareSync(originalDir, destDir);
@@ -236,7 +236,7 @@ describe('test/tgz/index.test.js', () => {
 
     it('tgz.uncompress(sourceFile, destDir) with strip 2', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.tgz');
-      const destDir = path.join(os.tmpdir(), uuid.v4());
+      const destDir = path.join(os.tmpdir(), randomUUID());
       await compressing.tgz.uncompress(sourceFile, destDir, { strip: 2 });
       const res = dircompare.compareSync(path.join(__dirname, '..', 'fixtures', 'xxx-strip2'), destDir);
       assert.equal(res.distinct, 0);

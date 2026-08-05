@@ -1,7 +1,7 @@
 const fs = require('fs');
 const mm = require('mm');
 const os = require('os');
-const uuid = require('uuid');
+const { randomUUID } = require('node:crypto');
 const path = require('path');
 const assert = require('assert');
 const { pipeline: pump } = require('stream');
@@ -16,7 +16,7 @@ describe('test/gzip/uncompress_stream.test.js', () => {
   afterEach(mm.restore);
 
   it('should be transform stream', done => {
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.log');
 
     const sourceStream = fs.createReadStream(sourceFile);
     const uncompressStream = new compressing.gzip.UncompressStream();
@@ -36,7 +36,7 @@ describe('test/gzip/uncompress_stream.test.js', () => {
   });
 
   it('should uncompress according to file path', done => {
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.log');
 
     const uncompressStream = new compressing.gzip.UncompressStream({ source: sourceFile });
     const destStream = fs.createWriteStream(destFile);
@@ -55,7 +55,7 @@ describe('test/gzip/uncompress_stream.test.js', () => {
 
   it('should uncompress buffer', done => {
     const sourceBuffer = fs.readFileSync(sourceFile);
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.log');
 
     const destStream = fs.createWriteStream(destFile);
     const uncompressStream = new compressing.gzip.UncompressStream({ source: sourceBuffer });
@@ -74,7 +74,7 @@ describe('test/gzip/uncompress_stream.test.js', () => {
 
   it('should uncompress stream', done => {
     const sourceStream = fs.createReadStream(sourceFile);
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.log');
 
     const destStream = fs.createWriteStream(destFile);
     const uncompressStream = new compressing.gzip.UncompressStream({ source: sourceStream });
