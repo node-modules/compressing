@@ -1,5 +1,11 @@
 # Changelog
 
+## <small>2.1.2 (2026-08-05)</small>
+
+* test: use node:crypto randomUUID instead of uuid dependency (#143) ([c0d269f](https://github.com/node-modules/compressing/commit/c0d269f)), closes [#143](https://github.com/node-modules/compressing/issues/143) [#139](https://github.com/node-modules/compressing/issues/139)
+* ci: add Node.js 26 to the test matrix (#141) ([5c725e6](https://github.com/node-modules/compressing/commit/5c725e6)), closes [#141](https://github.com/node-modules/compressing/issues/141) [#140](https://github.com/node-modules/compressing/issues/140)
+* fix: resolve symlink chains fully when extracting (#140) ([72a3c84](https://github.com/node-modules/compressing/commit/72a3c84)), closes [#140](https://github.com/node-modules/compressing/issues/140)
+
 ## <small>2.1.1 (2026-04-13)</small>
 
 * fix: prevent symlink path traversal via pre-existing symlinks during tar extraction ([9c885e5](https://github.com/node-modules/compressing/commit/9c885e5))
