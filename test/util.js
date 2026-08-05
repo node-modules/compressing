@@ -31,4 +31,25 @@ function createTarBuffer(entries) {
   });
 }
 
-module.exports = { pipelinePromise, createTarBuffer };
+/**
+ * Create a ZIP buffer with given file entries
+ * @param {Array<{name: string, content?: string}>} entries
+ * @returns {Promise<Buffer>}
+ */
+function createZipBuffer(entries) {
+  return new Promise((resolve, reject) => {
+    const compressing = require('..');
+    const zipStream = new compressing.zip.Stream();
+    const chunks = [];
+
+    for (const entry of entries) {
+      zipStream.addEntry(Buffer.from(entry.content || ''), { relativePath: entry.name });
+    }
+
+    zipStream.on('data', chunk => chunks.push(chunk));
+    zipStream.on('end', () => resolve(Buffer.concat(chunks)));
+    zipStream.on('error', reject);
+  });
+}
+
+module.exports = { pipelinePromise, createTarBuffer, createZipBuffer };
