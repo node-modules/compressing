@@ -39,13 +39,13 @@
   },
   "homepage": "https://github.com/node-modules/compressing#readme",
   "dependencies": {
-    "yauzl": "^3.4.0",
     "flushwritable": "^1.0.0",
     "get-ready": "^1.0.0",
     "iconv-lite": "^0.7.0",
     "streamifier": "^0.1.1",
     "tar-stream": "^1.5.2",
-    "yazl": "^2.4.2"
+    "yauzl": "^3.4.0",
+    "yazl": "^3.3.1"
   },
   "devDependencies": {
     "@types/mocha": "10",
