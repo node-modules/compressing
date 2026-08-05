@@ -52,7 +52,7 @@ describe('test/zip/uncompress_stream.test.js', () => {
     const uncompressStream = new compressing.zip.UncompressStream();
     await assert.rejects(async () => {
       await pipelinePromise(fs.createReadStream(sourceFile), uncompressStream);
-    }, /end of central directory record signature not found/);
+    }, /end of central directory record signature not found/i);
   });
 
   it('should uncompress according to file path', done => {
