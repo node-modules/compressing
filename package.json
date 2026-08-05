@@ -39,7 +39,7 @@
   },
   "homepage": "https://github.com/node-modules/compressing#readme",
   "dependencies": {
-    "@eggjs/yauzl": "^2.11.0",
+    "yauzl": "^3.4.0",
     "flushwritable": "^1.0.0",
     "get-ready": "^1.0.0",
     "iconv-lite": "^0.7.0",
