@@ -229,6 +229,35 @@ describe('test/tar/symlink-resolution.test.js', () => {
     });
   });
 
+  describe('an extraction directory reached through a symlink', () => {
+    // destDir is given as linkBase/dest while its real path is realBase/dest, the
+    // shape /var -> /private/var produces on macOS. A link target written in the
+    // real namespace must still be recognised as living inside destDir.
+    it('should accept a dangling target written in the real namespace', async () => {
+      const realBase = path.join(tempDir, 'realBase');
+      const linkBase = path.join(tempDir, 'linkBase');
+      fs.mkdirSync(path.join(realBase, 'dest'), { recursive: true });
+      fs.symlinkSync(realBase, linkBase);
+
+      const destDir = path.join(linkBase, 'dest');
+      // realpathSync, not the realBase path: tempDir may itself sit behind a symlink.
+      const realDest = fs.realpathSync(path.join(realBase, 'dest'));
+      fs.symlinkSync(path.join(realDest, 'final.txt'), path.join(destDir, 'entry'));
+
+      const tarBuffer = await createTarBuffer([
+        { name: 'entry', type: 'file', content: 'content' },
+      ]);
+
+      await compressing.tar.uncompress(tarBuffer, destDir);
+
+      assert.strictEqual(
+        fs.readFileSync(path.join(destDir, 'entry'), 'utf8'),
+        'content',
+        'A target inside destDir should be accepted whichever namespace names it'
+      );
+    });
+  });
+
   describe('symlink cycles', () => {
     it('should terminate rather than loop', async () => {
       const destDir = path.join(tempDir, 'dest');
