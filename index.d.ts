@@ -53,6 +53,37 @@ export namespace gzip {
 
 }
 
+export namespace xz {
+
+  function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>
+
+  function uncompress(source: sourceType, dest: destType, opts?: any): Promise<void>
+
+  function decompress(source: sourceType, dest: destType, opts?: any): Promise<void>
+
+  export class FileStream extends ReadStream {
+
+    constructor(opts?: {
+      preset?: number,
+      threads?: number,
+      source?: sourceType
+    });
+
+  }
+
+  export class UncompressStream extends WriteStream {
+
+    constructor(opts?: {
+      source?: sourceType
+    });
+
+    on(event: string, listener: (...args: any[]) => void): this
+    on(event: 'error', listener: (err: Error) => void): this
+
+  }
+
+}
+
 export namespace tar {
 
   function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>
