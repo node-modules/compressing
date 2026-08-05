@@ -3,7 +3,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const uuid = require('uuid');
+const { randomUUID } = require('node:crypto');
 const assert = require('assert');
 const compressing = require('../..');
 const { createTarBuffer } = require('../util');
@@ -12,7 +12,7 @@ describe('test/tar/security-GHSA-cc8f-xg8v-72m3.test.js', () => {
   let tempDir;
 
   beforeEach(() => {
-    tempDir = path.join(os.tmpdir(), uuid.v4());
+    tempDir = path.join(os.tmpdir(), randomUUID());
     fs.mkdirSync(tempDir, { recursive: true });
   });
 

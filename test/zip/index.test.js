@@ -1,7 +1,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const uuid = require('uuid');
+const { randomUUID } = require('node:crypto');
 const assert = require('assert');
 const dircompare = require('dir-compare');
 const compressing = require('../..');
@@ -23,9 +23,9 @@ describe('test/zip/index.test.js', () => {
   describe('zip.compressFile()', () => {
     it('zip.compressFile(file, stream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       fs.mkdirSync(destDir, { recursive: true });
-      const destFile = path.join(destDir, uuid.v4() + '.zip');
+      const destFile = path.join(destDir, randomUUID() + '.zip');
       // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.zip.compressFile(sourceFile, fileStream);
@@ -34,9 +34,9 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.compressFile(file, stream) should handle error if file not exist', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log', 'not_exist');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       fs.mkdirSync(destDir, { recursive: true });
-      const destFile = path.join(destDir, uuid.v4() + '.zip');
+      const destFile = path.join(destDir, randomUUID() + '.zip');
       // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       let err;
@@ -50,9 +50,9 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.compressFile(file, destStream) should error if destStream emit error', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       fs.mkdirSync(destDir, { recursive: true });
-      const destFile = path.join(destDir, uuid.v4() + '.zip');
+      const destFile = path.join(destDir, randomUUID() + '.zip');
       const fileStream = fs.createWriteStream(destFile);
       setImmediate(() => fileStream.emit('error', new Error('xx')));
       let err;
@@ -67,9 +67,9 @@ describe('test/zip/index.test.js', () => {
     it('zip.compressFile(buffer, stream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceBuffer = fs.readFileSync(sourceFile);
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       fs.mkdirSync(destDir, { recursive: true });
-      const destFile = path.join(destDir, uuid.v4() + '.zip');
+      const destFile = path.join(destDir, randomUUID() + '.zip');
       // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.zip.compressFile(sourceBuffer, fileStream, { relativePath: 'dd/dd.log' });
@@ -79,9 +79,9 @@ describe('test/zip/index.test.js', () => {
     it('zip.compressFile(sourceStream, targetStream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceStream = fs.createReadStream(sourceFile);
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       fs.mkdirSync(destDir, { recursive: true });
-      const destFile = path.join(destDir, uuid.v4() + '.zip');
+      const destFile = path.join(destDir, randomUUID() + '.zip');
       // console.log('dest', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.zip.compressFile(sourceStream, fileStream, { relativePath: 'dd/dd.log' });
@@ -92,9 +92,9 @@ describe('test/zip/index.test.js', () => {
   describe('zip.compressDir()', () => {
     it('zip.compressDir(dir, destFile)', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       fs.mkdirSync(destDir, { recursive: true });
-      const destFile = path.join(destDir, uuid.v4() + '.zip');
+      const destFile = path.join(destDir, randomUUID() + '.zip');
       // console.log('dest', destFile);
       await compressing.zip.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
@@ -102,9 +102,9 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.compressDir(dir, destStream)', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       fs.mkdirSync(destDir, { recursive: true });
-      const destFile = path.join(destDir, uuid.v4() + '.zip');
+      const destFile = path.join(destDir, randomUUID() + '.zip');
       const destStream = fs.createWriteStream(destFile);
       // console.log('dest', destFile);
       await compressing.zip.compressDir(sourceDir, destStream);
@@ -113,9 +113,9 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.compressDir(dir, destStream, { ignoreBase: true })', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       fs.mkdirSync(destDir, { recursive: true });
-      const destFile = path.join(destDir, uuid.v4() + '.zip');
+      const destFile = path.join(destDir, randomUUID() + '.zip');
       const destStream = fs.createWriteStream(destFile);
       // console.log('dest', destFile);
       await compressing.zip.compressDir(sourceDir, destStream, { ignoreBase: true });
@@ -124,9 +124,9 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.compressDir(dir, destStream) should return promise', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       fs.mkdirSync(destDir, { recursive: true });
-      const destFile = path.join(destDir, uuid.v4() + '.zip');
+      const destFile = path.join(destDir, randomUUID() + '.zip');
       // console.log('dest', destFile);
       await compressing.zip.compressDir(sourceDir, destFile);
       assert(fs.existsSync(destFile));
@@ -134,9 +134,9 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.compressDir(dir, destStream) should reject when destStream emit error', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       fs.mkdirSync(destDir, { recursive: true });
-      const destFile = path.join(destDir, uuid.v4() + '.zip');
+      const destFile = path.join(destDir, randomUUID() + '.zip');
       const destStream = fs.createWriteStream(destFile);
       setImmediate(() => {
         destStream.emit('error', new Error('xxx'));
@@ -167,7 +167,7 @@ describe('test/zip/index.test.js', () => {
   describe('zip.uncompress()', () => {
     it('zip.uncompress(sourceFile, destDir)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       await compressing.zip.uncompress(sourceFile, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -179,7 +179,7 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.uncompress(sourceFile, destDir) support file mode', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       await compressing.zip.uncompress(sourceFile, destDir, {
         mode: 32804,
       });
@@ -195,7 +195,7 @@ describe('test/zip/index.test.js', () => {
     // only test on local
     it.skip('zip.uncompress(sourceFile, destDir) support chinese gbk path', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'chinese-path-test.zip');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       await compressing.zip.uncompress(sourceFile, destDir, {
         zipFileNameEncoding: 'gbk',
       });
@@ -204,7 +204,7 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = gbk', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       await compressing.zip.uncompress(sourceFile, destDir, {
         zipFileNameEncoding: 'gbk',
         strip: 1,
@@ -214,7 +214,7 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = utf8', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       await compressing.zip.uncompress(sourceFile, destDir, {
         zipFileNameEncoding: 'utf8',
         strip: 1,
@@ -224,7 +224,7 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.uncompress(sourceFile, destDir) work on zipFileNameEncoding = utf-8', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xxx.zip');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       await compressing.zip.uncompress(sourceFile, destDir, {
         zipFileNameEncoding: 'utf-8',
         strip: 1,
@@ -234,7 +234,7 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.uncompress(sourceFile, destDir) support absolute path', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'contain-absolute-path.zip');
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       await compressing.zip.uncompress(sourceFile, destDir, { strip: 1 });
       const names = fs.readdirSync(destDir);
       names.sort();
@@ -253,7 +253,7 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.uncompress(sourceStream, destDir)', async () => {
       const sourceStream = fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xxx.zip'));
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       await compressing.zip.uncompress(sourceStream, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -265,7 +265,7 @@ describe('test/zip/index.test.js', () => {
 
     it('zip.uncompress(sourceBuffer, destDir)', async () => {
       const sourceBuffer = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xxx.zip'));
-      destDir = path.join(os.tmpdir(), uuid.v4());
+      destDir = path.join(os.tmpdir(), randomUUID());
       const originalDir = path.join(__dirname, '..', 'fixtures', 'xxx');
       await compressing.zip.uncompress(sourceBuffer, destDir);
       const res = dircompare.compareSync(originalDir, path.join(destDir, 'xxx'));
@@ -278,13 +278,13 @@ describe('test/zip/index.test.js', () => {
   it('uncompress should keep stat mode', async () => {
     const sourceFile = path.join(__dirname, '..', 'fixtures/xxx/bin');
     const originStat = fs.statSync(sourceFile);
-    const destFile = path.join(os.tmpdir(), uuid.v4() + '.zip');
+    const destFile = path.join(os.tmpdir(), randomUUID() + '.zip');
     // console.log('dest', destFile);
     const fileStream = fs.createWriteStream(destFile);
     await compressing.zip.compressFile(sourceFile, fileStream);
     assert(fs.existsSync(destFile));
 
-    destDir = path.join(os.tmpdir(), uuid.v4());
+    destDir = path.join(os.tmpdir(), randomUUID());
     fs.mkdirSync(destDir, { recursive: true });
     await compressing.zip.uncompress(destFile, destDir);
     const stat = fs.statSync(path.join(destDir, 'bin'));

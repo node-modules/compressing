@@ -3,7 +3,7 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const uuid = require('uuid');
+const { randomUUID } = require('node:crypto');
 const compressing = require('../..');
 const assert = require('assert');
 const isWindows = os.platform() === 'win32';
@@ -12,7 +12,7 @@ describe('test/gzip/index.test.js', () => {
   describe('gzip.compressFile()', () => {
     it('gzip.compressFile(file, stream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.log.gz');
       // console.log('destFile', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.gzip.compressFile(sourceFile, fileStream);
@@ -21,7 +21,7 @@ describe('test/gzip/index.test.js', () => {
 
     it('gzip.compressFile(file, destStream) should error if destStream emit error', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.gz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.gz');
       const fileStream = fs.createWriteStream(destFile);
       setImmediate(() => fileStream.emit('error', new Error('xx')));
 
@@ -37,7 +37,7 @@ describe('test/gzip/index.test.js', () => {
     it('gzip.compressFile(buffer, stream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceBuffer = fs.readFileSync(sourceFile);
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.log.gz');
       // console.log('destFile', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.gzip.compressFile(sourceBuffer, fileStream);
@@ -47,7 +47,7 @@ describe('test/gzip/index.test.js', () => {
     it('gzip.compressFile(sourceStream, destStream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
       const sourceStream = fs.createReadStream(sourceFile);
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log.gz');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.log.gz');
       // console.log('destFile', destFile);
       const fileStream = fs.createWriteStream(destFile);
       await compressing.gzip.compressFile(sourceStream, fileStream);
@@ -59,7 +59,7 @@ describe('test/gzip/index.test.js', () => {
     it('gzip.uncompress(sourceFile, destStream)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log.gz');
       const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.log');
       const fileStream = fs.createWriteStream(destFile);
       await compressing.gzip.uncompress(sourceFile, fileStream);
       assert(fs.existsSync(destFile));
@@ -72,7 +72,7 @@ describe('test/gzip/index.test.js', () => {
     it('gzip.uncompress(sourceStream, destStream)', async () => {
       const sourceStream = fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xx.log.gz'));
       const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.log');
       const fileStream = fs.createWriteStream(destFile);
       await compressing.gzip.uncompress(sourceStream, fileStream);
       assert(fs.existsSync(destFile));
@@ -85,7 +85,7 @@ describe('test/gzip/index.test.js', () => {
     it('gzip.uncompress(sourceStream, destFile)', async () => {
       const sourceStream = fs.createReadStream(path.join(__dirname, '..', 'fixtures', 'xx.log.gz'));
       const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.log');
       await compressing.gzip.uncompress(sourceStream, destFile);
       assert(fs.existsSync(destFile));
       if (!isWindows) {
@@ -97,7 +97,7 @@ describe('test/gzip/index.test.js', () => {
     it('gzip.uncompress(sourceFile, destFile)', async () => {
       const sourceFile = path.join(__dirname, '..', 'fixtures', 'xx.log.gz');
       const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.log');
       await compressing.gzip.uncompress(sourceFile, destFile);
       assert(fs.existsSync(destFile));
       if (!isWindows) {
@@ -109,7 +109,7 @@ describe('test/gzip/index.test.js', () => {
     it('gzip.uncompress(buffer, destFile)', async () => {
       const sourceBuffer = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'xx.log.gz'));
       const originalFile = path.join(__dirname, '..', 'fixtures', 'xx.log');
-      const destFile = path.join(os.tmpdir(), uuid.v4() + '.log');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.log');
       await compressing.gzip.uncompress(sourceBuffer, destFile);
       assert(fs.existsSync(destFile));
       if (!isWindows) {

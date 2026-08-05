@@ -4,7 +4,7 @@ const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const zlib = require('zlib');
-const uuid = require('uuid');
+const { randomUUID } = require('node:crypto');
 const assert = require('assert');
 const compressing = require('../..');
 const { createTarBuffer, createZipBuffer } = require('../util');
@@ -16,7 +16,7 @@ describe('test/tar/symlink-resolution.test.js', () => {
   let tempDir;
 
   beforeEach(() => {
-    tempDir = path.join(os.tmpdir(), uuid.v4());
+    tempDir = path.join(os.tmpdir(), randomUUID());
     fs.mkdirSync(tempDir, { recursive: true });
   });
 
