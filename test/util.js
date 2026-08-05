@@ -40,5 +40,33 @@ function createTarBuffer(entries) {
   });
 }
 
+/**
+ * Create a ZIP buffer with given file entries
+ * @param {Array<{name: string, content?: string}>} entries - Files to put in the archive
+ * @returns {Promise<Buffer>} The archive contents
+ */
+function createZipBuffer(entries) {
+  return new Promise((resolve, reject) => {
+    // An empty archive never finalizes, so the promise would never settle.
+    if (!entries || entries.length === 0) {
+      return reject(new Error('createZipBuffer requires at least one entry'));
+    }
+
+    const compressing = require('..');
+    const zipStream = new compressing.zip.Stream();
+    const chunks = [];
+
+    // Listeners first, so an entry rejected during addEntry() settles the promise.
+    zipStream.on('data', chunk => chunks.push(chunk));
+    zipStream.on('end', () => resolve(Buffer.concat(chunks)));
+    zipStream.on('error', reject);
+
+    for (const entry of entries) {
+      zipStream.addEntry(Buffer.from(entry.content || ''), { relativePath: entry.name });
+    }
+  });
+}
+
 exports.pipelinePromise = pipelinePromise;
+exports.createZipBuffer = createZipBuffer;
 exports.createTarBuffer = createTarBuffer;
