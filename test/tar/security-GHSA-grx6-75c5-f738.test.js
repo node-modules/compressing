@@ -204,7 +204,9 @@ describe('test/tar/security-GHSA-grx6-75c5-f738.test.js', () => {
           fs.mkdirSync(realBase);
           fs.symlinkSync(realBase, alias, 'dir');
           const destDir = path.join(alias, 'dest');
-          const realDestDir = path.join(fs.realpathSync(realBase), 'dest');
+          // Match the extractor's native realpath resolution, including Windows
+          // short paths such as RUNNER~1.
+          const realDestDir = path.join(await fs.promises.realpath(realBase), 'dest');
 
           const entries = [
             { name: 'nested/relative', type: 'symlink', linkname: '../target.txt' },
