@@ -163,6 +163,21 @@ describe('test/tar/security-GHSA-grx6-75c5-f738.test.js', () => {
         assert.strictEqual(fs.realpathSync(path.join(destDir, 'new/self')), fs.realpathSync(path.join(destDir, 'new')));
       });
 
+      it('should extract a file through an internal directory symlink', async () => {
+        const destDir = path.join(tempDir, 'dest');
+        await extract([
+          { name: 'target/', type: 'directory' },
+          { name: 'link', type: 'symlink', linkname: 'target' },
+          { name: 'link/file.txt', content: 'safe' },
+        ], destDir);
+
+        const link = path.join(destDir, 'link');
+        assert.strictEqual(fs.lstatSync(link).isSymbolicLink(), true);
+        assert.strictEqual(fs.statSync(link).isDirectory(), true);
+        assert.strictEqual(fs.readlinkSync(link), 'target');
+        assert.strictEqual(fs.readFileSync(path.join(destDir, 'target/file.txt'), 'utf8'), 'safe');
+      });
+
       it('should block an internal target that resolves through an external symlink', async () => {
         const destDir = path.join(tempDir, 'dest');
         const outsideDir = path.join(tempDir, 'outside');
