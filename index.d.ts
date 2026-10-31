@@ -199,3 +199,25 @@ export namespace zip {
   }
 
 }
+
+export namespace xz {
+  function compressFile(source: sourceType, dest: destType, opts?: any): Promise<void>
+  function uncompress(source: sourceType, dest: destType, opts?: any): Promise<void>
+  function decompress(source: sourceType, dest: destType, opts?: any): Promise<void>
+
+  export class FileStream extends ReadStream {
+    constructor(opts?: {
+      lzma?: object,
+      source: sourceType
+    });
+  }
+
+  export class UncompressStream extends WriteStream {
+    constructor(opts?: {
+      lzma?: object,
+      source: sourceType
+    });
+    on(event: string, listener: (...args: any[]) => void): this
+    on(event: 'error', listener: (err: Error) => void): this
+  }
+}
