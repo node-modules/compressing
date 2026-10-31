@@ -163,6 +163,48 @@ describe('test/tar/security-GHSA-grx6-75c5-f738.test.js', () => {
         assert.strictEqual(fs.realpathSync(path.join(destDir, 'new/self')), fs.realpathSync(path.join(destDir, 'new')));
       });
 
+      it('should extract a file through an internal directory symlink', async () => {
+        const destDir = path.join(tempDir, 'dest');
+        await extract([
+          { name: 'target/', type: 'directory' },
+          { name: 'link', type: 'symlink', linkname: 'target' },
+          { name: 'link/file.txt', content: 'safe' },
+        ], destDir);
+
+        const link = path.join(destDir, 'link');
+        assert.strictEqual(fs.lstatSync(link).isSymbolicLink(), true);
+        assert.strictEqual(fs.statSync(link).isDirectory(), true);
+        assert.strictEqual(fs.readlinkSync(link), 'target');
+        assert.strictEqual(fs.readFileSync(path.join(destDir, 'target/file.txt'), 'utf8'), 'safe');
+      });
+
+      [ 'file', 'directory' ].forEach(type => {
+        it(`should infer a ${type} target from the real parent of a symlink`, async () => {
+          const destDir = path.join(tempDir, 'dest');
+          const isDirectory = type === 'directory';
+          await extract([
+            { name: 'a/b/', type: 'directory' },
+            { name: 'a/target', type, content: 'safe' },
+            // The textual parent resolves ../target to this entry of the opposite type.
+            { name: 'target', type: isDirectory ? 'file' : 'directory', content: 'decoy' },
+            { name: 'd', type: 'symlink', linkname: 'a/b' },
+            { name: 'd/link', type: 'symlink', linkname: '../target' },
+          ], destDir);
+
+          const link = path.join(destDir, 'd/link');
+          assert.strictEqual(fs.lstatSync(link).isSymbolicLink(), true);
+          assert.strictEqual(fs.statSync(link).isDirectory(), isDirectory);
+          assert.strictEqual(fs.readlinkSync(link), path.join('..', 'target'));
+          assert.strictEqual(fs.realpathSync(link), fs.realpathSync(path.join(destDir, 'a/target')));
+          if (isDirectory) {
+            fs.writeFileSync(path.join(link, 'file.txt'), 'safe');
+            assert.strictEqual(fs.readFileSync(path.join(destDir, 'a/target/file.txt'), 'utf8'), 'safe');
+          } else {
+            assert.strictEqual(fs.readFileSync(link, 'utf8'), 'safe');
+          }
+        });
+      });
+
       it('should block an internal target that resolves through an external symlink', async () => {
         const destDir = path.join(tempDir, 'dest');
         const outsideDir = path.join(tempDir, 'outside');
@@ -204,7 +246,9 @@ describe('test/tar/security-GHSA-grx6-75c5-f738.test.js', () => {
           fs.mkdirSync(realBase);
           fs.symlinkSync(realBase, alias, 'dir');
           const destDir = path.join(alias, 'dest');
-          const realDestDir = path.join(fs.realpathSync(realBase), 'dest');
+          // Match the extractor's native realpath resolution, including Windows
+          // short paths such as RUNNER~1.
+          const realDestDir = path.join(await fs.promises.realpath(realBase), 'dest');
 
           const entries = [
             { name: 'nested/relative', type: 'symlink', linkname: '../target.txt' },
