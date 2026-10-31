@@ -1,5 +1,9 @@
 # Changelog
 
+## <small>2.1.5 (2026-10-31)</small>
+
+* fix: handle Windows symlinks across supported Node.js versions (#147) ([525e508](https://github.com/node-modules/compressing/commit/525e508)), closes [#147](https://github.com/node-modules/compressing/issues/147)
+
 ## <small>2.1.4 (2026-10-31)</small>
 
 * fix: validate symlink targets from their real parent ([663d174](https://github.com/node-modules/compressing/commit/663d174))
