@@ -1,5 +1,11 @@
 # Changelog
 
+## <small>2.1.4 (2026-10-31)</small>
+
+* fix: validate symlink targets from their real parent ([663d174](https://github.com/node-modules/compressing/commit/663d174))
+* Merge commit from fork ([0495f37](https://github.com/node-modules/compressing/commit/0495f37))
+* chore(deps): update dependency dir-compare to v5 (#125) ([a6e7784](https://github.com/node-modules/compressing/commit/a6e7784)), closes [#125](https://github.com/node-modules/compressing/issues/125)
+
 ## <small>2.1.3 (2026-08-05)</small>
 
 * fix: replace @eggjs/yauzl with upstream yauzl 3.4.0, update yazl to 3.3.1 (#145) ([572a0ba](https://github.com/node-modules/compressing/commit/572a0ba)), closes [#145](https://github.com/node-modules/compressing/issues/145) [#140](https://github.com/node-modules/compressing/issues/140)
