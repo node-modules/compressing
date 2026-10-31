@@ -178,6 +178,33 @@ describe('test/tar/security-GHSA-grx6-75c5-f738.test.js', () => {
         assert.strictEqual(fs.readFileSync(path.join(destDir, 'target/file.txt'), 'utf8'), 'safe');
       });
 
+      [ 'file', 'directory' ].forEach(type => {
+        it(`should infer a ${type} target from the real parent of a symlink`, async () => {
+          const destDir = path.join(tempDir, 'dest');
+          const isDirectory = type === 'directory';
+          await extract([
+            { name: 'a/b/', type: 'directory' },
+            { name: 'a/target', type, content: 'safe' },
+            // The textual parent resolves ../target to this entry of the opposite type.
+            { name: 'target', type: isDirectory ? 'file' : 'directory', content: 'decoy' },
+            { name: 'd', type: 'symlink', linkname: 'a/b' },
+            { name: 'd/link', type: 'symlink', linkname: '../target' },
+          ], destDir);
+
+          const link = path.join(destDir, 'd/link');
+          assert.strictEqual(fs.lstatSync(link).isSymbolicLink(), true);
+          assert.strictEqual(fs.statSync(link).isDirectory(), isDirectory);
+          assert.strictEqual(fs.readlinkSync(link), path.join('..', 'target'));
+          assert.strictEqual(fs.realpathSync(link), fs.realpathSync(path.join(destDir, 'a/target')));
+          if (isDirectory) {
+            fs.writeFileSync(path.join(link, 'file.txt'), 'safe');
+            assert.strictEqual(fs.readFileSync(path.join(destDir, 'a/target/file.txt'), 'utf8'), 'safe');
+          } else {
+            assert.strictEqual(fs.readFileSync(link, 'utf8'), 'safe');
+          }
+        });
+      });
+
       it('should block an internal target that resolves through an external symlink', async () => {
         const destDir = path.join(tempDir, 'dest');
         const outsideDir = path.join(tempDir, 'outside');
