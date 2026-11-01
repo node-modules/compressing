@@ -43,7 +43,7 @@
     "get-ready": "^1.0.0",
     "iconv-lite": "^0.7.0",
     "streamifier": "^0.1.1",
-    "tar-stream": "^1.5.2",
+    "tar-stream": "^3.0.0",
     "yauzl": "^3.4.0",
     "yazl": "^3.3.1"
   },
