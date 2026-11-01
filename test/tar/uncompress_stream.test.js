@@ -38,10 +38,9 @@ describe('test/tar/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
-          if (err) return done(err);
-          stream.resume();
-        });
+        fs.promises.mkdir(path.join(destDir, header.name), { recursive: true })
+          .then(() => stream.resume())
+          .catch(done);
         stream.on('end', next);
       }
     });
@@ -68,10 +67,9 @@ describe('test/tar/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
-          if (err) return done(err);
-          stream.resume();
-        });
+        fs.promises.mkdir(path.join(destDir, header.name), { recursive: true })
+          .then(() => stream.resume())
+          .catch(done);
         stream.on('end', next);
       }
     });
@@ -102,10 +100,9 @@ describe('test/tar/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        fs.mkdir(path.join(destDir, header.name), err => {
-          if (err) return done(err);
-          stream.resume();
-        });
+        fs.promises.mkdir(path.join(destDir, header.name))
+          .then(() => stream.resume())
+          .catch(done);
         stream.on('end', next);
       }
     });
@@ -133,10 +130,9 @@ describe('test/tar/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
-          if (err) return done(err);
-          stream.resume();
-        });
+        fs.promises.mkdir(path.join(destDir, header.name), { recursive: true })
+          .then(() => stream.resume())
+          .catch(done);
         stream.on('end', next);
       }
     });
