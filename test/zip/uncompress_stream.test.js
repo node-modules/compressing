@@ -38,10 +38,9 @@ describe('test/zip/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
-          if (err) return done(err);
-          stream.resume();
-        });
+        fs.promises.mkdir(path.join(destDir, header.name), { recursive: true })
+          .then(() => stream.resume())
+          .catch(done);
         stream.on('end', next);
       }
     });
@@ -78,10 +77,9 @@ describe('test/zip/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
-          if (err) return done(err);
-          stream.resume();
-        });
+        fs.promises.mkdir(path.join(destDir, header.name), { recursive: true })
+          .then(() => stream.resume())
+          .catch(done);
         stream.on('end', next);
       }
     });
@@ -111,10 +109,9 @@ describe('test/zip/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
-          if (err) return done(err);
-          stream.resume();
-        });
+        fs.promises.mkdir(path.join(destDir, header.name), { recursive: true })
+          .then(() => stream.resume())
+          .catch(done);
         stream.on('end', next);
       }
     });
@@ -144,10 +141,9 @@ describe('test/zip/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
-          if (err) return done(err);
-          stream.resume();
-        });
+        fs.promises.mkdir(path.join(destDir, header.name), { recursive: true })
+          .then(() => stream.resume())
+          .catch(done);
         stream.on('end', next);
       }
     });
@@ -206,10 +202,9 @@ describe('test/zip/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
-          if (err) return done(err);
-          stream.resume();
-        });
+        fs.promises.mkdir(path.join(destDir, header.name), { recursive: true })
+          .then(() => stream.resume())
+          .catch(done);
         stream.on('end', next);
       }
     });
@@ -237,10 +232,9 @@ describe('test/zip/uncompress_stream.test.js', () => {
           .then(next)
           .catch(done);
       } else { // directory
-        fs.mkdir(path.join(destDir, header.name), { recursive: true }, err => {
-          if (err) return done(err);
-          stream.resume();
-        });
+        fs.promises.mkdir(path.join(destDir, header.name), { recursive: true })
+          .then(() => stream.resume())
+          .catch(done);
         stream.on('end', next);
       }
     });
