@@ -143,6 +143,53 @@ describe('test/tar/index.test.js', () => {
       assert(fs.existsSync(destFile));
     });
 
+    it('tar.compressFile(file, destFile) keeps the modification time', async () => {
+      const sourceFile = path.join(os.tmpdir(), randomUUID() + '.txt');
+      const mtime = new Date('2020-01-02T03:04:05Z');
+      fs.writeFileSync(sourceFile, 'hi');
+      fs.utimesSync(sourceFile, mtime, mtime);
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tar');
+      await compressing.tar.compressFile(sourceFile, destFile);
+
+      const extract = require('tar-stream').extract();
+      let entryMtime;
+      extract.on('entry', (header, stream, next) => {
+        entryMtime = header.mtime;
+        stream.resume();
+        stream.on('end', next);
+      });
+      await new Promise((resolve, reject) => {
+        extract.on('finish', resolve);
+        extract.on('error', reject);
+        fs.createReadStream(destFile).pipe(extract);
+      });
+      assert.deepStrictEqual(entryMtime, mtime);
+    });
+
+    it('tar.compressDir(dir, destFile) keeps file modification times', async () => {
+      const sourceDir = path.join(os.tmpdir(), randomUUID());
+      fs.mkdirSync(sourceDir);
+      const mtime = new Date('2020-01-02T03:04:05Z');
+      fs.writeFileSync(path.join(sourceDir, 'a.txt'), 'hi');
+      fs.utimesSync(path.join(sourceDir, 'a.txt'), mtime, mtime);
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tar');
+      await compressing.tar.compressDir(sourceDir, destFile);
+
+      const mtimes = {};
+      const extract = require('tar-stream').extract();
+      extract.on('entry', (header, stream, next) => {
+        mtimes[header.name] = header.mtime;
+        stream.resume();
+        stream.on('end', next);
+      });
+      await new Promise((resolve, reject) => {
+        extract.on('finish', resolve);
+        extract.on('error', reject);
+        fs.createReadStream(destFile).pipe(extract);
+      });
+      assert.deepStrictEqual(mtimes[path.basename(sourceDir) + '/a.txt'], mtime);
+    });
+
     it('tar.compressDir(dir, destStream) should return promise', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), randomUUID() + '.tar');
