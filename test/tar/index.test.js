@@ -117,6 +117,18 @@ describe('test/tar/index.test.js', () => {
   });
 
   describe('tar.compressDir()', () => {
+    it('tar.compressDir(dir, destFile) keeps empty directories', async () => {
+      const sourceDir = path.join(os.tmpdir(), randomUUID());
+      fs.mkdirSync(path.join(sourceDir, 'logs'), { recursive: true });
+      fs.writeFileSync(path.join(sourceDir, 'a.txt'), 'hi');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.tar');
+      await compressing.tar.compressDir(sourceDir, destFile);
+
+      const destDir = path.join(os.tmpdir(), randomUUID());
+      await compressing.tar.uncompress(destFile, destDir);
+      assert(fs.statSync(path.join(destDir, path.basename(sourceDir), 'logs')).isDirectory());
+    });
+
     it('tar.compressDir(dir, destFile)', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       const destFile = path.join(os.tmpdir(), randomUUID() + '.tar');
