@@ -90,6 +90,18 @@ describe('test/zip/index.test.js', () => {
   });
 
   describe('zip.compressDir()', () => {
+    it('zip.compressDir(dir, destFile) keeps empty directories', async () => {
+      const sourceDir = path.join(os.tmpdir(), randomUUID());
+      fs.mkdirSync(path.join(sourceDir, 'logs'), { recursive: true });
+      fs.writeFileSync(path.join(sourceDir, 'a.txt'), 'hi');
+      const destFile = path.join(os.tmpdir(), randomUUID() + '.zip');
+      await compressing.zip.compressDir(sourceDir, destFile);
+
+      const destDir = path.join(os.tmpdir(), randomUUID());
+      await compressing.zip.uncompress(destFile, destDir);
+      assert(fs.statSync(path.join(destDir, path.basename(sourceDir), 'logs')).isDirectory());
+    });
+
     it('zip.compressDir(dir, destFile)', async () => {
       const sourceDir = path.join(__dirname, '..', 'fixtures');
       destDir = path.join(os.tmpdir(), randomUUID());
